@@ -1,0 +1,399 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.new-shadow {
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .08);
+}
+
+.font-sans {
+    font-family: '__Poppins_7df6af', '__Poppins_Fallback_7df6af' !important;
+}
+
+.text-outline {
+    -webkit-text-stroke-color: #e4e4e4;
+    -webkit-text-fill-color: transparent;
+    -webkit-text-stroke-color: #f4739e;
+    -webkit-text-stroke-width: 1px;
+}
+
+.card-shape:before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: #f4739e5e;
+    top: -20px;
+    margin: 0 40px;
+    border-radius: 56px;
+}
+
+.card-shape:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 40px;
+    background-color: #f4739e45;
+    top: -11px;
+    margin: 0 23px;
+    border-radius: 70px;
+}
+
+.relative.p-4.text-blue-gray-500.antialiased.font-sans.text-base.font-light.leading-relaxed {
+    padding: 0;
+}
+
+
+
+
+.swal2-container.swal2-center.swal2-backdrop-show {
+    z-index: 9999 !important;
+}
+
+
+@keyframes slide {
+    0% {
+        left: -100%;
+    }
+
+    50% {
+        left: 100%;
+    }
+
+    100% {
+        left: -100%;
+    }
+}
+
+
+
+/***Product slider***/
+
+
+
+.product-slider-area .swiper-button-next {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #f4739e;
+    border-radius: 5px;
+}
+
+.product-slider-area .swiper-button-prev:after,
+.product-slider-area .swiper-button-next:after {
+    font-size: 25px;
+}
+
+.product-slider-area .swiper-button-prev:after,
+.product-slider-area .swiper-button-next:after {
+    font-size: 25px;
+}
+
+
+
+/***Category sliders***/
+
+.category-slider-area .swiper {
+    position: static;
+}
+
+.category-slider-area .swiper-button-prev {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #f4739e;
+    border-radius: 5px;
+    position: absolute;
+    top: 50px;
+    right: 100px;
+    left: inherit;
+}
+
+
+.category-slider-area .swiper-button-next {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #f4739e;
+    border-radius: 5px;
+    position: absolute;
+    top: 50px;
+    right: 45px;
+}
+
+.category-slider-area .swiper-button-prev:after,
+.category-slider-area .swiper-button-next:after {
+    font-size: 25px;
+}
+
+
+
+.combo-slider .swiper-button-prev,
+.combo-slider .swiper-button-next {
+    color: #f4739e;
+}
+
+
+.modify-inc-dec-btn::-webkit-outer-spin-button,
+.modify-inc-dec-btn::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+.modify-inc-dec-btn {
+    -moz-appearance: textfield;
+}
+
+
+
+
+::-webkit-scrollbar-thumb {
+    background-color: rgb(177, 177, 177);
+    border-radius: 50%;
+}
+
+
+
+.css-t3ipsp-control {
+
+    border-color: #fce4ec;
+    box-shadow: 0 0 0 1px #fce4ec;
+}
+
+
+/********COUPON*********/
+
+.coupon-slider-area .swiper {
+    position: static;
+    padding-top: 40px;
+}
+
+.coupon-slider-area .swiper-button-prev {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #f4739e;
+    border-radius: 5px;
+    bottom: 100px !important;
+    top: inherit;
+    left: 0;
+}
+
+
+.coupon-slider-area .swiper-button-next {
+    color: white;
+    width: 40px;
+    height: 40px;
+    background-color: #f4739e;
+    border-radius: 5px;
+    bottom: 100px !important;
+    top: inherit;
+    right: 0;
+}
+
+
+.coupon-slider-area .swiper-button-prev:after,
+.coupon-slider-area .swiper-button-next:after {
+    font-size: 25px;
+}
+
+/*********BEST SELLER*********/
+
+.best-sestseller-slider .swiper-button-next,
+.best-sestseller-slider .swiper-button-prev {
+    color: #f4739e;
+}
+
+
+/**********Shop Cafe************/
+
+.shop-cafe-slider .swiper {
+    position: static;
+    padding-top: 40px;
+}
+
+.shop-cafe-slider .swiper-button-next,
+.shop-cafe-slider .swiper-button-prev {
+    color: #f4739e;
+    bottom: 50px;
+    top: inherit;
+}
+
+.css-13cymwt-control {
+    background-color: #fafafa !important;
+}
+
+
+
+
+/* custom otp popup design  */
+
+.swal2-popup-custom {
+    background-color: #fdeff4;
+}
+
+.swal2-title-custom {
+    color: #f4739e;
+    font-family: 'cursive', sans-serif;
+    font-weight: bold;
+}
+
+.swal2-input-custom {
+    border: 1px solid #b6b3b3;
+    outline: none;
+}
+
+/** Customer Pro Slider **/
+
+.customer-pro-slider {}
+
+.customer-pro-slider .swiper-button-next,
+.customer-pro-slider .swiper-button-prev {
+    color: #f4739e;
+    bottom: 150px;
+    top: inherit;
+}
+
+/****/
+.slide-d-cstmr .swiper-button-next,
+.slide-d-cstmr .swiper-button-prev {
+    color: #f4739e;
+    bottom: 100px;
+    top: inherit;
+}
+
+
+/****/
+.cstmr-combo-prdct-slider .swiper-button-next,
+.cstmr-combo-prdct-slider .swiper-button-prev {
+    color: #f4739e;
+    bottom: 100px;
+    top: inherit;
+}
+
+/****/
+.customer-couponarea .swiper-button-prev,
+.customer-couponarea .swiper-button-next {
+    bottom: 60px !important;
+}
+
+/***/
+
+.best-seller-customer .swiper-button-next,
+.best-seller-customer .swiper-button-prev {
+    color: #f4739e;
+}
+
+/****/
+.extra-points .swiper-button-next,
+.extra-points .swiper-button-prev {
+    color: #f4739e;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+/*******Alert******/
+
+button.swal2-confirm.swal2-styled {
+    display: none !important;
+}
+
+.swal2-popup.swal2-modal {
+    display: inline-flex !important;
+    align-items: center !important;
+    padding-bottom: 0 !important;
+    overflow: hidden;
+    width: 25em !important;
+}
+
+div:where(.swal2-icon) {
+
+    margin-right: 25px !important;
+    margin-left: 36px !important;
+    margin-top: 0.5em !important;
+
+
+}
+
+div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left] {
+    top: -1.7375em !important;}
+
+    div:where(.swal2-container) .swal2-html-container {
+        margin: 0 !important;}
+
+
+        .css-t3ipsp-control {
+            border-color: #f9c7d8 !important;
+            box-shadow: 0 0 0 1px #fac6d8 !important;
+        }
+
+
+
+
+/*Mobile*/
+
+@media(max-width:767px) {
+
+    .container {
+        width: 100% !important;
+        max-width: 100vw;
+    }
+
+    .m-nav .bg-green-50,
+    .m-nav h4 {
+        display: none;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+        display: none !important;
+    }
+
+    .card-shape:after {
+        height: 18px;
+    }
+
+
+
+}
+
+
+/*tablet devices (both orentations)*/
+@media (min-width:768px) and (max-width:979px) {
+
+
+    .container {
+        width: 95% !important;
+        max-width: 100%;
+    }
+
+}
+
+.error {
+    color: red;
+}
+
+
+
+
+/* global classess */
+
+
+.remove-scroll-bar::-webkit-scrollbar-track {
+    background-color: transparent !important;
+}
+
+.remove-scroll-bar::-webkit-scrollbar-thumb {
+    width: 2px;
+    border-radius: 50%;
+    background-color: gray !important;
+}
