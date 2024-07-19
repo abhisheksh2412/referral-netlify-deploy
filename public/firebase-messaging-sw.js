@@ -18,62 +18,72 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 
-class CustomPushEvent extends Event {
-  constructor(data) {
-    super("push");
+// Check if the browser supports Service Workers and the Push API
+if ("serviceWorker" in navigator && "PushManager" in window) {
+  // Check if firebase.messaging is supported
+  if (firebase.messaging.isSupported()) {
+    const messaging = firebase.messaging();
 
-    Object.assign(this, data);
-    this.custom = true;
+    class CustomPushEvent extends Event {
+      constructor(data) {
+        super("push");
+
+        Object.assign(this, data);
+        this.custom = true;
+      }
+    }
+
+    self.addEventListener("push", (e) => {
+      if (e.custom) return;
+
+      const oldData = e.data;
+
+      const newEvent = new CustomPushEvent({
+        data: {
+          ehheh: oldData.json(),
+          json() {
+            const newData = oldData.json();
+            newData.data = {
+              ...newData.data,
+              ...newData.notification,
+            };
+            delete newData.notification;
+            return newData;
+          },
+        },
+        waitUntil: e.waitUntil.bind(e),
+      });
+
+      // Stop event propagation
+      e.stopImmediatePropagation();
+
+      // Dispatch the new wrapped event
+      dispatchEvent(newEvent);
+    });
+
+    messaging.onBackgroundMessage((payload) => {
+      const { title, body, image, icon, ...restPayload } = payload.data;
+      const notificationOptions = {
+        body,
+        icon: image || "/icons/firebase-logo.png", // path to your "fallback" firebase notification logo
+        data: restPayload,
+      };
+      return self.registration.showNotification(title, notificationOptions);
+    });
+
+    self.addEventListener("notificationclick", (event) => {
+      if (event?.notification?.data && event?.notification?.data?.link) {
+        self.clients.openWindow(event.notification.data.link);
+      }
+
+      // close notification after click
+      event.notification.close();
+    });
+  } else {
+    console.warn("Firebase Messaging is not supported in this browser.");
   }
+} else {
+  console.warn(
+    "Service Worker or Push Manager is not supported in this browser."
+  );
 }
-
-self.addEventListener("push", (e) => {
-  if (e.custom) return;
-
-  const oldData = e.data;
-
-  const newEvent = new CustomPushEvent({
-    data: {
-      ehheh: oldData.json(),
-      json() {
-        const newData = oldData.json();
-        newData.data = {
-          ...newData.data,
-          ...newData.notification,
-        };
-        delete newData.notification;
-        return newData;
-      },
-    },
-    waitUntil: e.waitUntil.bind(e),
-  });
-
-  // Stop event propagation
-  e.stopImmediatePropagation();
-
-  // Dispatch the new wrapped event
-  dispatchEvent(newEvent);
-});
-
-const messaging = firebase.messaging();
-
-messaging.onBackgroundMessage((payload) => {
-  // console.log('[firebase-messaging-sw.js] Received background message ', payload);
-
-  const { title, body, image, icon, ...restPayload } = payload.data;
-  const notificationOptions = {
-    body,
-    icon: image || "/icons/firebase-logo.png", // path to your "fallback" firebase notification logo
-    data: restPayload,
-  };
-  return self.registration.showNotification(title, notificationOptions);
-});
-
-self.addEventListener("notificationclick", (event) => {
-  if (event?.notification?.data && event?.notification?.data?.link) {
-    self.clients.openWindow(event.notification.data.link);
-  }
-
-  // close notification after click
-  event.notification.close();
-});
