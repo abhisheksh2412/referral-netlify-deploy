@@ -19,7 +19,8 @@ import {
 import Loader from "@/components/globals/Loader";
 
 function MoreCoupon() {
-  const storeId = localStorage.getItem("store_id");
+  const storeId =
+    typeof window !== "undefined" && localStorage.getItem("store_id");
   const filtertabs = [
     { name: "New", id: null },
     { name: "Active Coupon", id: 1 },

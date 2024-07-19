@@ -19,7 +19,8 @@ import CustomerProfileDropdown from "./profileDropdown";
 export default function CustomerHeader() {
   const router = useRouter();
 
-  const storeId = localStorage.getItem("store_id");
+  const storeId =
+    typeof window !== "undefined" && localStorage.getItem("store_id");
 
   const { token } = useStateManager();
   const [isOpen, setIsOpen] = useState(false);

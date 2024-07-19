@@ -25,18 +25,21 @@ export const StateManagerProvider = ({ children }) => {
   );
 
   const isWebShareSupported = () => {
-    return navigator.share !== undefined;
+    if (typeof window !== "undefined") {
+      return navigator.share !== undefined;
+    }
   };
 
   const shareUrl = async (url, title, text) => {
     if (isWebShareSupported()) {
       try {
-        await navigator.share({
-          title: title,
-          text: text,
-          url: url,
-        });
-        console.log("URL shared successfully");
+        if (typeof window !== "undefined") {
+          await navigator.share({
+            title: title,
+            text: text,
+            url: url,
+          });
+        }
       } catch (error) {
         console.error("Error sharing URL:", error);
       }

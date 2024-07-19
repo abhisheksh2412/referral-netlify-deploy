@@ -125,7 +125,9 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
         session_id: sessionId,
       };
       await dispatch(SuccessPaymentTransaction(data));
-      localStorage.removeItem("store_payment");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("store_payment");
+      }
       if (await checkOut.isSuccess) {
         await dispatch(CreateStore(storeData));
         setTimeout(() => {
@@ -136,7 +138,9 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
         }, 500);
       }
     } else if (status === "cancel" || status === "failed") {
-      localStorage.removeItem("store_payment");
+      if (typeof window !== "undefined") {
+        localStorage.removeItem("store_payment");
+      }
       popup({ status: "error", message: "Payment Failed" });
     }
   }, [status, sessionId]);

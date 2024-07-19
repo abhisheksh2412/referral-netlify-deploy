@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 
 export const copyToClipboard = (link) => {
-  if (typeof navigator !== "undefined") {
+  if (typeof window !== "undefined") {
     navigator.clipboard.writeText(link).then(
       () => {
         Swal.mixin({ toast: true }).fire({
@@ -23,7 +23,7 @@ export const copyToClipboard = (link) => {
   }
 };
 export const handleShare = async (url) => {
-  if (typeof navigator !== "undefined") {
+  if (typeof window !== "undefined") {
     if (navigator.share) {
       try {
         await navigator.share({

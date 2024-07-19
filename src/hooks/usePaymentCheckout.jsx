@@ -5,7 +5,9 @@ const usePaymentCheckout = (checkOut) => {
   const [sessionId, setSessionId] = useState(null);
 
   const initiateCheckout = () => {
-    localStorage.removeItem("store_payment");
+    if (typeof window !== "undefined") {
+      localStorage.removeItem("store_payment");
+    }
     const redirectUrl = checkOut;
 
     if (redirectUrl) {
@@ -20,7 +22,9 @@ const usePaymentCheckout = (checkOut) => {
       } else {
         // Polling interval to check localStorage
         const intervalId = setInterval(() => {
-          const storePayment = localStorage.getItem("store_payment");
+          const storePayment =
+            typeof window !== "undefined" &&
+            localStorage.getItem("store_payment");
 
           if (storePayment) {
             clearInterval(intervalId);

@@ -17,7 +17,8 @@ const withAuth = (WrappedComponent) => {
       dispatch(FindSelfUser());
     }, [dispatch]);
 
-    const token = localStorage.getItem(config?.TOKEN_KEY);
+    const token =
+      typeof window !== "undefined" && localStorage.getItem(config?.TOKEN_KEY);
 
     useEffect(() => {
       const pathname = location.pathname.toString().split("/");
