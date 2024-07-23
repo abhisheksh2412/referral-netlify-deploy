@@ -8,6 +8,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import Modal from "../../Modal";
 import { config } from "@/config/config";
 import moment from "moment";
+import Image from "next/image";
 
 export default function StoresSlider({ details = true }) {
   const [selectedData, setSelectedData] = useState(null);
@@ -74,10 +75,14 @@ export default function StoresSlider({ details = true }) {
                       className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer hover:shadow-md transition-shadow"
                     >
                       <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                        <img
-                          class="w-32 h-32 mx-auto object-cover"
+                     
+
+                        <Image
                           src={config.IMAGE_URL_PATH + item?.logo}
-                          alt="StoreImage"
+                          width={300}
+                          height={300}
+                          alt="Picture of the author"
+                            class="w-32 h-32 mx-auto object-cover"
                         />
                       </div>
                       <h3 className="text-center p-4 font-medium">

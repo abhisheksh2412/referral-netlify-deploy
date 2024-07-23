@@ -11,39 +11,20 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "@/components/globals/Loader";
 import { GetManagerCoupons } from "@/store/slices/coupon";
+import withAuth from "@/hoc/withAuth";
 
 function MoreCoupon() {
-  // const filtertabs = [
-  //   { name: "New", id: null },
-  //   { name: "Active Coupon", id: 1 },
-  //   { name: "Inactive Coupon", id: 2 },
-  // ];
-
   const user = useSelector((state) => state.auth.data);
   const { managerCoupons, isLoading, isSuccess } = useSelector(
     (state) => state.coupon
   );
-  // const [activeTab, setActiveTab] = useState(null);
+
   const [viewExtraPointsModal, setViewExtraPointsModal] = useState(null);
   const handleCustomerCouponDetailsModel = (value) =>
     setViewExtraPointsModal(value);
 
-  // const { couponsByStore, isLoading } = useSelector((state) => state.customer);
-
   const dispatch = useDispatch();
-  // const getAllCouponsData = useCallback(() => {
-  //   if (storeId) {
-  //     if (activeTab === null) {
-  //       dispatch(GetCouponsByStore(storeId));
-  //     } else if (activeTab === 1) {
-  //       dispatch(GetActiveCouponsByStore(storeId));
-  //     } else if (activeTab === 2) {
-  //       dispatch(GetInActiveCouponsByStore(storeId));
-  //     } else {
-  //       dispatch(GetCouponsByStore(storeId));
-  //     }
-  //   }
-  // }, [dispatch, storeId, activeTab]);
+
   const fetchManagerCoupon = useCallback(() => {
     if (user?.id) {
       dispatch(GetManagerCoupons(user?.id));
@@ -141,4 +122,4 @@ function MoreCoupon() {
   );
 }
 
-export default MoreCoupon;
+export default withAuth(MoreCoupon);

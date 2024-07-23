@@ -9,16 +9,18 @@ export default function Success() {
   const sessionId = parms.get("session_id");
 
   useEffect(() => {
-    if (sessionId) {
-      const data = {
-        sessionId: sessionId,
-        status: "cancel",
-      };
-      localStorage.setItem(
-        "store_payment",
-        encodeURIComponent(JSON.stringify(data))
-      );
-      window.close();
+    if (typeof window !== "undefined") {
+      if (sessionId) {
+        const data = {
+          sessionId: sessionId,
+          status: "cancel",
+        };
+        localStorage.setItem(
+          "store_payment",
+          encodeURIComponent(JSON.stringify(data))
+        );
+        window.close();
+      }
     }
   }, [sessionId]);
 

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Container from "../globals/container";
+import Image from 'next/image'
 
 function HowItsWorking() {
   return (
@@ -17,11 +18,15 @@ function HowItsWorking() {
                 <h1 className="w-14 h-14 rounded-full text-center text-5xl leading-[3.5rem] font-extrabold md:absolute md:absolute lg:absolute -top-6 text-outline">
                   01
                 </h1>
-                <img
-                  className="my-1 md:my-6 lg:my-6 w-18 h-18"
+
+                <Image
                   src="/assets/shopping.png"
-                  alt=""
+                  width={70}
+                  height={70}
+                  alt="Picture of the author"
+                  className="my-1 md:my-6 lg:my-6 !w-18 !h-18"
                 />
+
                 <h3 className="text-xl font-semibold mb-2">
                   Shop with App Name
                 </h3>
@@ -36,7 +41,15 @@ function HowItsWorking() {
                 <h1 className="w-14 h-14 rounded-full text-center text-5xl leading-[3.5rem] font-extrabold md:absolute lg:absolute -top-6 text-outline">
                   02
                 </h1>
-                <img className="my-1 md:my-6 lg:my-6 w-18 h-18" src="/assets/gift.png" alt="" />
+
+                <Image
+                  src="/assets/gift.png"
+                  width={70}
+                  height={70}
+                  alt="Picture of the author"
+                  className="my-1 md:my-6 lg:my-6 !w-18 !h-18"
+                />
+
                 <h3 className="text-xl font-semibold mb-2">Activate coupons</h3>
                 <p className="text-gray-500 text-sm">
                   Thanks to them, you collect °points faster and take advantage
@@ -49,11 +62,14 @@ function HowItsWorking() {
                 <h1 className="w-14 h-14 rounded-full text-center text-5xl leading-[3.5rem] font-extrabold md:absolute lg:absolute -top-6 text-outline">
                   03
                 </h1>
-                <img
-                  className="my-1 md:my-6 lg:my-6 w-18 h-18"
-                  src="/assets/coupon.png"
-                  alt=""
+                <Image
+                   src="/assets/coupon.png"
+                  width={70}
+                  height={70}
+                  alt="Picture of the author"
+                  className="my-1 md:my-6 lg:my-6 !w-18 !h-18"
                 />
+
                 <h3 className="text-xl font-semibold mb-2">Collect rewards</h3>
                 <p className="text-gray-500 text-sm">
                   Exchange the collected °points for prizes, vouchers or further

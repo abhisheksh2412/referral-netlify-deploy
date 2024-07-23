@@ -6,6 +6,7 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 import { GetStores } from "@/store/slices/seller";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
@@ -218,4 +219,4 @@ function ManagerStore() {
   );
 }
 
-export default ManagerStore;
+export default withAuth(ManagerStore);

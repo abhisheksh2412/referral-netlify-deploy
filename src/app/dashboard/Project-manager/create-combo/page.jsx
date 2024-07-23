@@ -5,8 +5,9 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import CreateComboForm from "@/components/managerdashboard/forms/createComboForm";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
+import withAuth from "@/hoc/withAuth";
 
-export default function ComboUpdate() {
+function ComboUpdate() {
   return (
     <div>
       <TopHeader />
@@ -28,3 +29,5 @@ export default function ComboUpdate() {
     </div>
   );
 }
+
+export default withAuth(ComboUpdate);

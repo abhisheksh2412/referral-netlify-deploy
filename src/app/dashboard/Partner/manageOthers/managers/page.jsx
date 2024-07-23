@@ -12,6 +12,7 @@ import PartnerHeader from "@/components/PartnerDashboard/header";
 import { useDispatch, useSelector } from "react-redux";
 import { PartnerGetManager } from "@/store/slices/seller";
 import Loader from "@/components/globals/Loader";
+import withAuth from "@/hoc/withAuth";
 
 function ManagerList() {
   const [selectedData, setSelectedData] = useState();
@@ -88,4 +89,4 @@ function ManagerList() {
   );
 }
 
-export default ManagerList;
+export default withAuth(ManagerList);

@@ -503,7 +503,26 @@ export const GetCardOrderTotal = (data) => async (dispatch) => {
       data
     );
     if (response.status === 200) {
-      dispatch(CardOrderTotal(response.data.data));
+      dispatch(CardOrderTotal(response.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error?.message?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    dispatch(failed(errorMessage));
+    console.log(error);
+  }
+};
+export const GetPaperCardOrderTotal = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/manager/get/paper_card_order_total",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(CardOrderTotal(response.data));
     }
   } catch (error) {
     const errorMessage =
@@ -524,7 +543,7 @@ export const GetAllCardsByStoreId = (storeId) => async (dispatch) => {
       "/seller/get/all-cards-by-store-id/" + storeId
     );
     if (response.status === 200) {
-      dispatch(cardsFetchSuccess(response.data.data));
+      dispatch(cardsFetchSuccess(response.data));
     }
   } catch (error) {
     const errorMessage =

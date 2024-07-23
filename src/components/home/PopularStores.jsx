@@ -3,6 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "../globals/container";
 import { Swiper, SwiperSlide } from "swiper/react";
+import Image from 'next/image'
 
 export default function PopularStore() {
   const dispatch = useDispatch();
@@ -26,42 +27,46 @@ export default function PopularStore() {
           300 stores, thousands of °points to collect!
         </p>
         <Swiper
-         spaceBetween={50}
-         autoplay={{ delay: 1000, disableOnInteraction: false }}
-        breakpoints={{
-          // Mobile devices (320px and up)
-          320: {
-            slidesPerView: 2,
-            spaceBetween: 30,
-          },
-          // iPads/Tablets (768px and up)
-          768: {
-            slidesPerView: 3,
-            spaceBetween: 30,
-          },
-          // Desktops (1024px and up)
-          1024: {
-            slidesPerView: 4,
-            spaceBetween: 50,
-          },
-          // Desktops (1200px and up)
-          1200: {
-            slidesPerView: 5,
-            spaceBetween: 50,
-          },
+          spaceBetween={50}
+          autoplay={{ delay: 1000, disableOnInteraction: false }}
+          breakpoints={{
+            // Mobile devices (320px and up)
+            320: {
+              slidesPerView: 2,
+              spaceBetween: 30,
+            },
+            // iPads/Tablets (768px and up)
+            768: {
+              slidesPerView: 3,
+              spaceBetween: 30,
+            },
+            // Desktops (1024px and up)
+            1024: {
+              slidesPerView: 4,
+              spaceBetween: 50,
+            },
+            // Desktops (1200px and up)
+            1200: {
+              slidesPerView: 5,
+              spaceBetween: 50,
+            },
 
-        }}
+          }}
 
         >
           {popularStores?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer hover:shadow-md transition-shadow">
                 <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                  <img
-                    class="w-32 h-32 mx-auto object-cover"
+                
+                  <Image
                     src={item?.logo}
-                    alt="StoreImage"
+                    width={250}
+                    height={250}
+                    alt="Picture of the author"
+                    class="!w-32 !h-32 mx-auto object-cover"
                   />
+
                 </div>
                 <h3 className="text-center p-4 font-medium">{item?.name}</h3>
               </div>

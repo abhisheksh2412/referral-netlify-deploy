@@ -40,28 +40,30 @@ export default function PaymentCard() {
           </h6>
         ) : (
           <div>
-            {lastInvoices?.data?.map((item, index) => (
-              <div
-                key={index}
-                className="w-full p-2 px-3 bg-white rounded-md shadown-lg"
-              >
-                <div className="flex justify-between items-center pt-1">
-                  <h5 className="text-xs bg-green-100 text-green-500 p-1 px-2 rounded-md">
-                    {item?.invoice?.status}
-                  </h5>
-                  <h5 className="text-sm">
-                    {floatToFixed(item?.transactions?.amount)} zl
-                  </h5>
+            {lastInvoices?.data
+              ?.filter((_, index) => lastInvoices?.data?.length - 1 === index)
+              .map((item, index) => (
+                <div
+                  key={index}
+                  className="w-full p-2 px-3 bg-white rounded-md shadown-lg"
+                >
+                  <div className="flex justify-between items-center pt-1">
+                    <h5 className="text-xs bg-green-100 text-green-500 p-1 px-2 rounded-md">
+                      {item?.invoice?.status}
+                    </h5>
+                    <h5 className="text-sm">
+                      {floatToFixed(item?.transactions?.amount)} zl
+                    </h5>
+                  </div>
+                  <h5 className="text-sm pt-1">{item?.transactions?.note}</h5>
+                  <div className="flex items-center justify-between pt-1">
+                    <CalendarCheck className="text-green-500" size={14} />
+                    <h5 className="text-xs">
+                      {item?.transactions?.date_recorded}
+                    </h5>
+                  </div>
                 </div>
-                <h5 className="text-sm pt-1">{item?.transactions?.note}</h5>
-                <div className="flex items-center justify-between pt-1">
-                  <CalendarCheck className="text-green-500" size={14} />
-                  <h5 className="text-xs">
-                    {item?.transactions?.date_recorded}
-                  </h5>
-                </div>
-              </div>
-            ))}
+              ))}
           </div>
         )}
 

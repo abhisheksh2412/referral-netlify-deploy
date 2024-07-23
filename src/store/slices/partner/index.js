@@ -26,10 +26,10 @@ const PartnerSlice = createSlice({
       state.error = error.payload;
     },
     success: (state, action) => {
+      state.isSuccess = true;
       state.isLoading = false;
       state.isError = false;
       state.data = action.payload;
-      state.isSuccess = true;
       state.error = null;
     },
     bestSellerFetchedSuccess: (state, action) => {
@@ -199,6 +199,41 @@ export const UpdateProfileByPartnerId = (userid, data) => async (dispatch) => {
     );
     if (response.status === 200) {
       dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error.message || error?.message?.data?.message || "unknown error")
+    );
+  }
+};
+
+export const StorePaperCardOrder = (data) => async (dispatch) => {
+  try {
+    dispatch(loading());
+    const response = await axiosInstance.post(
+      "/manager/store_paper_card_order",
+      data
+    );
+    if (response.status === 201) {
+      dispatch(success(response.data));
+      popup({ status: "success", message: "Ordered Successfully" });
+    }
+  } catch (error) {
+    dispatch(
+      failed(error.message || error?.message?.data?.message || "unknown error")
+    );
+  }
+};
+export const StorePlasticCardOrder = (data) => async (dispatch) => {
+  try {
+    dispatch(loading());
+    const response = await axiosInstance.post(
+      "/manager/store_card_order",
+      data
+    );
+    if (response.status === 201) {
+      dispatch(success(response.data));
+      popup({ status: "success", message: "Ordered Successfully" });
     }
   } catch (error) {
     dispatch(

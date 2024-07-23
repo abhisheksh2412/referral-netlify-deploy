@@ -14,6 +14,7 @@ import Modal from "@/components/globals/Modal";
 import AddSendMessage from "@/components/globals/dashboard/froms/addSendMessage";
 import Loader from "@/components/globals/Loader";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
+import withAuth from "@/hoc/withAuth";
 
 function SendMessageList() {
   const { sendMessageUserList, isLoading } = useSelector(
@@ -149,4 +150,4 @@ function SendMessageList() {
   );
 }
 
-export default SendMessageList;
+export default withAuth(SendMessageList);

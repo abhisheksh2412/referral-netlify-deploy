@@ -5,12 +5,13 @@ import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 import { GetStoreById } from "@/store/slices/seller";
 import { useParams } from "next/navigation";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function UpdateStore() {
+function UpdateStore() {
   const { singleStore, isLoading } = useSelector((state) => state.seller);
   const dispatch = useDispatch();
   const params = useParams();
@@ -37,3 +38,5 @@ export default function UpdateStore() {
     </div>
   );
 }
+
+export default withAuth(UpdateStore);

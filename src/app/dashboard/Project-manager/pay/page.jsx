@@ -1,10 +1,12 @@
+"use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import PaymentCard from "@/components/globals/dashboard/PaymentCard";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
+import withAuth from "@/hoc/withAuth";
 
-export default function Pay() {
+function Pay() {
   return (
     <div>
       <TopHeader />
@@ -19,3 +21,5 @@ export default function Pay() {
     </div>
   );
 }
+
+export default withAuth(Pay);

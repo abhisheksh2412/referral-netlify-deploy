@@ -8,6 +8,7 @@ import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerCreateFrom from "@/components/PartnerDashboard/forms/managerCreateFrom";
 import SellerCreateForm from "@/components/PartnerDashboard/forms/sellerCreateForm";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 import { Copy, Globe, Share2 } from "lucide-react";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
@@ -31,7 +32,7 @@ const RenderModalContent = ({ content, handleClose }) => {
   }
 };
 
-export default function PartnerOrder() {
+function PartnerOrder() {
   const router = useRouter();
   const [modelContent, setModalContent] = useState(null);
   const handleModalContent = (content) => {
@@ -266,3 +267,5 @@ export default function PartnerOrder() {
     </div>
   );
 }
+
+export default withAuth(PartnerOrder);

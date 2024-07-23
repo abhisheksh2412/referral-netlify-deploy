@@ -9,6 +9,7 @@ const initialState = {
   productList: [],
   storeProducts: [],
   singleProduct: {},
+  sellerUserProducts: [],
   data: null,
   error: null,
 };
@@ -53,6 +54,12 @@ const ProductSlice = createSlice({
       state.isSuccess = true;
       state.storeProducts = action.payload;
     },
+    fetchedSellerUserProducts: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = true;
+      state.sellerUserProducts = action.payload;
+    },
   },
 });
 
@@ -64,6 +71,7 @@ const {
   success,
   fetchedStoreProducts,
   SingleProductFetchedSuccess,
+  fetchedSellerUserProducts,
 } = ProductSlice.actions;
 
 export default ProductSlice.reducer;
@@ -203,3 +211,18 @@ export const GetProductsByStoreId = (storeId) => async (dispatch) => {
   }
 };
 
+export const GetAllProductsAndPoints = (userid) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.get(
+      "/get/all/products_and_points/" + userid
+    );
+    if (response.status === 200) {
+      dispatch(fetchedSellerUserProducts(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};

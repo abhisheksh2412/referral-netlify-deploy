@@ -1,4 +1,5 @@
 "use client";
+import PartnerHeader from "@/components/PartnerDashboard/header";
 import CustomerHeader from "@/components/customerdashboard/header/customerHeader";
 import MoreBestSellerCard from "@/components/customerdashboard/more/bestSellerCard";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
@@ -8,6 +9,7 @@ import Container from "@/components/globals/container";
 import BestSellerDetails from "@/components/globals/dashboard/BestSeller/bestSellerDetails";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetPartnerBestSeller } from "@/store/slices/partner";
 
 import React, { useCallback, useEffect, useState } from "react";
@@ -41,12 +43,11 @@ function MoreBestSeller() {
     getBestSellers();
   }, [getBestSellers]);
 
-  console.log(bestSellerList);
   return (
     <Loader isLoading={isLoading}>
       <div>
         <TopHeader />
-        <CustomerHeader />
+        <PartnerHeader />
         <InnerBanner title={"Best Seller"} />
         <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
           <Container>
@@ -94,7 +95,10 @@ function MoreBestSeller() {
             ) : (
               <div className="grid grid-cols-12 mobile:grid-cols-1 gap-16 mobile:gap-3 sm:gap-4">
                 {filteredData(search, bestSellerList)?.map((item, index) => (
-                  <div className="lg:col-span-3 col-span-3 mobile:col-span-1 sm:col-span-4" key={index}>
+                  <div
+                    className="lg:col-span-3 col-span-3 mobile:col-span-1 sm:col-span-4"
+                    key={index}
+                  >
                     <div onClick={() => handleShowBestSeller(item)}>
                       <MoreBestSellerCard data={item} />
                     </div>
@@ -116,4 +120,4 @@ function MoreBestSeller() {
   );
 }
 
-export default MoreBestSeller;
+export default withAuth(MoreBestSeller);

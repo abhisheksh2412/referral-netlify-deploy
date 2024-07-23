@@ -8,6 +8,8 @@ export const StateManagerProvider = ({ children }) => {
   const [partnerVerifyEmail, setPartnerVerifyEmail] = useState("");
   const [email, setEmail] = useState("");
   const [couponList, setCouponList] = useState([]);
+  const [plasticCardData, setPlasticCardData] = useState(null);
+  const [paperCardData, setPaperCardData] = useState(null);
   const [birthdayInfo, setBirthdayInfo] = useState(null);
   const router = useRouter();
   const token =
@@ -33,7 +35,7 @@ export const StateManagerProvider = ({ children }) => {
   const shareUrl = async (url, title, text) => {
     if (isWebShareSupported()) {
       try {
-        if (typeof window !== "undefined") {
+        if (typeof window !==  "undefined") {
           await navigator.share({
             title: title,
             text: text,
@@ -61,6 +63,10 @@ export const StateManagerProvider = ({ children }) => {
         couponList,
         setCouponList,
         birthdayInfo,
+        plasticCardData,
+        setPlasticCardData,
+        paperCardData,
+        setPaperCardData,
         setBirthdayInfo,
       }}
     >

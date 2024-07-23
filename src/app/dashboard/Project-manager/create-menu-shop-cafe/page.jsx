@@ -6,6 +6,7 @@ import CreateMenuCafeForm from "@/components/globals/dashboard/MenuCafe/createMe
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
+import withAuth from "@/hoc/withAuth";
 import React from "react";
 
 function CreateMenuShopCafe() {
@@ -30,4 +31,4 @@ function CreateMenuShopCafe() {
   );
 }
 
-export default CreateMenuShopCafe;
+export default withAuth(CreateMenuShopCafe);

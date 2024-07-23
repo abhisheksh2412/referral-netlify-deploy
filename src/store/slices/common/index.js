@@ -24,7 +24,7 @@ const CommonSlice = createSlice({
   initialState: initialState,
   reducers: {
     resetRedirectUrl: (state) => {
-      state.checkoutData = {};
+      state.checkoutData = null;
       state.isSuccess = false;
     },
     loading: (state) => {
@@ -159,12 +159,31 @@ export const VerifyCode =
 export const CardOrderCheckOut = (data) => async (dispatch) => {
   dispatch(loading());
   try {
-    const response = await axiosInstance.get(
-      "/stripe/paper_card_order_checkout",
+    const response = await axiosInstance.post(
+      "/stripe/paper_card_order_checkout_web",
       data
     );
     if (response.status === 200) {
-      dispatch(CheckOutOrder(response.data.data));
+      dispatch(CheckOutOrder(response.data?.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    dispatch(failed(errorMessage));
+    console.log(error);
+  }
+};
+export const PlasticCardCheckout = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/stripe/card_order_checkout_web",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(CheckOutOrder(response.data?.data));
     }
   } catch (error) {
     const errorMessage =
@@ -296,13 +315,52 @@ export const GetNotificationList = (userid) => async (dispatch) => {
 };
 
 export const SuccessPaymentTransaction = (data) => async (dispatch) => {
+  dispatch(loading());
   try {
     const response = await axiosInstance.post(
       "/stripe/add_store_success",
       data
     );
     if (response.status === 200) {
-      successTransactionData(response.data);
+      dispatch(successTransactionData(response.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    dispatch(failed(errorMessage));
+    console.log(error);
+  }
+};
+export const PaperCardSuccessApi = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/stripe/paper_card_order_success",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(successTransactionData(response.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    dispatch(failed(errorMessage));
+    console.log(error);
+  }
+};
+export const PlasticCardSuccessApi = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/stripe/card_order_success",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(successTransactionData(response.data));
     }
   } catch (error) {
     const errorMessage =

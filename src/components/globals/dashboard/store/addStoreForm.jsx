@@ -138,7 +138,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
         }, 500);
       }
     } else if (status === "cancel" || status === "failed") {
-      if (typeof window !== "undefined") {
+      if (typeof window === "undefined") {
         localStorage.removeItem("store_payment");
       }
       popup({ status: "error", message: "Payment Failed" });
@@ -168,9 +168,9 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
 
   return (
     <Loader isLoading={store?.isLoading || isLoading}>
-      <div className="w-full flex items-center justify-center">
+      <div className=" flex items-center justify-center">
         <form
-          className="w-2/4 md:w-8/12 sm:w-6/12 mobile:w-full p-4 shadow-lg rounded-xl "
+          className="mobile:w-full  md:w-3/5 lg:w-2/5 p-4 shadow-lg rounded-xl "
           onSubmit={formik.handleSubmit}
         >
           {/* Image upload */}

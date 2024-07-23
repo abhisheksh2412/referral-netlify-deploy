@@ -13,6 +13,7 @@ import UserBirthdayCard from "@/components/managerdashboard/storebirthday/userBi
 import Loader from "@/components/globals/Loader";
 import Modal from "@/components/globals/Modal";
 import AddUserBirthdayForm from "@/components/common/form/addUserBirthdayForm";
+import withAuth from "@/hoc/withAuth";
 
 function UserBirthday() {
   const [search, setSearch] = useState("");
@@ -146,4 +147,4 @@ function UserBirthday() {
   );
 }
 
-export default UserBirthday;
+export default withAuth(UserBirthday);

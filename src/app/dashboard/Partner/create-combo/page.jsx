@@ -5,8 +5,9 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import CreateComboForm from "@/components/managerdashboard/forms/createComboForm";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 
-export default function PartnerAddCombo() {
+function PartnerAddCombo() {
   return (
     <div>
       <TopHeader />
@@ -28,3 +29,5 @@ export default function PartnerAddCombo() {
     </div>
   );
 }
+
+export default withAuth(PartnerAddCombo);

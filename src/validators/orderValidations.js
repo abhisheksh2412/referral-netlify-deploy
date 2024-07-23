@@ -123,3 +123,43 @@ export const UserBirthdayUpdateValidate = Yup.object({
     .required("Message is required")
     .max(500, "Message cannot exceed 500 characters"),
 });
+
+// plastic card image and storeid valdations
+
+export const PlasticCardValidationSchema = Yup.object({
+  template_image: Yup.mixed()
+    .required("Image is required")
+    .test("fileType", "Only jpeg and png files are allowed", (value) => {
+      return (
+        value && (value.type === "image/jpeg" || value.type === "image/png")
+      );
+    })
+    .test("fileSize", "File size should be less than 2MB", (value) => {
+      return value && value.size <= 2 * 1024 * 1024; // 2MB
+    })
+    .test(
+      "fileDimensions",
+      "Image dimensions should be at least 223x204 pixels",
+      (value) => {
+        return new Promise((resolve) => {
+          if (!value) {
+            resolve(false);
+          } else {
+            const img = new Image();
+            img.src = URL.createObjectURL(value);
+            img.onload = () => {
+              if (img.width >= 223 && img.height >= 204) {
+                resolve(true);
+              } else {
+                resolve(false);
+              }
+            };
+            img.onerror = () => {
+              resolve(false);
+            };
+          }
+        });
+      }
+    ),
+  store_id: Yup.string().required("Store ID is required"),
+});

@@ -11,8 +11,9 @@ import CategorySlider from "@/components/globals/dashboard/CategorySlider/Catego
 import StoresSlider from "@/components/globals/dashboard/StoreSlider/StoreSlider";
 import ProductsSlider from "@/components/globals/dashboard/ProductSlider/ProductsSlider";
 import Container from "@/components/globals/container";
+import withAuth from "@/hoc/withAuth";
 
-export default function ManagerDashboard() {
+function ManagerDashboard() {
   return (
     <div className="relative">
       <TopHeader />
@@ -38,3 +39,5 @@ export default function ManagerDashboard() {
     </div>
   );
 }
+
+export default withAuth(ManagerDashboard);

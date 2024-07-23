@@ -1,10 +1,10 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 const usePaymentCheckout = (checkOut) => {
   const [status, setStatus] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
-  const initiateCheckout = () => {
+  const initiateCheckout = useCallback(() => {
     if (typeof window !== "undefined") {
       localStorage.removeItem("store_payment");
     }
@@ -44,11 +44,11 @@ const usePaymentCheckout = (checkOut) => {
         return () => clearInterval(intervalId);
       }
     }
-  };
+  }, [checkOut]);
 
   useEffect(() => {
     initiateCheckout();
-  }, [checkOut]);
+  }, [initiateCheckout]);
 
   return { status, sessionId, initiateCheckout };
 };

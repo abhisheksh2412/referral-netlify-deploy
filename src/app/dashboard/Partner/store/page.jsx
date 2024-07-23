@@ -1,5 +1,4 @@
 "use client";
-import { popup } from "@/_utils/alerts";
 import PartnerHeader from "@/components/PartnerDashboard/header";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import Modal from "@/components/globals/Modal";
@@ -8,6 +7,7 @@ import StoreDetails from "@/components/globals/dashboard/StoreDetials";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 import { DeleteStore, GetStores } from "@/store/slices/seller";
 import { PenBox, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -85,7 +85,10 @@ function PartnerStore() {
 
               <div className="grid grid-cols-12 mobile:grid-cols-12 gap-16 mobile:gap-3 sm:gap-4 mobile:mt-6">
                 {stores?.data?.map((item, index) => (
-                  <div key={index} className="lg:col-span-3  mobile:col-span-6 sm:col-span-4">
+                  <div
+                    key={index}
+                    className="lg:col-span-3  mobile:col-span-6 sm:col-span-4"
+                  >
                     <div className=" bg-white rounded-lg group  relative p-0 rounded-b-lg mb-4  hover:shadow-md transition-shadow">
                       <span className="absolute flex items-center gap-2 top-2 opacity-0 right-2 group-hover:opacity-100">
                         <button
@@ -139,4 +142,4 @@ function PartnerStore() {
   );
 }
 
-export default PartnerStore;
+export default withAuth(PartnerStore);

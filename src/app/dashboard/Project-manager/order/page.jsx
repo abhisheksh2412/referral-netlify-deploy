@@ -11,6 +11,7 @@ import { FaRegArrowAltCircleRight } from "react-icons/fa";
 
 import React from "react";
 import { useRouter } from "next/navigation";
+import withAuth from "@/hoc/withAuth";
 
 function Order() {
   const router = useRouter();
@@ -23,7 +24,6 @@ function Order() {
       <div className="p-16 mobile:p-4">
         <Container>
           <div className="lg:w-6/12 mobile:w-full sm:w-10/12 md:w-10/12 md-landscape:w-8/12 mx-auto mb-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
-
             <h5 className="mb-6 text-base font-semibold text-pink-400 md:text-xl dark:text-white flex items-center gap-2">
               <MdOutlineMail className="text-2xl" />{" "}
               <span>Notification Emails</span>
@@ -184,4 +184,4 @@ function Order() {
   );
 }
 
-export default Order;
+export default withAuth(Order);

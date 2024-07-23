@@ -1,4 +1,5 @@
 "use client";
+import PartnerHeader from "@/components/PartnerDashboard/header";
 import CustomerHeader from "@/components/customerdashboard/header/customerHeader";
 import ProductsCard from "@/components/customerdashboard/more/productsCard";
 import TabFiltter from "@/components/customerdashboard/more/tabFiltter";
@@ -9,6 +10,7 @@ import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ProductDetails from "@/components/managerdashboard/products/ProductDetails";
+import withAuth from "@/hoc/withAuth";
 import { GetAllCategoryByPartnerId } from "@/store/slices/category";
 import {
   GetAllProductByPartner,
@@ -78,7 +80,7 @@ function MoreProduct() {
     <Loader isLoading={isLoading}>
       <div>
         <TopHeader />
-        <CustomerHeader />
+        <PartnerHeader />
         <InnerBanner title={"Products"} />
         <div className="p-28 px-12 bg-gray-100">
           <Container>
@@ -117,14 +119,4 @@ function MoreProduct() {
   );
 }
 
-export default MoreProduct;
-
-const dummyData = {
-  name: "Sample Product",
-  quantity: 10,
-  weight: 500, // assuming the weight is in grams
-  path: "/images/sample-product.jpg", // path to the product image
-  description:
-    "This is a sample product used for demonstration purposes. It has a sleek design and is made from high-quality materials.",
-  points: "Redeem Now",
-};
+export default withAuth(MoreProduct);

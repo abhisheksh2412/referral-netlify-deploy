@@ -36,23 +36,20 @@ export default function SellerCreateFrom({ handleClose }) {
       }
       try {
         await dispatch(AddSeller(values));
+        if (seller.isSuccess) {
+          popup({
+            status: "success",
+            message: "Seller Created Successfully",
+          });
+          handleClose(null);
+        }
+        resetForm();
         // resetForm();
       } catch (error) {
         console.log(error);
       }
     },
   });
-
-  useEffect(() => {
-    if (seller.isSuccess && !hasShownPopup) {
-      popup({
-        status: "success",
-        message: "Seller Created Successfully",
-      });
-      handleClose(null);
-      setHasShownPopup(true);
-    }
-  }, [seller.isSuccess, hasShownPopup, handleClose]);
 
   return (
     <Loader isLoading={seller.isLoading}>

@@ -303,11 +303,11 @@ input:-webkit-autofill:active {
 
 /*******Alert******/
 
-button.swal2-confirm.swal2-styled {
+.top-right-alert .swal2-confirm.swal2-styled {
     display: none !important;
 }
 
-.swal2-popup.swal2-modal {
+.top-right-alert.swal2-modal {
     display: inline-flex !important;
     align-items: center !important;
     padding-bottom: 0 !important;
@@ -315,7 +315,7 @@ button.swal2-confirm.swal2-styled {
     width: 25em !important;
 }
 
-div:where(.swal2-icon) {
+.top-right-alert div:where(.swal2-icon) {
 
     margin-right: 25px !important;
     margin-left: 36px !important;
@@ -324,19 +324,23 @@ div:where(.swal2-icon) {
 
 }
 
-div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left] {
-    top: -1.7375em !important;}
+.top-right-alert div:where(.swal2-icon).swal2-success [class^=swal2-success-circular-line][class$=left] {
+    top: -1.7375em !important;
+}
 
-    div:where(.swal2-container) .swal2-html-container {
-        margin: 0 !important;}
-
-
-        .css-t3ipsp-control {
-            border-color: #f9c7d8 !important;
-            box-shadow: 0 0 0 1px #fac6d8 !important;
-        }
+.top-right-alert div:where(.swal2-container) .swal2-html-container {
+    margin: 0 !important;
+}
 
 
+.top-right-alert .css-t3ipsp-control {
+    border-color: #f9c7d8 !important;
+    box-shadow: 0 0 0 1px #fac6d8 !important;
+}
+
+.top-right-alert .swal2-html-container {
+    padding: 0;
+}
 
 
 /*Mobile*/

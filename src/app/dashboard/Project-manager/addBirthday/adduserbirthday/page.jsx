@@ -6,6 +6,7 @@ import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
 import React, { useState } from "react";
 import AddUserBirthdayForm from "@/components/common/form/addUserBirthdayForm";
+import withAuth from "@/hoc/withAuth";
 
 function UserAddBirthday() {
   return (
@@ -29,4 +30,4 @@ function UserAddBirthday() {
   );
 }
 
-export default UserAddBirthday;
+export default withAuth(UserAddBirthday);

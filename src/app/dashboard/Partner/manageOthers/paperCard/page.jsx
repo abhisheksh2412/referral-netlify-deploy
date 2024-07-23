@@ -1,10 +1,11 @@
+"use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
-import AddPlasticCardForm from "@/components/managerdashboard/addPlasticard/addPlasticardform";
-import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
+import AddPaperCardForm from "@/components/managerdashboard/addPlasticard/addPaperCard";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 import React from "react";
 
 function PaperCard() {
@@ -19,7 +20,7 @@ function PaperCard() {
             <h3 class="text-left text-2xl leading-tight mb-6 font-semibold text-black">
               Add Paper Card{" "}
             </h3>
-            <AddPlasticCardForm />
+            <AddPaperCardForm />
           </div>
         </Container>
       </div>
@@ -28,4 +29,4 @@ function PaperCard() {
   );
 }
 
-export default PaperCard;
+export default withAuth(PaperCard);

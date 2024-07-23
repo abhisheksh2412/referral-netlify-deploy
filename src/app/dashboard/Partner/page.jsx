@@ -13,8 +13,9 @@ import Container from "@/components/globals/container";
 import { FaPlus } from "react-icons/fa";
 import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import withAuth from "@/hoc/withAuth";
 
-export default function PartnerDashboard() {
+function PartnerDashboard() {
   return (
     <div>
       <Toaster />
@@ -48,3 +49,5 @@ export default function PartnerDashboard() {
     </div>
   );
 }
+
+export default withAuth(PartnerDashboard);

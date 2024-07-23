@@ -7,6 +7,7 @@ const initialState = {
   isError: false,
   isSuccess: false,
   isPasswordReset: false,
+  userByCard: {},
   usersList: [],
   error: null,
   data: null,
@@ -47,8 +48,23 @@ const UserSlice = createSlice({
       state.isSuccess = true;
       state.usersList = action.payload;
     },
+    userByCardSuccess: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = true;
+      state.userByCard = action.payload;
+    },
+
+    EndSession: (state) => {
+      state.isSuccess = false;
+      state.isLoading = false;
+      state.isError = false;
+      state.userByCard = {};
+    },
   },
 });
+
+export const { EndSession } = UserSlice.actions;
 
 const {
   failed,
@@ -57,6 +73,7 @@ const {
   UpdatedSuccess,
   passwordresetSuccess,
   fetchedUsersList,
+  userByCardSuccess,
 } = UserSlice.actions;
 
 export default UserSlice.reducer;
@@ -121,8 +138,8 @@ export const RegisterCardToUser = (data) => async (dispatch) => {
       "/seller/register-card-to-user",
       data
     );
-    if (response.status === 200) {
-      dispatch(success(response.data.data));
+    if (response.status === 201) {
+      dispatch(success(response.data));
     }
   } catch (error) {
     const errorMessage =
@@ -187,6 +204,26 @@ export const ChangePasswordByUserId = (data) => async (dispatch) => {
       message:
         error?.response?.data?.message || error?.message || "unknown Error",
     });
+    dispatch(
+      failed(
+        error?.response?.data?.message || error?.message || "unknown Error"
+      )
+    );
+  }
+};
+
+// Get user by the card
+
+export const GetUserByCard = (cardNo) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.get(
+      "/seller/get/user_by_card/" + cardNo
+    );
+    if (response.status === 200) {
+      dispatch(userByCardSuccess(response.data));
+    }
+  } catch (error) {
     dispatch(
       failed(
         error?.response?.data?.message || error?.message || "unknown Error"

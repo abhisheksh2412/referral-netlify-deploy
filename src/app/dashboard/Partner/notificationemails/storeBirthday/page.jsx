@@ -1,3 +1,4 @@
+"use client";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
@@ -8,6 +9,7 @@ import StoreBirthdayCard from "@/components/managerdashboard/storebirthday/store
 import Link from "next/link";
 import PartnerHeader from "@/components/PartnerDashboard/header";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
+import withAuth from "@/hoc/withAuth";
 
 function EmailsNotification() {
   return (
@@ -71,9 +73,7 @@ function EmailsNotification() {
           </div>
 
           <div className="bg-white p-5 rounded-b-lg ">
-
             <div className="grid grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-4 sm:gap-4 ">
-
               <div className="lg:col-span-3 sm:col-span-6 md-landscape:col-span-4">
                 <StoreBirthdayCard />
               </div>
@@ -105,7 +105,6 @@ function EmailsNotification() {
               <div className="lg:col-span-3 sm:col-span-6 md-landscape:col-span-4">
                 <StoreBirthdayCard />
               </div>
-
             </div>
           </div>
         </Container>
@@ -115,4 +114,4 @@ function EmailsNotification() {
   );
 }
 
-export default EmailsNotification;
+export default withAuth(EmailsNotification);

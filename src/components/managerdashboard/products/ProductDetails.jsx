@@ -1,5 +1,6 @@
 import { config } from "@/config/config";
 import { CheckCheck } from "lucide-react";
+import Image from 'next/image'
 
 export default function ProductDetails({ data }) {
   return (
@@ -25,10 +26,12 @@ export default function ProductDetails({ data }) {
               </span>
             </div>
           </div>
-          <img
-            src={config.IMAGE_URL_PATH + data?.path}
-            alt="Store image"
-            className="w-36 h-36 rounded-full shadow-lg p-2"
+          <Image
+            src={config.IMAGE_URL_PATH + data?.path}  
+            width={250}
+            height={500}
+            alt="Picture of the author"
+             className="!w-36 !h-36 rounded-full shadow-lg p-2"
           />
         </div>
         <div className="flex flex-col">

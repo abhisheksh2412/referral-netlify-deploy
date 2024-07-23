@@ -13,6 +13,8 @@ export const popup = ({
     showConfirmButton: confirmBtn,
     position: position,
     timer: timer,
-    
+    customClass: {
+      popup: "top-right-alert",
+    },
   });
 };

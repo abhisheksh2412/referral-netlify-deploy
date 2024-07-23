@@ -1,6 +1,5 @@
 "use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
-import EditProfile from "@/components/globals/dashboard/EditProfileForms/SellerEditProfile";
 import Container from "@/components/globals/container";
 import Modal from "@/components/globals/Modal";
 import TopHeader from "@/components/home/homeHeader/topheader";
@@ -18,8 +17,9 @@ import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import PartnerEditProfile from "@/components/globals/dashboard/EditProfileForms/PartnerEditProfile";
 import Loader from "@/components/globals/Loader";
+import withAuth from "@/hoc/withAuth";
 
-export default function PartnerProfilePage() {
+function PartnerProfilePage() {
   const { data: user, isLoading } = useSelector((state) => state.auth);
 
   const [editModal, setEditModal] = useState(false);
@@ -215,3 +215,5 @@ export default function PartnerProfilePage() {
     </Loader>
   );
 }
+
+export default withAuth(PartnerProfilePage);

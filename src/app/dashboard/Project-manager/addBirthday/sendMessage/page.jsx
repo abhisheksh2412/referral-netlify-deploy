@@ -1,26 +1,15 @@
 "use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
-import EasySelect from "@/components/globals/EasySelect";
 import Container from "@/components/globals/container";
-import DateTimePicker from "@/components/globals/dateTimePicker";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
-import { FaPlusCircle } from "react-icons/fa";
-import { IoCloseCircleOutline } from "react-icons/io5";
-import Image from "next/image";
-import React, { useState } from "react";
-import Modal from "@/components/globals/Modal";
+import React from "react";
 import { SEND_MESSAGE } from "@/language/Texts";
 import AddSendMessage from "@/components/globals/dashboard/froms/addSendMessage";
+import withAuth from "@/hoc/withAuth";
 
-const options = [
-  { label: "User 1", value: "User 1" },
-  { label: "User 2", value: "User 2" },
-];
 function SendMessage() {
-  const [date, setDate] = useState();
-
   return (
     <div>
       <TopHeader />
@@ -42,4 +31,4 @@ function SendMessage() {
   );
 }
 
-export default SendMessage;
+export default withAuth(SendMessage);

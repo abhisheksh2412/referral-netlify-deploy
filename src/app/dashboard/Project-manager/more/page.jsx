@@ -7,6 +7,7 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 import { GetMoreSectionCounts } from "@/store/slices/customer";
 import Image from "next/image";
 import Link from "next/link";
@@ -77,4 +78,4 @@ function More() {
   );
 }
 
-export default More;
+export default withAuth(More);

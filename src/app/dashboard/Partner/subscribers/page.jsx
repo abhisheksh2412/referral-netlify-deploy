@@ -7,6 +7,7 @@ import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerCard from "@/components/managerdashboard/manageOthers/managerCard";
 import ManagerDetails from "@/components/managerdashboard/manageOthers/managerDetails";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 import { PartnerGetManager, PartnerGetSeller } from "@/store/slices/seller";
 import clsx from "clsx";
 import { useCallback, useEffect, useMemo, useState } from "react";
@@ -25,7 +26,7 @@ const RenderTabComponents = ({
   ));
 };
 
-export default function Subscribers() {
+function Subscribers() {
   const [selectedData, setSelectedData] = useState();
   const [showDetails, setShowDetails] = useState(false);
   const handleManagerDetails = (value) => {
@@ -125,3 +126,5 @@ export default function Subscribers() {
     </Loader>
   );
 }
+
+export default withAuth(Subscribers);

@@ -15,8 +15,8 @@ import { MdOutlineEdit } from "react-icons/md";
 import { RiVerifiedBadgeFill } from "react-icons/ri";
 import { useSelector } from "react-redux";
 import ManagerEditProfile from "@/components/globals/dashboard/EditProfileForms/ManagerEditProfile";
-
-export default function Profile() {
+import withAuth from "@/hoc/withAuth";
+function Profile() {
   const { data: user, isLoading } = useSelector((state) => state.auth);
 
   const [editModal, setEditModal] = useState(false);
@@ -167,3 +167,5 @@ export default function Profile() {
     </div>
   );
 }
+
+export default withAuth(Profile);

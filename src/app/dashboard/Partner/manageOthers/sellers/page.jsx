@@ -12,6 +12,7 @@ import PartnerHeader from "@/components/PartnerDashboard/header";
 import { useDispatch, useSelector } from "react-redux";
 import { PartnerGetSeller } from "@/store/slices/seller";
 import Loader from "@/components/globals/Loader";
+import withAuth from "@/hoc/withAuth";
 
 function SellerList() {
   const dispatch = useDispatch();
@@ -75,4 +76,4 @@ function SellerList() {
   );
 }
 
-export default SellerList;
+export default withAuth(SellerList);

@@ -7,6 +7,7 @@ import { config } from "@/config/config";
 import { useDispatch } from "react-redux";
 import { DeleteProduct, GetAllProduct } from "@/store/slices/products";
 import Swal from "sweetalert2";
+import Image from 'next/image'
 
 function ProductCard({ data, handleModal = null }) {
   const dispatch = useDispatch();
@@ -35,7 +36,7 @@ function ProductCard({ data, handleModal = null }) {
     <div>
       <div className="shadow bg-white rounded-lg p-0 relative pb-2 rounded-b-lg mb-4 group">
         <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-          <div className=" absolute right-0 flex justify-end gap-2 mb-2 opacity-0 group-hover:opacity-100">
+          <div className=" absolute right-0 flex justify-end gap-2 mb-2 mobile:opacity-100 opacity-0 group-hover:opacity-100">
             <button
               className="cursor-pointer bg-red-700 p-1 rounded"
               onClick={() => handleDeleteProduct(data?.id)}
@@ -49,12 +50,22 @@ function ProductCard({ data, handleModal = null }) {
               <TiPencil className="text-white" />
             </div>
           </div>
-          <img
+          {/* <img
             className="w-36 h-36 mx-auto"
             onClick={() => handleModal("view", data)}
             src={config.IMAGE_URL_PATH + data?.path}
             alt=""
+          /> */}
+
+          <Image
+            src={config.IMAGE_URL_PATH + data?.path}
+            onClick={() => handleModal("view", data)}
+            width={250}
+            height={250}
+            alt="Picture of the author"
+            className="!w-32 !h-32 mx-auto"
           />
+
         </div>
         <h3
           onClick={() => handleModal("view", data)}

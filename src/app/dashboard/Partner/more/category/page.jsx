@@ -11,6 +11,8 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetAllCategoryByPartnerId } from "@/store/slices/category";
 import Loader from "@/components/globals/Loader";
+import withAuth from "@/hoc/withAuth";
+import PartnerHeader from "@/components/PartnerDashboard/header";
 
 function Category() {
   const user = useSelector((state) => state.auth.data);
@@ -46,7 +48,7 @@ function Category() {
     <Loader isLoading={isLoading}>
       <div>
         <TopHeader />
-        <CustomerHeader />
+        <PartnerHeader />
         <InnerBanner title={"Category"} />
         <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
           <Container>
@@ -95,7 +97,10 @@ function Category() {
               <div className="grid lg:grid-cols-10 md:grid-cols-12 md-landscape:grid-cols-12  sm:grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-4 sm:gap-4 ">
                 {filteredData(search, categoryListByUserId?.data)?.map(
                   (item, index) => (
-                    <div key={index} className="lg:col-span-2 mobile:col-span-1 md:col-span-4 sm:col-span-4 md-landscape:col-span-4">
+                    <div
+                      key={index}
+                      className="lg:col-span-2 mobile:col-span-1 md:col-span-4 sm:col-span-4 md-landscape:col-span-4"
+                    >
                       <div onClick={() => handleCategoryDetailsModel(item)}>
                         <MoreCategoryCard data={item} />
                       </div>
@@ -140,4 +145,4 @@ function Category() {
   );
 }
 
-export default Category;
+export default withAuth(Category);

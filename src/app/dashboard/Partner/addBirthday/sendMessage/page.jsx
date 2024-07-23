@@ -3,16 +3,13 @@ import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
-import React, { useState } from "react";
+import React from "react";
 import { SEND_MESSAGE } from "@/language/Texts";
 import AddSendMessage from "@/components/globals/dashboard/froms/addSendMessage";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 
 function SendMessage() {
-  const [date, setDate] = useState();
-  const [addCoupon, setAddCoupon] = useState(false);
-  const handleCouponModal = () => setAddCoupon(!addCoupon);
-
   return (
     <div>
       <TopHeader />
@@ -34,4 +31,4 @@ function SendMessage() {
   );
 }
 
-export default SendMessage;
+export default withAuth(SendMessage);

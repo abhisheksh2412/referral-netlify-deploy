@@ -1,11 +1,13 @@
+"use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import AddCouponForm from "@/components/managerdashboard/addcoupons/addcouponform";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 
-export default function PartnerCreateCoupon() {
+function PartnerCreateCoupon() {
   return (
     <div>
       <TopHeader />
@@ -22,3 +24,5 @@ export default function PartnerCreateCoupon() {
     </div>
   );
 }
+
+export default withAuth(PartnerCreateCoupon);

@@ -127,7 +127,7 @@ export default function ManagerDashboardHeader() {
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
                   className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
-                  href="/dashboard/Project-manager/store"
+                  href="/dashboard/Project-manager/managerStore"
                 >
                   <FaStore /> Store
                 </Link>

@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning className={inter.className}>
         <Toaster />
         <Providers>
-          <Suspense fallback={<h5>Loading...</h5>}>{children}</Suspense>
+          <Suspense fallback={<h5>Loading ...</h5>}>{children}</Suspense>
         </Providers>
       </body>
     </html>

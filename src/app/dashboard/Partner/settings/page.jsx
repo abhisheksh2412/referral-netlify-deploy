@@ -6,13 +6,14 @@ import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 import { GetMaxpointByToken, SetMaxpointSetting } from "@/store/slices/partner";
 import { MaxpointValidation } from "@/validators/partnerSetting";
 import { useFormik } from "formik";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-export default function Settings() {
+function Settings() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.auth.data);
   const { maxPointSetting, isLoading, isSuccess } = useSelector(
@@ -133,3 +134,5 @@ export default function Settings() {
     </Loader>
   );
 }
+
+export default withAuth(Settings);

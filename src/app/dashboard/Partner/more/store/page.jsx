@@ -1,4 +1,5 @@
 "use client";
+import PartnerHeader from "@/components/PartnerDashboard/header";
 import CustomerHeader from "@/components/customerdashboard/header/customerHeader";
 import MoreStoreCard from "@/components/customerdashboard/more/storeCard";
 import TabFiltter from "@/components/customerdashboard/more/tabFiltter";
@@ -9,13 +10,9 @@ import Container from "@/components/globals/container";
 import StoreDetails from "@/components/globals/dashboard/StoreDetials";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
+import { GetAllCategoryByPartnerId } from "@/store/slices/category";
 import {
-  GetAllCategories,
-  GetAllCategoryByPartnerId,
-} from "@/store/slices/category";
-import { GetAllStoresByUserID } from "@/store/slices/customer";
-import {
-  GetAllCustomerStores,
   GetallStoresByUserId,
   GetStoresByCategoryId,
 } from "@/store/slices/seller";
@@ -86,7 +83,7 @@ function MoreStore() {
     <Loader isLoading={isLoading}>
       <div>
         <TopHeader />
-        <CustomerHeader />
+        <PartnerHeader />
         <InnerBanner title={"Store"} />
         <div className="py-28 mobile:py-6 mobile:p-4 bg-gray-100">
           <Container>
@@ -121,4 +118,4 @@ function MoreStore() {
   );
 }
 
-export default MoreStore;
+export default withAuth(MoreStore);

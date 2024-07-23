@@ -1,27 +1,14 @@
 "use client";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
-import EasySelect from "@/components/globals/EasySelect";
 import Container from "@/components/globals/container";
-import DateTimePicker from "@/components/globals/dateTimePicker";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ManagerDashboardHeader from "@/components/managerdashboard/header/managerheader";
-import { FaPlusCircle } from "react-icons/fa";
-import { IoCloseCircleOutline } from "react-icons/io5";
-import Image from "next/image";
 import React, { useState } from "react";
-import Modal from "@/components/globals/Modal";
 import AddUserBirthdayForm from "@/components/common/form/addUserBirthdayForm";
+import withAuth from "@/hoc/withAuth";
 
-const options = [
-  { label: "Store 1", value: "Store 1" },
-  { label: "Store 2", value: "Store 2" },
-];
 function UserAddBirthday() {
-  const [date, setDate] = useState();
-  const [addCoupon, setAddCoupon] = useState(false);
-  const handleCouponModal = () => setAddCoupon(!addCoupon);
-
   return (
     <div>
       <TopHeader />
@@ -43,4 +30,4 @@ function UserAddBirthday() {
   );
 }
 
-export default UserAddBirthday;
+export default withAuth(UserAddBirthday);

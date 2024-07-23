@@ -6,8 +6,9 @@ import CreateBestSellerForm from "@/components/globals/dashboard/BestSeller/crea
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import PartnerHeader from "@/components/PartnerDashboard/header";
+import withAuth from "@/hoc/withAuth";
 
-export default function CreateBestSeller() {
+function CreateBestSeller() {
   return (
     <div>
       <TopHeader />
@@ -24,3 +25,5 @@ export default function CreateBestSeller() {
     </div>
   );
 }
+
+export default withAuth(CreateBestSeller);

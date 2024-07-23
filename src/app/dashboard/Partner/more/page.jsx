@@ -1,5 +1,4 @@
 "use client";
-import CustomerHeader from "@/components/customerdashboard/header/customerHeader";
 import DashboardFooter from "@/components/dashboard/dashboardfooter/page";
 import Container from "@/components/globals/container";
 import Loader from "@/components/globals/Loader";
@@ -7,6 +6,7 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import PartnerHeader from "@/components/PartnerDashboard/header";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 import { GetMoreSectionCounts } from "@/store/slices/customer";
 import Image from "next/image";
 import Link from "next/link";
@@ -76,4 +76,4 @@ function More() {
   );
 }
 
-export default More;
+export default withAuth(More);
