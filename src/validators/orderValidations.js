@@ -163,3 +163,77 @@ export const PlasticCardValidationSchema = Yup.object({
     ),
   store_id: Yup.string().required("Store ID is required"),
 });
+
+export const StoreBirthdayCreateValidation = Yup.object().shape({
+  store_id: Yup.string().required("Store ID is required"),
+  dob: Yup.date().required("Date of birth is required"),
+  message: Yup.string().required("Message is required"),
+  birthday_image: Yup.mixed()
+    .required("Birthday image is required")
+    .test(
+      "fileSize",
+      "File size is too large",
+      (value) => value && value.size <= FILE_SIZE
+    )
+    .test(
+      "fileFormat",
+      "Unsupported format",
+      (value) => value && SUPPORTED_FORMATS.includes(value.type)
+    )
+    .test(
+      "fileDimensions",
+      "Image dimensions should be 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If there is no file, we pass the test.
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              resolve(img.width === 500 && img.height === 500);
+            };
+            img.onerror = () => resolve(false);
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(value);
+        });
+      }
+    ),
+});
+
+export const StoreBirthdayUpdateValidation = Yup.object().shape({
+  store_id: Yup.string().required("Store ID is required"),
+  dob: Yup.date().required("Date of birth is required"),
+  message: Yup.string().required("Message is required"),
+  birthday_image: Yup.mixed()
+    .nullable()
+    .test(
+      "fileSize",
+      "File size is too large",
+      (value) => !value || value.size <= FILE_SIZE
+    )
+    .test(
+      "fileFormat",
+      "Unsupported format",
+      (value) => !value || SUPPORTED_FORMATS.includes(value.type)
+    )
+    .test(
+      "fileDimensions",
+      "Image dimensions should be 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If there is no file, we pass the test.
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (e) => {
+            const img = new Image();
+            img.onload = () => {
+              resolve(img.width === 500 && img.height === 500);
+            };
+            img.onerror = () => resolve(false);
+            img.src = e.target.result;
+          };
+          reader.readAsDataURL(value);
+        });
+      }
+    ),
+});

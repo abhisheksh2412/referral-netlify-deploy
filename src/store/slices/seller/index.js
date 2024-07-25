@@ -703,3 +703,17 @@ export const UpdateProfileBySellerId = (userid, data) => async (dispatch) => {
     );
   }
 };
+
+export const AddExtraPoints = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post("/add/extra_points", data);
+    if (response.status === 201) {
+      dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error.message || error?.message?.data?.message || "unknown error")
+    );
+  }
+};

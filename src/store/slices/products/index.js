@@ -226,3 +226,36 @@ export const GetAllProductsAndPoints = (userid) => async (dispatch) => {
     );
   }
 };
+
+export const AddProductAndPoints = (fromdata) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/add/product/name/point",
+      fromdata
+    );
+    if (response.status === 200) {
+      dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};
+
+export const DeleteProductPoints = (productid) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.delete(
+      "/seller/delete/products_and_points/" + productid
+    );
+    if (response.status === 200) {
+      dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};

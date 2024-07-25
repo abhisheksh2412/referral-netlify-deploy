@@ -35,7 +35,7 @@ module.exports = withMT({
         'm-landscape': { 'raw': '(max-width: 736px) and (orientation: landscape)' },
         'mobile': { 'max': '767px' }, // Custom screen for max-width: 767px
         'tab': { 'min': '768px', 'max': '979px' }, // Custom screen for tablet devices
-        'md-landscape': { 'min': '980px', 'max': '1199px' }, // Custom screen for tablet landscape orientation
+        'md-landscape': { 'min': '960px', 'max': '1400px' }, // Custom screen for tablet landscape orientation
 
       },
 

@@ -6,6 +6,7 @@ import Container from "@/components/globals/container";
 import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetRecentProductList } from "@/store/slices/customer";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -43,7 +44,6 @@ function CustomerFavoriteProducts() {
 
         <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
           <Container>
-
             <div className=" mb-12">
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                 <h2 className=" text-center text-2xl font-semibold">
@@ -84,7 +84,10 @@ function CustomerFavoriteProducts() {
 
             <div className="grid grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-2 sm:gap-4">
               {filteredData(search, favoriteProductList)?.map((item, index) => (
-                <div key={index} className="lg:col-span-3 mobile:col-span-1 sm:col-span-4 md-landscape:col-span-4">
+                <div
+                  key={index}
+                  className="lg:col-span-3 mobile:col-span-1 sm:col-span-4 md-landscape:col-span-4"
+                >
                   <CustomerProductCard data={item} />
                 </div>
               ))}
@@ -93,9 +96,9 @@ function CustomerFavoriteProducts() {
         </div>
 
         <DashboardFooter />
-      </div >
-    </Loader >
+      </div>
+    </Loader>
   );
 }
 
-export default CustomerFavoriteProducts;
+export default withAuth(CustomerFavoriteProducts);

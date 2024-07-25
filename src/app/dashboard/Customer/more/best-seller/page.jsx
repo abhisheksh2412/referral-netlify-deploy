@@ -8,6 +8,7 @@ import Container from "@/components/globals/container";
 import BestSellerDetails from "@/components/globals/dashboard/BestSeller/bestSellerDetails";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetPartnerBestSeller } from "@/store/slices/partner";
 
 import React, { useCallback, useEffect, useState } from "react";
@@ -94,7 +95,10 @@ function MoreBestSeller() {
             ) : (
               <div className="grid grid-cols-12 mobile:grid-cols-1 gap-16 mobile:gap-3 sm:gap-4">
                 {filteredData(search, bestSellerList)?.map((item, index) => (
-                  <div className="lg:col-span-3 col-span-3 mobile:col-span-1 sm:col-span-4" key={index}>
+                  <div
+                    className="lg:col-span-3 col-span-3 mobile:col-span-1 sm:col-span-4"
+                    key={index}
+                  >
                     <div onClick={() => handleShowBestSeller(item)}>
                       <MoreBestSellerCard data={item} />
                     </div>
@@ -116,4 +120,4 @@ function MoreBestSeller() {
   );
 }
 
-export default MoreBestSeller;
+export default withAuth(MoreBestSeller);

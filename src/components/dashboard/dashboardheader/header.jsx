@@ -14,6 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { FindSelfUser, LogoutUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";
 import { useRouter } from "next/navigation";
+import { GetUserByCard } from "@/store/slices/userSlice";
 
 export default function DashboardHeader() {
   const router = useRouter();
@@ -46,6 +47,28 @@ export default function DashboardHeader() {
       fetchSelfUser();
     }
   }, [fetchSelfUser, token]);
+
+  // fetch data using card
+
+  const getUser = useCallback(
+    (cardno) => {
+      dispatch(GetUserByCard(cardno));
+    },
+    [dispatch]
+  );
+
+  const getUserByCard = useCallback(() => {
+    if (typeof window !== "undefined") {
+      const cardno = localStorage.getItem("card_no");
+      if (cardno) {
+        getUser(cardno);
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    getUserByCard();
+  }, [getUserByCard]);
 
   return (
     <nav className="bg-rose-300">

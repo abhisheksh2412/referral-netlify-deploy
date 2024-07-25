@@ -8,6 +8,8 @@ const initialState = {
   singleCoupon: {},
   couponsList: [],
   managerCoupons: [],
+  confirmCoupon: [],
+  voucherList: [],
   data: null,
   error: null,
 };
@@ -48,6 +50,18 @@ const CouponSlice = createSlice({
       state.isSuccess = true;
       state.managerCoupons = action.payload;
     },
+    successFetchConfirmCoupons: (state, action) => {
+      state.isLoading = false;
+      state.isSuccess = true;
+      state.isError = false;
+      state.confirmCoupon = action.payload;
+    },
+    fetchVouchersSuccess: (state, action) => {
+      state.isLoading = false;
+      state.isError = false;
+      state.isSuccess = true;
+      state.voucherList = action.payload;
+    },
   },
 });
 
@@ -58,6 +72,8 @@ const {
   SingleCouponFetchSuccess,
   couponFetchedSuccess,
   successFetchManagerCoupons,
+  successFetchConfirmCoupons,
+  fetchVouchersSuccess,
 } = CouponSlice.actions;
 
 export default CouponSlice.reducer;
@@ -152,6 +168,71 @@ export const GetManagerCoupons = (managerId) => async (dispatch) => {
     dispatch(
       failed(error?.message || error?.message?.data?.message || "unkown error")
     );
-    console.log(error);
+  }
+};
+
+export const GetSellerConfirmCoupons =
+  (cardId, sellerId) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.get(
+        `/seller/get/confirm_coupons/${cardId}/${sellerId}`
+      );
+      if (response.status === 200) {
+        dispatch(successFetchConfirmCoupons(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "unkown error"
+        )
+      );
+    }
+  };
+
+export const GetCustomerCouponsByCard = (cardid) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.get("/get/customer/coupons/" + cardid);
+    if (response.status === 200) {
+      dispatch(fetchVouchersSuccess(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};
+
+export const ConfirmCoupon = (data, couponId) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      `/seller/confirm_coupon/${couponId}`,
+      data
+    );
+    if (response.status === 200) {
+      dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};
+export const RejectCoupon = (data, couponId) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      `/seller/reject_coupon/${couponId}`,
+      data
+    );
+    if (response.status === 200) {
+      dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
   }
 };

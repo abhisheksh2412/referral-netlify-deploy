@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Loader from "@/components/globals/Loader";
 import { GetManagerCoupons } from "@/store/slices/coupon";
 import withAuth from "@/hoc/withAuth";
+import CouponDetails from "@/components/managerdashboard/coupons/couponDetails";
 
 function MoreCoupon() {
   const user = useSelector((state) => state.auth.data);
@@ -59,8 +60,11 @@ function MoreCoupon() {
                     key={index}
                     className="lg:col-span-3 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-6"
                   >
-                    <div onClick={handleCustomerCouponDetailsModel}>
-                      <MoreCouponCard data={item} />
+                    <div>
+                      <MoreCouponCard
+                        data={item}
+                        handleView={handleCustomerCouponDetailsModel}
+                      />
                     </div>
                   </div>
                 ))}
@@ -71,10 +75,16 @@ function MoreCoupon() {
 
         <Modal
           size={"sm"}
-          open={viewExtraPointsModal}
-          handleOpen={handleCustomerCouponDetailsModel}
+          open={viewExtraPointsModal !== null}
+          handleOpen={() => handleCustomerCouponDetailsModel(null)}
         >
-          <div className="bg-gradient-to-r from-blush-red to-pink-300 text-lg font-semibold text-white p-4 text-left rounded-t-md">
+          <CouponDetails
+            data={viewExtraPointsModal}
+            isdelete={true}
+            refreshFunc={fetchManagerCoupon}
+            handleClose={handleCustomerCouponDetailsModel}
+          />
+          {/* <div className="bg-gradient-to-r from-blush-red to-pink-300 text-lg font-semibold text-white p-4 text-left rounded-t-md">
             <h1>Customer Coupon Details</h1>
           </div>
           <div className="p-12 relative">
@@ -113,7 +123,7 @@ function MoreCoupon() {
               text ever since the 1500s, when an unknown printer took a galley
               of type and scrambled it to make a type specimen book.
             </p>
-          </div>
+          </div> */}
         </Modal>
 
         <DashboardFooter />

@@ -1,79 +1,71 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
 import EasySelect from "@/components/globals/EasySelect";
-import { FaPlusCircle } from "react-icons/fa";
+import Loader from "@/components/globals/Loader";
 import Modal from "@/components/globals/Modal";
-import { IoCloseCircleOutline } from "react-icons/io5";
-import Image from "next/image";
-import { useDispatch, useSelector } from "react-redux";
-import { GetAllCustomer } from "@/store/slices/customer";
-import { useFormik } from "formik";
+import { config } from "@/config/config";
+import {
+  AddStoreBirthdayData,
+  FetchStoreBirthdayList,
+  FetchStoreForBirthday,
+  UpdateStoreBirthdayData,
+} from "@/store/slices/orders";
 import {
   SendMessageAddCouponValidation,
-  UserBirthdayCrationValidate,
-  UserBirthdayUpdateValidate,
+  StoreBirthdayCreateValidation,
+  StoreBirthdayUpdateValidation,
 } from "@/validators/orderValidations";
-import { Router, Trash2 } from "lucide-react";
-import {
-  AddUserBirthday,
-  CardGetByUserId,
-  UpdateUserBirthday,
-} from "@/store/slices/orders";
-import Loader from "@/components/globals/Loader";
-import { useRouter } from "next/navigation";
-import { popup } from "@/_utils/alerts";
+import { useFormik } from "formik";
+import { Trash2 } from "lucide-react";
+import Image from "next/image";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { FaPlusCircle } from "react-icons/fa";
+import { IoCloseCircleOutline } from "react-icons/io5";
+import { useDispatch, useSelector } from "react-redux";
 
-export default function AddUserBirthdayForm({
-  editData = null,
-  handleClose = null,
-}) {
-  const [selectedUser, setSelectedUser] = useState(null);
+export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
   const dispatch = useDispatch();
-  const router = useRouter();
-  const [couponImageBinary, setCouponImageBinary] = useState([]);
-  const [birthdayImage, setBirthdayImage] = useState(null);
-  const [imagePreview, setImagePreview] = useState(null);
   const orders = useSelector((state) => state.orders);
   const [coupons, setCoupons] = useState([]);
-  const { customerList, isLoading } = useSelector((state) => state.customer);
+  const [birthdayImage, setBirthdayImage] = useState(null);
+  const [selectedStore, setSelectedStore] = useState("");
+  const [couponImageBinary, setCouponImageBinary] = useState([]);
+  const [imagePreview, setImagePreview] = useState(null);
   const [addCoupon, setAddCoupon] = useState(false);
   const handleCouponModal = () => setAddCoupon(!addCoupon);
+  const { stores, isLoading } = useSelector((state) => state.orders);
 
-  const allCustomers = useCallback(() => {
-    dispatch(GetAllCustomer());
+  const getAllBirthdayList = useCallback(() => {
+    dispatch(FetchStoreBirthdayList());
   }, [dispatch]);
 
-  useEffect(() => {
-    allCustomers();
-  }, [allCustomers]);
-
-  const customers = useMemo(() => {
-    return customerList?.data?.map((item) => ({
-      label: item?.name,
-      value: item?.id,
-    }));
-  }, [customerList]);
+  const options = stores?.data
+    ? stores?.data?.map((item) => ({
+        label: item?.name,
+        value: item?.id,
+        logo: item?.logo,
+      }))
+    : [];
 
   const formik = useFormik({
     initialValues: {
-      birthday_image: "",
+      birthday_image: null,
       dob: editData?.dob || "",
-      user_id: editData?.user?.id || "",
+      store_id: editData?.store_id || "",
       message: editData?.message || "",
     },
     validationSchema: !editData
-      ? UserBirthdayCrationValidate
-      : UserBirthdayUpdateValidate,
+      ? StoreBirthdayCreateValidation
+      : StoreBirthdayUpdateValidation,
     onSubmit: async (values) => {
+      console.log(values);
       const formdata = new FormData();
 
       // Append the image if present
       if (values.birthday_image) {
         formdata.append("birthday_image", values.birthday_image);
       }
-
       // Append other fields
       formdata.append("dob", values.dob);
-      formdata.append("user_id", values.user_id);
+      formdata.append("store_id", values.store_id);
       formdata.append("message", values.message);
 
       // Append coupons if present
@@ -94,13 +86,14 @@ export default function AddUserBirthdayForm({
 
       try {
         if (!editData) {
-          await dispatch(AddUserBirthday(formdata));
+          await dispatch(AddStoreBirthdayData(formdata));
           if (orders.isSuccess) {
             popup({ status: "success", message: "created Successfully" });
             router.back();
           }
         } else {
-          await dispatch(UpdateUserBirthday(formdata, editData?.id));
+          await dispatch(UpdateStoreBirthdayData(formdata, editData?.id));
+          getAllBirthdayList();
           if (orders.isSuccess) {
             popup({ status: "success", message: "updated Successfully" });
             handleClose(null);
@@ -112,19 +105,6 @@ export default function AddUserBirthdayForm({
     },
   });
 
-  const handleSelectCustomer = useCallback(
-    (data) => {
-      const findData = customerList?.data?.find(
-        (item) => item?.id === data?.value
-      );
-      formik.setFieldValue("user_id", findData?.id);
-      setSelectedUser(findData);
-    },
-    [customerList?.data, formik]
-  );
-
-  // Modal formik
-
   const modalFormik = useFormik({
     initialValues: {
       coupon_name: "",
@@ -134,17 +114,11 @@ export default function AddUserBirthdayForm({
     },
     validationSchema: SendMessageAddCouponValidation,
     onSubmit: (values, { resetForm }) => {
-      console.log(values);
       setCoupons([...coupons, values]);
       resetForm();
       handleCouponModal();
     },
   });
-
-  const handleDeleteCoupons = (data) => {
-    const newCouponList = coupons?.filter((item) => item !== data);
-    setCoupons(newCouponList);
-  };
 
   const handleImageChange = async (event, field, modal = true) => {
     const file = event.currentTarget.files[0];
@@ -159,52 +133,72 @@ export default function AddUserBirthdayForm({
       }
     }
   };
+  const handleDeleteCoupons = (data) => {
+    const newCouponList = coupons?.filter((item) => item !== data);
+    setCoupons(newCouponList);
+  };
+  const handleSelectStore = useCallback(
+    (data) => {
+      const findData = stores?.data?.find((item) => item?.id === data?.value);
+      formik.setFieldValue("store_id", findData?.id);
+      setSelectedStore(findData);
+    },
+    [stores?.data, formik]
+  );
 
-  // get the user card as per the user select
-  const getuserCard = useCallback(() => {
-    if (selectedUser) {
-      dispatch(CardGetByUserId(selectedUser?.id));
-    } else if (editData) {
-      dispatch(CardGetByUserId(editData?.user?.id));
+  const getAllStores = useCallback(() => {
+    dispatch(FetchStoreForBirthday());
+  }, [dispatch]);
+
+  const onEditDataFound = useCallback(() => {
+    if (editData) {
+      setBirthdayImage(config.IMAGE_URL_PATH + editData?.birthday_image);
+      formik.setFieldValue("message", editData?.message);
+      formik.setFieldValue("store_id", editData?.store_id);
+      formik.setFieldValue("dob", editData?.dob);
     }
-  }, [dispatch, selectedUser, editData]);
+  }, [editData]);
 
   useEffect(() => {
-    getuserCard();
-  }, [getuserCard]);
+    onEditDataFound();
+  }, [onEditDataFound]);
+
+  useEffect(() => {
+    getAllStores();
+  }, [getAllStores]);
 
   const getDefaultValue = useMemo(() => {
-    return { label: editData?.user?.name, value: editData?.user?.id };
+    return { label: editData?.store?.name, value: editData?.store?.id };
   }, [editData]);
 
   return (
-    <Loader isLoading={orders?.isLoading || isLoading}>
+    <Loader isLoading={isLoading}>
       <form onSubmit={formik.handleSubmit}>
         <div className="bg-gray-100 p-4 rounded-lg">
           <div className=" mb-3 w-full">
-            <p className="text-base font-semibold mb-2">Select User</p>
+            <p className="text-base font-semibold mb-2">Select Store</p>
             <EasySelect
               defaultValue={getDefaultValue}
-              options={customers}
-              handleChange={handleSelectCustomer}
+              options={options}
+              handleChange={handleSelectStore}
             />
           </div>
 
-          {selectedUser && (
+          {selectedStore && (
             <div className="flex items-center gap-3 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-lg w-64">
               <Image
-                src={selectedUser?.profile_photo_url}
+                src={config?.IMAGE_URL_PATH + selectedStore?.logo}
                 width={60}
                 height={60}
                 alt="Picture of the author"
                 className="rounded-full"
               />
-              <p class="text-base font-semibold">{selectedUser?.name}</p>
+              <p class="text-base font-semibold">{selectedStore?.name}</p>
             </div>
           )}
         </div>
-        {formik.errors.user_id && (
-          <p className="text-xs  text-red-500 p-2">{formik.errors.user_id}</p>
+        {formik.errors.store_id && (
+          <p className="text-xs  text-red-500 p-2">{formik.errors.store_id}</p>
         )}
 
         <div className="mt-5 w-full">
@@ -212,12 +206,11 @@ export default function AddUserBirthdayForm({
           <textarea
             id="message"
             rows="4"
-            name="message"
             value={formik.values.message}
             onChange={formik.handleChange}
             class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Please Write Message..."
-          ></textarea>
+          ></textarea>{" "}
           {formik.touched.message && formik.errors.message ? (
             <p className="text-xs  text-red-500 p-2">{formik.errors.message}</p>
           ) : null}
@@ -279,7 +272,6 @@ export default function AddUserBirthdayForm({
 
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Enter Date Of Birth</p>
-          {/* <DateTimePicker date={date} setDate={setDate} /> */}
           <input
             type="date"
             className="w-full border-2 border-gray-200 p-2 px-3 rounded-md text-sm "
@@ -290,7 +282,9 @@ export default function AddUserBirthdayForm({
           {formik.touched.dob && formik.errors.dob ? (
             <p className="text-xs  text-red-500 p-2">{formik.errors.dob}</p>
           ) : null}
+          {/* <DateTimePicker date={date} setDate={setDate} /> */}
         </div>
+
         {!editData && (
           <div className="bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 mt-6 rounded-lg">
             <div className="flex justify-between p-4 rounded-t-lg border-b-[1.5px] border-grey-500 bg-gray-100">
@@ -333,76 +327,6 @@ export default function AddUserBirthdayForm({
           </p>
         ) : null}
 
-        {orders?.cardByUser?.points && (
-          <div className="py-3 px-2 w-full flex justify-between items-center border rounded-md mt-3">
-            <h5>Your Points</h5>
-            <h6>{orders?.cardByUser?.points}</h6>
-          </div>
-        )}
-
-        <div className="bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-lg inline-block mobile:w-full mt-4">
-          <table className="w-full mobile:w-full sm:w-w-8/12">
-            <tbody>
-              <tr>
-                <td className="w-2/3">
-                  <table className="w-full">
-                    <tbody>
-                      <tr>
-                        <th className="text-left p-1" colSpan={"2"}>
-                          {" "}
-                          <h3 className="text-lg font-semibold">Card</h3>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th className="text-left p-1" colSpan={"2"}>
-                          {" "}
-                          <h3 className="text-lg font-semibold">
-                            {orders.cardByUser?.cardData?.card_number ||
-                              "XXXXXXXX0000"}
-                          </h3>
-                        </th>
-                      </tr>
-                      <tr>
-                        <th className="text-left p-1 text-sm font-semibold">
-                          Valid From
-                        </th>
-                        <td className="text-left p-1 text-sm">
-                          {orders.cardByUser?.cardData?.valid_from || "XX/XXXX"}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="text-left p-1 text-sm font-semibold">
-                          Valid To
-                        </th>
-                        <td className="text-left p-1 text-sm">
-                          {orders.cardByUser?.cardData?.valid_thru || "XX/XXXX"}
-                        </td>
-                      </tr>
-                      <tr>
-                        <th className="text-left p-2" colSpan={"2"}>
-                          Card Holder:{" "}
-                          {orders.cardByUser?.cardData?.card_holder_name ||
-                            "Card holder name"}
-                        </th>
-                      </tr>
-                    </tbody>
-                  </table>
-                </td>
-
-                <td className="w-1/3 text-right">
-                  <Image
-                    src="/assets/card.png"
-                    width={120}
-                    height={120}
-                    alt="Picture of the author"
-                    className="mx-auto !mr-0"
-                  />
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
         <div
           className="p-4 mb-4 text-sm text-yellow-800 rounded-lg bg-yellow-50 dark:bg-gray-800 dark:text-yellow-400 mt-4"
           role="alert"
@@ -428,7 +352,7 @@ export default function AddUserBirthdayForm({
                     Upload Attachment
                   </p>
                   <label
-                    htmlFor="coupon_image_upload"
+                    htmlFor="upload_couponImage"
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
@@ -468,7 +392,7 @@ export default function AddUserBirthdayForm({
                       )}
                     </div>
                     <input
-                      id="coupon_image_upload"
+                      id="upload_couponImage"
                       type="file"
                       className="hidden"
                       onChange={(e) => handleImageChange(e, "coupon_image")}

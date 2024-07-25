@@ -20,7 +20,7 @@ import CustomerHeader from "@/components/customerdashboard/header/customerHeader
 import Loader from "@/components/globals/Loader";
 import CustomerEditProfile from "@/components/globals/dashboard/EditProfileForms/CustomerEditProfile";
 
-function SellerProfile() {
+function CustomerProfile() {
   const { data: user, isLoading } = useSelector((state) => state.auth);
 
   const [editModal, setEditModal] = useState(false);
@@ -150,4 +150,4 @@ function SellerProfile() {
   );
 }
 
-export default withAuth(SellerProfile);
+export default withAuth(CustomerProfile);

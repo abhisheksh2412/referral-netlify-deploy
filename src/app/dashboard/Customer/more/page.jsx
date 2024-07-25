@@ -6,6 +6,7 @@ import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 import { GetMoreSectionCounts } from "@/store/slices/customer";
 import Image from "next/image";
 import Link from "next/link";
@@ -36,7 +37,10 @@ function More() {
           <Container>
             <div className="grid grid-cols-10 gap-16 mobile:grid-cols-2  mobile:gap-4 sm:gap-4">
               {moreTabs?.Overview?.map((item, index) => (
-                <div key={index} className="lg:col-span-2 mobile:col-span-1 sm:col-span-4 md-landscape:col-span-4">
+                <div
+                  key={index}
+                  className="lg:col-span-2 mobile:col-span-1 sm:col-span-4 md-landscape:col-span-4"
+                >
                   <Link
                     href={`/dashboard/Customer/more/${item?.title}`}
                     className="group"
@@ -72,4 +76,4 @@ function More() {
   );
 }
 
-export default More;
+export default withAuth(More);

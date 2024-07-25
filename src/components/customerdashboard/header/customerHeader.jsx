@@ -108,7 +108,7 @@ export default function CustomerHeader() {
                 <Link
                   className="flex items-center gap-1 block py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 text-base md:text-base mobile:rounded-none"
                   aria-current="page"
-                  href="/"
+                  href="/dashboard/Customer"
                 >
                   Home
                 </Link>

@@ -8,11 +8,17 @@ import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import {
   ActivateUserCoupon,
-  GetCouponsByStore,
   GetCustomerDashData,
 } from "@/store/slices/customer";
+import { DeleteCouponById } from "@/store/slices/coupon";
+import Swal from "sweetalert2";
 
-export default function CouponDetails({ data, isdelete = false }) {
+export default function CouponDetails({
+  data,
+  isdelete = false,
+  refreshFunc = null,
+  handleClose = null,
+}) {
   const dispatch = useDispatch();
   const params = useSearchParams();
   const storeId = useSearchParams().get("store_id");
@@ -21,11 +27,34 @@ export default function CouponDetails({ data, isdelete = false }) {
     dispatch(GetCustomerDashData(id));
   }, [dispatch, params]);
 
+  const deleteCouponById = useCallback(
+    (id) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          dispatch(DeleteCouponById(id));
+          refreshFunc();
+          handleClose(null);
+        }
+      });
+    },
+    [dispatch]
+  );
   // activate coupon implementation
-  const activateCoupon = useCallback(() => {
-    dispatch(ActivateUserCoupon({ storeId: storeId, couponId: data?.id }));
-    CustomersAllData();
-  }, [dispatch, storeId, data]);
+  const activateCoupon = useCallback(
+    (storeId, couponId) => {
+      dispatch(ActivateUserCoupon({ storeId: storeId, couponId: couponId }));
+      CustomersAllData();
+    },
+    [dispatch, storeId, data]
+  );
   return (
     <div>
       <div className="bg-gradient-to-r p-3 from-blush-red to-pink-200 text-white font-semibold text-center rounded-t-md">
@@ -40,12 +69,6 @@ export default function CouponDetails({ data, isdelete = false }) {
           <span className="absolute w-fit right-2 top-2">
             <CouponStatus status={data?.status} />
           </span>
-
-          {isdelete && (
-            <button className="text-sm text-white font-normal bg-red-400 p-2 flex items-center justify-center rounded-md absolute left-0 lg:w-[30%] mobile:w-[40%] sm:w-[38%]  md-landscape:w-[40%] m-4">
-              <MdDelete />
-            </button>
-          )}
 
           {/* coupon info  */}
           <div className="p-4 flex flex-col gap-2">
@@ -86,6 +109,15 @@ export default function CouponDetails({ data, isdelete = false }) {
         >
           Activate Coupon
         </button> */}
+
+        {isdelete && (
+          <button
+            onClick={() => deleteCouponById(data?.id)}
+            className=" w-full text-sm flex gap-2 text-white font-normal bg-red-400 p-2 items-center justify-center rounded-md"
+          >
+            <MdDelete size={20} /> Delete
+          </button>
+        )}
       </div>
     </div>
   );

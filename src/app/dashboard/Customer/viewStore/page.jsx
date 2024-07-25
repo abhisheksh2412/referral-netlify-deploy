@@ -8,6 +8,7 @@ import Container from "@/components/globals/container";
 import StoreDetails from "@/components/globals/dashboard/StoreDetials";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetAllCustomerStores } from "@/store/slices/seller";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
@@ -57,9 +58,9 @@ function ViewCustomerStore() {
           <Container>
             <div className=" mb-12">
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <h2 className=" text-center text-3xl mobile:text-xl font-semibold">
-                            Popular stores
-                        </h2>
+                <h2 className=" text-center text-3xl mobile:text-xl font-semibold">
+                  Popular stores
+                </h2>
                 <div className="w-full md:w-72">
                   <div className="relative h-10 w-full min-w-[200px]">
                     <div className="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -103,7 +104,10 @@ function ViewCustomerStore() {
                     key={index}
                     className="md:col-span-4 md-landscape:col-span-4 lg:col-span-3 mobile:col-span-1"
                   >
-                    <FavoriteStoreCard data={item} handleView={handleViewModal} />
+                    <FavoriteStoreCard
+                      data={item}
+                      handleView={handleViewModal}
+                    />
                   </div>
                 ))}
               </div>
@@ -120,4 +124,4 @@ function ViewCustomerStore() {
   );
 }
 
-export default ViewCustomerStore;
+export default withAuth(ViewCustomerStore);

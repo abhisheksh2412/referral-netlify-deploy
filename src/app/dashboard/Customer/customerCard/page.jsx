@@ -7,6 +7,7 @@ import PointsBanner from "@/components/globals/dashboard/customer/PointsBanner";
 import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetAllCardsWithStoreId } from "@/store/slices/customer";
 import moment from "moment";
 import { useSearchParams } from "next/navigation";
@@ -40,7 +41,10 @@ function CustomerCard() {
           <Container>
             <div className="grid grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-4 sm:gap-4">
               {customerCardsByStore?.loyalty_card?.map((item, index) => (
-                <div key={index} className="lg:col-span-4 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-6 bg-white p-2 rounded-lg">
+                <div
+                  key={index}
+                  className="lg:col-span-4 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-6 bg-white p-2 rounded-lg"
+                >
                   <CustomerPlasticCard data={item} />
                 </div>
               ))}
@@ -99,4 +103,4 @@ function CustomerCard() {
   );
 }
 
-export default CustomerCard;
+export default withAuth(CustomerCard);

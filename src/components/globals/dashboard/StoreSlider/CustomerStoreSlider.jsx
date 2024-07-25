@@ -73,7 +73,7 @@ export default function CustomerStoresSlider({ details = true }) {
   );
   useEffect(() => {
     updateStore(selectedStore);
-  }, [updateStore]);
+  }, [updateStore, selectedStore]);
 
   return (
     <Loader isLoading={customer?.isLoading}>

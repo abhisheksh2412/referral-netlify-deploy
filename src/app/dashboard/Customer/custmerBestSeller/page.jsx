@@ -12,6 +12,7 @@ import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetBestSellerByUserId } from "@/store/slices/customer";
 import Loader from "@/components/globals/Loader";
+import withAuth from "@/hoc/withAuth";
 
 function CustomerBestSeller() {
   const [viewBestSeller, setViewBestSeller] = useState(null);
@@ -49,11 +50,9 @@ function CustomerBestSeller() {
         <CustomerHeader />
         <InnerBanner title={"Best Sellers"} />
 
-            <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
-
-                <Container>
-
-                <div className=" mb-12">
+        <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
+          <Container>
+            <div className=" mb-12">
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
                 <h2 className=" text-center text-2xl font-semibold">
                   Best Seller
@@ -123,4 +122,4 @@ function CustomerBestSeller() {
   );
 }
 
-export default CustomerBestSeller;
+export default withAuth(CustomerBestSeller);

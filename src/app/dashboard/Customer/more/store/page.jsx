@@ -9,12 +9,9 @@ import Container from "@/components/globals/container";
 import StoreDetails from "@/components/globals/dashboard/StoreDetials";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
+import { GetAllCategoryByPartnerId } from "@/store/slices/category";
 import {
-  GetAllCategories,
-  GetAllCategoryByPartnerId,
-} from "@/store/slices/category";
-import {
-  GetAllCustomerStores,
   GetallStoresByUserId,
   GetStoresByCategoryId,
 } from "@/store/slices/seller";
@@ -120,4 +117,4 @@ function MoreStore() {
   );
 }
 
-export default MoreStore;
+export default withAuth(MoreStore);

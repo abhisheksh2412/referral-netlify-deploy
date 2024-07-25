@@ -12,6 +12,7 @@ export const SellerProvider = ({ children }) => {
   // Countdown state and logic moved to the context provider
   const [time, setTime] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
 
   useEffect(() => {
     let interval = null;
@@ -44,6 +45,8 @@ export const SellerProvider = ({ children }) => {
         time: formatTime(time),
         isActive,
         startCountdown,
+        selectedProduct,
+        setSelectedProduct,
       }}
     >
       {children}

@@ -20,6 +20,7 @@ import Loader from "@/components/globals/Loader";
 import { config } from "@/config/config";
 import clsx from "clsx";
 import moment from "moment";
+import withAuth from "@/hoc/withAuth";
 
 function CustomeCouponList() {
   const filtertabs = ["New", "Active Coupon", "Inactive Coupon"];
@@ -148,4 +149,4 @@ function CustomeCouponList() {
   );
 }
 
-export default CustomeCouponList;
+export default withAuth(CustomeCouponList);

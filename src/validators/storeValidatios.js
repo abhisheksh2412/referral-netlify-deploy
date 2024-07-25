@@ -77,3 +77,28 @@ export const UpdateStoreValidationSchema = Yup.object({
       }
     ),
 });
+
+export const AddProductPointsvalidation = Yup.object().shape({
+  card_id: Yup.string().required("Card ID is required"),
+  coupon_id: Yup.string().nullable(),
+  customer_id: Yup.string().required("Customer ID is required"),
+  exchange_point: Yup.number()
+    .nullable()
+    .positive("Exchange Point must be a positive number"),
+  expire_at: Yup.string().required("Expiry date is required"),
+  store_id: Yup.string().required("Store ID is required"),
+  productList: Yup.array().of(
+    Yup.object().shape({
+      product_name: Yup.string().required("Product name is required"),
+      product_image: Yup.mixed().required("Product image is required"),
+      barcode: Yup.string().required("Barcode is required"),
+      product_points: Yup.number()
+        .required("Product points are required")
+        .positive("Product points must be a positive number"),
+      quantity: Yup.number()
+        .required("Quantity is required")
+        .positive("Quantity must be a positive number")
+        .integer("Quantity must be an integer"),
+    })
+  ),
+});

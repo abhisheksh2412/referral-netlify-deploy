@@ -4,14 +4,17 @@ import { config } from "@/config/config";
 import clsx from "clsx";
 import moment from "moment";
 
-function MoreCouponCard({ data }) {
+function MoreCouponCard({ data, handleView = null }) {
   return (
     <div>
       <div className="shadow rounded-md bg-[#fce4ec]">
         <div className="p-3">
           <div className="flex items-center justify-between">
             <div className="w-1/2">
-              <div className="p-1 shadow rounded-md w-20 bg-white">
+              <div
+                onClick={() => handleView(data)}
+                className="p-1 shadow rounded-md w-20 bg-white"
+              >
                 <Image
                   src={config?.IMAGE_URL_PATH + data?.coupon_image}
                   width={65}
@@ -35,7 +38,10 @@ function MoreCouponCard({ data }) {
               </h5>
             </div>
           </div>
-          <h3 className="line-clamp-1 hover:text-pink-600  mb-2 font-semibold mt-3 cursor-pointer">
+          <h3
+            onClick={() => handleView(data)}
+            className="line-clamp-1 hover:text-pink-600  mb-2 font-semibold mt-3 cursor-pointer"
+          >
             {data?.coupon_code}
           </h3>
           <p className="text-black-500 text-sm mt-1 line-clamp-2">

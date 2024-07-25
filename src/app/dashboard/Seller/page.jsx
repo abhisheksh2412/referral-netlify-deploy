@@ -22,6 +22,8 @@ import { FaCheckCircle } from "react-icons/fa";
 import { FaPen } from "react-icons/fa";
 import AssignCouponToCard from "@/components/dashboard/AssignCoupon";
 import { useSellerContext } from "@/providers/useSellerOrders";
+import { TicketCheck } from "lucide-react";
+import VoucherLists from "@/components/dashboard/VoucherList";
 
 const SellerDashboard = () => {
   const dispatch = useDispatch();
@@ -41,12 +43,15 @@ const SellerDashboard = () => {
     }
   };
 
+  const [voucherModal, setVoucherModal] = useState(false);
+  const handleVoucherModal = () => setVoucherModal(!voucherModal);
+
   function handleEndSession() {
-    dispatch(EndSession());
-    setReset(true);
-    if (typeof window !== "undefined") {
-      localStorage.removeItem("card_no");
-    }
+    // dispatch(EndSession());
+    // setReset(true);
+    // if (typeof window !== "undefined") {
+    //   localStorage.removeItem("card_no");
+    // }
   }
 
   const { time, isActive, startCountdown } = useSellerContext();
@@ -164,20 +169,20 @@ const SellerDashboard = () => {
                   </div>
 
                   <div>
-                    <button
+                    <Link
                       onClick={HandleAddPointsModal}
-                      type="button"
+                      href="/dashboard/Seller/editProductsPoints"
                       className="text-white bg-[#0e0a38] text-md rounded-lg py-3 px-8  flex items-center gap-2 justify-center"
                     >
                       <FaPlusCircle /> <span>Add Points</span>
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
             </div>
           </Container>
         </div>
-
+        {/* 
         <Modal
           size={"md"}
           open={addpointsModal}
@@ -364,6 +369,7 @@ const SellerDashboard = () => {
                       height={250}
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
+                    \
                   </div>
                   <div className="py-2 px-1 border-t">
                     <h4 className="font-medium text-blush-red">Product Name</h4>
@@ -386,7 +392,7 @@ const SellerDashboard = () => {
               </div>
             </div>
           </div>
-        </Modal>
+        </Modal> */}
 
         <div className="mb-12 mobile:m-3">
           <Container>
@@ -401,8 +407,23 @@ const SellerDashboard = () => {
                     <FaPlusCircle /> <span>Add Coupon</span>
                   </button>
                 </div>
+                <button
+                  onClick={handleVoucherModal}
+                  title="vouchers"
+                  className="flex gap-2 p-3 rounded-md bg-blush-red text-white px-4 text-sm items-center  hover:shadow-xl transition-all"
+                >
+                  <TicketCheck /> Voucher
+                </button>
               </div>
             </div>
+
+            <Modal
+              open={voucherModal}
+              size={"md"}
+              handleOpen={handleVoucherModal}
+            >
+              <VoucherLists />
+            </Modal>
             <Modal open={addCoupon} handleOpen={handleAddCoupon}>
               <AssignCouponToCard />
             </Modal>

@@ -33,6 +33,7 @@ import {
 } from "@/store/slices/customer";
 import { useSearchParams } from "next/navigation";
 import { config } from "@/config/config";
+import withAuth from "@/hoc/withAuth";
 
 function CustomerDashboard() {
   const [productDetailsModal, setProductDetailsModal] = useState(null);
@@ -713,4 +714,4 @@ function CustomerDashboard() {
   );
 }
 
-export default CustomerDashboard;
+export default withAuth(CustomerDashboard);

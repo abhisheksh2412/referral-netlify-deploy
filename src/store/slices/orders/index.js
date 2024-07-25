@@ -169,7 +169,7 @@ export const UpdateStoreBirthdayData = (data, id) => async (dispatch) => {
       "update/store/birthday/" + id,
       data
     );
-    console.log(response);
+
     if (response.data) {
       dispatch(success(response.data));
     } else {

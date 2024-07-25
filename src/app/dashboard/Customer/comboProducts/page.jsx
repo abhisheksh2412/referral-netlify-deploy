@@ -9,22 +9,10 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import ComboDetails from "@/components/managerdashboard/comboproducts/comboDetails";
 import ComboProductsCard from "@/components/managerdashboard/comboproducts/comboproductscard";
+import withAuth from "@/hoc/withAuth";
 import { AllCombosByPartnerId } from "@/store/slices/combo";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
-const CombodummyData = {
-  id: 1,
-  title: "Sample Combo",
-  description: "This is a sample combo description",
-  points: 100,
-  productData: [
-    { path: "https://via.placeholder.com/150/FF0000/FFFFFF?text=Product+1" },
-    { path: "https://via.placeholder.com/150/00FF00/FFFFFF?text=Product+2" },
-    { path: "https://via.placeholder.com/150/0000FF/FFFFFF?text=Product+3" },
-    { path: "https://via.placeholder.com/150/FFFF00/FFFFFF?text=Product+4" },
-  ],
-};
 
 function ComboProductsList() {
   const dispatch = useDispatch();
@@ -62,12 +50,11 @@ function ComboProductsList() {
         <CustomerHeader />
         <InnerBanner title={"Products List"} />
 
-            <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
-                <Container>
-
-                <div className=" mb-12">
+        <div className="py-16 mobile:py-6 mobile:p-4 bg-gray-100">
+          <Container>
+            <div className=" mb-12">
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <h2 className=" text-center text-2xl mobile:text-lg font-semibold">
+                <h2 className=" text-center text-2xl mobile:text-lg font-semibold">
                   Combo Products
                 </h2>
                 <div className="w-full md:w-72">
@@ -110,7 +97,10 @@ function ComboProductsList() {
             ) : (
               <div className="grid grid-cols-12 mobile:grid-cols-1 gap-16 mobile:gap-3 sm:gap-4">
                 {filteredData(search, combosList)?.map((item, index) => (
-                  <div key={index} className="lg:col-span-4 mobile:col-span-1 sm:col-span-6">
+                  <div
+                    key={index}
+                    className="lg:col-span-4 mobile:col-span-1 sm:col-span-6"
+                  >
                     <ComboProductsCard
                       data={item}
                       isdelete={false}
@@ -133,4 +123,4 @@ function ComboProductsList() {
   );
 }
 
-export default ComboProductsList;
+export default withAuth(ComboProductsList);

@@ -28,10 +28,10 @@ const withAuth = (WrappedComponent) => {
         if (!isAuthenticated) {
           setInstruction("User not authenticated, checking for token");
           if (!token) {
-            setInstruction("No token found to authenticate");
+            setInstruction("User Not found to authenticate");
             router.push("/login");
           } else {
-            setInstruction("Token found, logging in user");
+            setInstruction("User Found, logging in user");
             await fetchUser();
           }
         } else {

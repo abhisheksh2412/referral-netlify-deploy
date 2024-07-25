@@ -6,6 +6,7 @@ import Container from "@/components/globals/container";
 import Loader from "@/components/globals/Loader";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
+import withAuth from "@/hoc/withAuth";
 import { GetAllProductByPartner } from "@/store/slices/products";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -45,9 +46,9 @@ function CustomerProducts() {
           <Container>
             <div className=" mb-12">
               <div className="flex flex-col items-center justify-between gap-4 md:flex-row">
-              <h2 className=" text-center text-2xl mobile:text-lg font-semibold">
-                            Popular Products
-                        </h2>
+                <h2 className=" text-center text-2xl mobile:text-lg font-semibold">
+                  Popular Products
+                </h2>
                 <div className="w-full md:w-72">
                   <div className="relative h-10 w-full min-w-[200px]">
                     <div className="absolute grid w-5 h-5 top-2/4 right-3 -translate-y-2/4 place-items-center text-blue-gray-500">
@@ -105,4 +106,4 @@ function CustomerProducts() {
   );
 }
 
-export default CustomerProducts;
+export default withAuth(CustomerProducts);

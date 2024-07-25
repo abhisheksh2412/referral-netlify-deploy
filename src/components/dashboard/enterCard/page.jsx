@@ -2,11 +2,15 @@ import { GetUserByCard } from "@/store/slices/userSlice";
 import { useFormik } from "formik";
 import { ArrowRight } from "lucide-react";
 import React, { useCallback, useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 
 function EnterCard({ reset }) {
+  const { userByCard, isLoading, isSuccess } = useSelector(
+    (state) => state.user
+  );
   const dispatch = useDispatch();
+
   const getUser = useCallback(
     (cardno) => {
       dispatch(GetUserByCard(cardno));
@@ -22,25 +26,18 @@ function EnterCard({ reset }) {
       card_no: yup
         .string()
         .required("Card No is Required")
-        .min(16, "card number min length should be 16")
-        .max(16, "card number maximum length should be 16"),
+        .min(16, "Card number min length should be 16")
+        .max(16, "Card number maximum length should be 16"),
     }),
     onSubmit: async (values, { resetForm }) => {
       await getUser(values.card_no);
     },
   });
 
-  const resetCard = useCallback(() => {
-    formik.setFieldValue("card_no", "");
-  });
-
   useEffect(() => {
     if (reset) {
-      resetCard();
+      formik.setFieldValue("card_no", "");
     }
-  }, [reset]);
-
-  useEffect(() => {
     if (typeof window !== "undefined") {
       const cardno = localStorage.getItem("card_no");
       if (cardno) {
@@ -48,7 +45,13 @@ function EnterCard({ reset }) {
         getUser(cardno);
       }
     }
-  }, []);
+  }, [reset, getUser]);
+
+  useEffect(() => {
+    if (isSuccess) {
+      localStorage.setItem("card_no", userByCard?.card_number);
+    }
+  }, [isSuccess, userByCard]);
   return (
     <form
       onSubmit={formik.handleSubmit}
