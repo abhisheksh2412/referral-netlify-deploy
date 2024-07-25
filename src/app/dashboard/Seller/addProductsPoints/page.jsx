@@ -253,7 +253,7 @@ function AddProductsPoints() {
 
           {/* Product  */}
           {productsFormik.values.productList?.map((item, index) => (
-            <div className="p-5 bg-white shadow mb-4 rounded">
+            <div key={index} className="p-5 bg-white shadow mb-4 rounded">
               <div class="grid md:grid-cols-3 md-landscape:grid-cols-3 lg:grid-cols-6 md:gap-2 lg:gap-2  sm:rounded-lg ">
                 <div class="md:px-2 lg:px-2  py-1">
                   <div className="mobile:py-1">
