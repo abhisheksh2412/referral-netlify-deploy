@@ -22,6 +22,7 @@ import { popup } from "@/_utils/alerts";
 import { useRef } from "react";
 import OtpForm from "./PartnerOptVerify";
 import { useStateManager } from "@/providers/useStateManager";
+import toast from "react-hot-toast";
 
 export default function PartnerSignup() {
   const { setPartnerVerifyEmail } = useStateManager();
@@ -49,10 +50,7 @@ export default function PartnerSignup() {
     },
     onSubmit: async (values, { resetForm }) => {
       if (!values.agreestoterms) {
-        popup({
-          status: "info",
-          message: "Please Agree the Terms and Conditions",
-        });
+        toast.error("Please Agree the Terms and Conditions");
       } else {
         setPartnerVerifyEmail(values.email);
         await dispatch(RegisterPartner(values));
@@ -268,7 +266,7 @@ export default function PartnerSignup() {
           parentClassName="p-0 border rounded-md flex gap-3"
           inputClassName="outline-none text-gray-800 text-sm"
           leftIcon={<FileDigit className="text-gray-700 text-xs" size={15} />}
-         leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm"
+          leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm"
           placeholder="NIP number"
           name="nip_number"
           value={formik.values.nip_number}
@@ -319,7 +317,7 @@ export default function PartnerSignup() {
           parentClassName="p-0 border rounded-md flex gap-3"
           inputClassName="outline-none text-gray-800 text-sm"
           leftIcon={<UsersRound className="text-gray-700 text-xs" size={15} />}
-          leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm" 
+          leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm"
           type="text"
           placeholder="Reffral Code (Optional)"
           value={formik.values.referral_code}

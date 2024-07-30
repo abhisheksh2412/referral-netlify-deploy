@@ -13,6 +13,7 @@ import Loader from "../Loader";
 import usePaymentCheckout from "@/hooks/usePaymentCheckout";
 import { popup } from "@/_utils/alerts";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 export default function PaymentCard() {
   const user = useSelector((state) => state.auth.data);
@@ -48,20 +49,10 @@ export default function PaymentCard() {
       await dispatch(BillPaymentSuccessApi(formdata));
       getInvoiceData();
       getLastInvoices();
-      await Swal.mixin({ toast: true }).fire({
-        icon: "success",
-        text: "Payment Successfull",
-        timer: 1500,
-        showConfirmButton: false,
-      });
+      toast.success("Payment Successfully");
     } else if (status === "cancel") {
       console.log("cancle hai");
-      await Swal.mixin({ toast: true }).fire({
-        icon: "error",
-        text: "Payment cancel",
-        timer: 1500,
-        showConfirmButton: false,
-      });
+      toast.error("Payment Canceled");
     }
   }, [status, sessionId, user]);
 

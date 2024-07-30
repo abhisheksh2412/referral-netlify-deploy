@@ -4,6 +4,7 @@ import { useDispatch } from "react-redux";
 import { RegisterNormalUser } from "@/store/slices/authSlice";
 import { UserSignupValidationsSchema } from "@/validators/authValidations";
 import { Key, LucideCalendarSearch, Mail, Phone, User } from "lucide-react";
+import toast from "react-hot-toast";
 
 export default function UserSignup() {
   const dispatch = useDispatch();
@@ -19,10 +20,7 @@ export default function UserSignup() {
     },
     onSubmit: async (values, { resetForm }) => {
       if (!values.agreestoterms) {
-        popup({
-          status: "info",
-          message: "Please Agree the Terms and Conditions",
-        });
+        toast.error("Please Agree the Terms and Conditions");
       } else {
         await dispatch(RegisterNormalUser(values));
         resetForm();
@@ -128,7 +126,7 @@ export default function UserSignup() {
           parentClassName="p-0 border rounded-md flex gap-3"
           inputClassName="outline-none text-gray-800 text-sm"
           leftIcon={<Key className="text-gray-700 text-xs" size={15} />}
-         leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm"
+          leftIconClassName="bg-gray-100 p-4 px-4 md:p-4 md:px-4 lg:p-5 lg:px-6 rounded-sm"
           name="password_confirmation"
           placeholder="Confirm your Enter Password"
           error={
