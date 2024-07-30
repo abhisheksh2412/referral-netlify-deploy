@@ -23,6 +23,7 @@ import { popup } from "@/_utils/alerts";
 import { useRouter } from "next/navigation";
 import usePaymentCheckout from "@/hooks/usePaymentCheckout";
 import UseSampleImage from "../../useSampleImage";
+import toast from "react-hot-toast";
 
 const AddStoreForm = ({ edit = false, editData = null }) => {
   const [SelectedImage, setSelectedImage] = useState("");
@@ -110,36 +111,61 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
     } else {
       setPreviewImage(null);
     }
-  }; 
+  };
 
   // handle Payment checkout to open a new window and checkout
   const { status, sessionId } = usePaymentCheckout(
     checkOut?.checkoutData?.redirect_url
   );
 
-  // handle the payment
   const handlePayment = useCallback(async () => {
-    resetRedirectUrl();
+    dispatch(resetRedirectUrl());
+
     if (status === "success") {
       const data = {
         partner_id: user?.role !== "Partner" ? user?.partner_id : user?.id,
         session_id: sessionId,
       };
-      await dispatch(SuccessPaymentTransaction(data));
+      await dispatch(
+        SuccessPaymentTransaction(data, storeData, () => router.back())
+      );
       if (typeof window !== "undefined") {
-        localStorage.removeItem("store_payment");
+        await localStorage.removeItem("store_payment");
       }
-      if (await checkOut.isSuccess) {
-        await dispatch(CreateStore(storeData));
-        setTimeout(() => {
-          if (store.isSuccess) {
-            popup({ status: "success", message: "Create Store Successfuly" });
-            router.back();
-          }
-        }, 500);
-      }
+
+      // Start the promise chain
+      // dispatch(SuccessPaymentTransaction(data))
+      //   .then(() => {
+      //     // Remove store_payment from localStorage if in a browser environment
+      //     if (typeof window !== "undefined") {
+      //       localStorage.removeItem("store_payment");
+      //     }
+      //   })
+      //   .then(() => {
+      //     // Proceed with creating the store if checkout was successful
+      //     if (checkOut.isSuccess) {
+      //       return dispatch(CreateStore(storeData));
+      //     } else {
+      //       // If checkout was not successful, resolve to maintain the chain
+      //       return Promise.resolve();
+      //     }
+      //   })
+      //   .then(() => {
+      //     // Check if the store creation was successful
+      //     if (store.isSuccess) {
+      //       // If successful, perform desired actions, such as navigating back
+      //       popup({ status: "success", message: "Create Store Successfully" });
+      //       router.back();
+      //     } else {
+      //       console.error("Store creation was not successful.");
+      //     }
+      //   })
+      //   .catch((error) => {
+      //     // Handle any errors in the promise chain
+      //     console.error("Error during payment handling:", error);
+      //   });
     } else if (status === "cancel" || status === "failed") {
-      if (typeof window === "undefined") {
+      if (typeof window !== "undefined") {
         localStorage.removeItem("store_payment");
       }
       popup({ status: "error", message: "Payment Failed" });
@@ -200,7 +226,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
                     }
                     width={100}
                     height={100}
-                     alt="Store logo"
+                    alt="Store logo"
                     className="!w-full !h-full"
                   />
                 ) : (

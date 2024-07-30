@@ -1,6 +1,7 @@
 import { popup } from "@/_utils/alerts";
 import axiosInstance from "@/_utils/axiosUtils";
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
   isLoading: false,
@@ -333,25 +334,33 @@ export const GetNotificationList = (userid) => async (dispatch) => {
   }
 };
 
-export const SuccessPaymentTransaction = (data) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post(
-      "/stripe/add_store_success",
-      data
-    );
-    if (response.status === 200) {
-      dispatch(successTransactionData(response.data));
+export const SuccessPaymentTransaction =
+  (data, credentials, route) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "/stripe/add_store_success",
+        data
+      );
+      if (response.status === 200) {
+        const createStore = await axiosInstance.post("/add/store", credentials);
+        if (createStore.status === 201) {
+          dispatch(successTransactionData(response.data));
+          toast.success("created store Successfully");
+          route();
+        }
+      } else {
+        toast.error("failed to create invoice and store connect to support");
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred";
+      dispatch(failed(errorMessage));
+      console.log(error);
     }
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "An unknown error occurred";
-    dispatch(failed(errorMessage));
-    console.log(error);
-  }
-};
+  };
 export const PaperCardSuccessApi = (data) => async (dispatch) => {
   dispatch(loading());
   try {
