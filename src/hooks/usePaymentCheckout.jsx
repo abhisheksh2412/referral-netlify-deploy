@@ -1,6 +1,9 @@
+import { resetRedirectUrl } from "@/store/slices/common";
 import { useCallback, useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
 
-const usePaymentCheckout = (checkOut) => {
+const usePaymentCheckout = (checkOut, localName = "store_payment") => {
+  const dispatch = useDispatch();
   const [status, setStatus] = useState(null);
   const [sessionId, setSessionId] = useState(null);
 
@@ -17,14 +20,14 @@ const usePaymentCheckout = (checkOut) => {
         "width=900,height=800"
       );
 
+      dispatch(resetRedirectUrl());
       if (!paymentWindow) {
         console.error("Failed to open payment window.");
       } else {
         // Polling interval to check localStorage
         const intervalId = setInterval(() => {
           const storePayment =
-            typeof window !== "undefined" &&
-            localStorage.getItem("store_payment");
+            typeof window !== "undefined" && localStorage.getItem(localName);
 
           if (storePayment) {
             clearInterval(intervalId);

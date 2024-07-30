@@ -7,6 +7,7 @@ import { IoLogOutSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { FaCartArrowDown } from "react-icons/fa";
 import { LogoutUser } from "@/store/slices/authSlice";
+import Image from "next/image";
 
 function ProfileDropdown() {
   const user = useSelector((state) => state.auth);
@@ -25,14 +26,17 @@ function ProfileDropdown() {
       <button
         id="dropdownDefaultButton"
         onClick={toggleDropdown}
-      className=" focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className=" focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
       >
-        <img
-          className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
+    
+        <Image
           src={user?.data?.profile_photo_url}
-          alt=""
-        ></img>
+          width={500}
+          height={500}
+          alt="Picture of the author"
+          className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
+        />
 
         <div className="text-left">
           <h4 className="mb-1">{user?.data?.name}</h4>
@@ -54,10 +58,8 @@ function ProfileDropdown() {
         >
           <li>
             <Link
-             href={"/dashboard/Seller/profile"}
+              href={"/dashboard/Seller/profile"}
               className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-
-              
             >
               <FaUser /> Profile
             </Link>

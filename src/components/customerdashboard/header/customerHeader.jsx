@@ -106,7 +106,8 @@ export default function CustomerHeader() {
             <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 mobile:p-0 mobile:mt-0">
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 text-base md:text-base mobile:rounded-none"
+                  className="flex items-center gap-1 block py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:text-blue-700 md:p-0
+                   dark:text-white md:dark:text-blue-500 text-base md:text-base mobile:rounded-none"
                   aria-current="page"
                   href="/dashboard/Customer"
                 >

@@ -10,7 +10,12 @@ import {
 } from "@/store/slices/menuShopCafe";
 import Swal from "sweetalert2";
 
-function MmenuShopCafeCard({ data, handleEdit, handleView }) {
+function MmenuShopCafeCard({
+  data,
+  handleEdit,
+  handleView,
+  isActionAllow = true,
+}) {
   const dispatch = useDispatch();
   const { isLoading, isSuccess } = useSelector((state) => state.menu);
   const fetChMenuCafeList = useCallback(() => {
@@ -53,25 +58,28 @@ function MmenuShopCafeCard({ data, handleEdit, handleView }) {
           />
 
           <div className="flex items-center justify-center gap-1  py-1 px-1 rounded-full w-20 absolute top-0 right-0 m-2 ">
-            <div className="flex gap-2 mb-3 opacity-0 group-hover:opacity-100">
-              <div
-                className="cursor-pointer bg-red-700 p-1 rounded"
-                onClick={() => deleteShopMenuCafe(data?.id)}
-              >
-                <MdDeleteOutline className="text-white" />
+            {isActionAllow && (
+              <div className="flex gap-2 mb-3 opacity-0 group-hover:opacity-100">
+                <div
+                  className="cursor-pointer bg-red-700 p-1 rounded"
+                  onClick={() => deleteShopMenuCafe(data?.id)}
+                >
+                  <MdDeleteOutline className="text-white" />
+                </div>
+                <div
+                  onClick={() => handleEdit(data)}
+                  className="cursor-pointer bg-green-700 p-1 rounded"
+                >
+                  <TiPencil className="text-white" />
+                </div>
               </div>
-              <div
-                onClick={() => handleEdit(data)}
-                className="cursor-pointer bg-green-700 p-1 rounded"
-              >
-                <TiPencil className="text-white" />
-              </div>
-            </div>
+            )}
           </div>
 
           <h3
             onClick={() => handleView(data)}
-            className="line-clamp-1 cursor-pointer hover:text-pink-600 mobile:text-sm mb-2 font-semibold text-center mt-16 mobile:mt-10">
+            className="line-clamp-1 cursor-pointer hover:text-pink-600 mobile:text-sm mb-2 font-semibold text-center mt-16 mobile:mt-10"
+          >
             {data?.title}
           </h3>
           <div className="flex justify-center items-center gap-5 mt-3 mobile:gap-2">

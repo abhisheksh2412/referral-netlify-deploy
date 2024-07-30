@@ -11,6 +11,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { GetAllCustomer } from "@/store/slices/customer";
 import Loader from "../../Loader";
 import { Delete, Trash2 } from "lucide-react";
+
+
 import {
   AddSendMessageValidations,
   SendMessageAddCouponValidation,
@@ -22,6 +24,7 @@ import {
 } from "@/store/slices/orders";
 import { popup } from "@/_utils/alerts";
 import { useRouter } from "next/navigation";
+import UseSampleImage from "../../useSampleImage";
 
 export default function AddSendMessage({ editData = null, handleClose }) {
   const [addCoupon, setAddCoupon] = useState(false);
@@ -275,17 +278,26 @@ export default function AddSendMessage({ editData = null, handleClose }) {
                   <p className="text-base font-semibold mb-2 text-black">
                     Upload Attachment
                   </p>
+                  <UseSampleImage
+                    popper={false}
+                    buttonClass="!w-fit"
+                    imageUrl="/assets/coupondemo.png"
+                  />
                   <label
                     htmlFor="dropzone-file"
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {imagePreview ? (
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className="w-24 h-24 mb-4"
-                        />
+                       
+                        <Image
+                        src={imagePreview}
+                        width={500}
+                        height={500}
+                        alt="Preview"
+                        className="w-24 h-24 mb-4"
+                      />
+
                       ) : (
                         <>
                           <svg

@@ -2,12 +2,15 @@ import { popup } from "@/_utils/alerts";
 import EasySelect from "@/components/globals/EasySelect";
 import GlobalInput from "@/components/globals/globalInput";
 import Loader from "@/components/globals/Loader";
+import UseSampleImage from "@/components/globals/useSampleImage";
 import { CreateProduct, GetAllProduct } from "@/store/slices/products";
 import { GetStores } from "@/store/slices/seller";
+import { ProductCreateValidationsSchema } from "@/validators/productValidations";
 import { useFormik } from "formik";
-import { Minus, Pen, Plus } from "lucide-react";
+import { Info, Minus, Pen, Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 export default function CreateProductForm({ handleModal }) {
   const [imagePreview, setImagePreview] = useState(
@@ -26,6 +29,7 @@ export default function CreateProductForm({ handleModal }) {
       weight: "",
       store_id: "",
     },
+    validationSchema: ProductCreateValidationsSchema,
     onSubmit: async (values, { resetForm }) => {
       const formdata = new FormData();
       formdata.append("name", values.name);
@@ -99,11 +103,16 @@ export default function CreateProductForm({ handleModal }) {
           {/*  Product image Upload */}
           <span className="w-full flex flex-col items-center justify-between ">
             <div className="relative w-40 h-40">
-              <img
+           
+
+              <Image
                 src={imagePreview}
+                width={500}
+                height={500}
                 alt="store Image"
                 className="w-40 h-40 rounded-full p-2 shadow-md object-cover object-center"
               />
+
               <button
                 type="button"
                 className="p-2 bg-gray-200 rounded-full absolute right-2 m-1  top-2"
@@ -119,6 +128,12 @@ export default function CreateProductForm({ handleModal }) {
               </button>
             </div>
           </span>
+          <UseSampleImage popper={false} />
+          {formik.touched.product_image && formik.errors.product_image ? (
+            <p className="text-xs text-red-500 p-1">
+              {formik.errors.product_image}
+            </p>
+          ) : null}
           <form onSubmit={formik.handleSubmit}>
             <input
               type="file"
@@ -127,7 +142,6 @@ export default function CreateProductForm({ handleModal }) {
               onChange={handleImageChange}
             />
             <div className="p-4 grid lg:grid-cols-2 mobile:inline-block mobile:p-3 gap-2">
-
               <span className="mobile:mb-3 mobile:inline-block mobile:w-full">
                 <label
                   htmlFor="product_name"
@@ -143,6 +157,11 @@ export default function CreateProductForm({ handleModal }) {
                   placeholder="Product Name"
                   parentClassName="border border-2 border-gray-300 p-2 px-3 flex gap-2 rounded-md"
                   inputClassName="outline-none text-gray-800 text-sm"
+                  error={
+                    formik.touched.name && formik.errors.name
+                      ? formik.errors.name
+                      : null
+                  }
                 />
               </span>
 
@@ -161,6 +180,11 @@ export default function CreateProductForm({ handleModal }) {
                   placeholder="Product Points"
                   parentClassName="border border-2 border-gray-300 p-2 px-3 flex gap-2 rounded-md"
                   inputClassName="outline-none text-gray-800 text-sm"
+                  error={
+                    formik.touched.points && formik.errors.points
+                      ? formik.errors.points
+                      : null
+                  }
                 />
               </span>
 
@@ -194,6 +218,11 @@ export default function CreateProductForm({ handleModal }) {
                       <Plus />
                     </button>
                   }
+                  error={
+                    formik.touched.quantity && formik.errors.quantity
+                      ? formik.errors.quantity
+                      : null
+                  }
                 />
               </span>
 
@@ -212,6 +241,11 @@ export default function CreateProductForm({ handleModal }) {
                   placeholder="Product Points"
                   parentClassName="border border-2 border-gray-300 p-2 px-3 flex gap-2 rounded-md"
                   inputClassName="outline-none text-gray-800 text-sm"
+                  error={
+                    formik.touched.weight && formik.errors.weight
+                      ? formik.errors.weight
+                      : null
+                  }
                 />
               </span>
               {/* discription  */}
@@ -230,6 +264,12 @@ export default function CreateProductForm({ handleModal }) {
                   className="outline-none  text-gray-800 text-sm border-gray-300 border-2 rounded-md p-2"
                   placeholder="Description"
                 ></textarea>
+
+                {formik.touched.description && formik.errors.description ? (
+                  <p className="text-xs text-red-500 p-1">
+                    {formik.errors.description}
+                  </p>
+                ) : null}
               </span>
               {/* select store */}
               <span className="col-span-2 w-full">
@@ -240,6 +280,11 @@ export default function CreateProductForm({ handleModal }) {
                   Store
                 </label>
                 <EasySelect options={options} handleChange={handleStoreId} />
+                {formik.touched.store_id && formik.errors.store_id ? (
+                  <p className="text-xs text-red-500 p-1">
+                    {formik.errors.store_id}
+                  </p>
+                ) : null}
               </span>
 
               <button className="w-full text-sm p-3 rounded-md text-white bg-blush-red col-span-2 mobile:my-3 ">

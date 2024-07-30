@@ -6,6 +6,7 @@ import DashboardHeader from "@/components/dashboard/dashboardheader/header";
 import Modal from "@/components/globals/Modal";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
+import Image from "next/image";
 import InnerBanner from "@/components/innerpagebanner/page";
 import { config } from "@/config/config";
 import { GetAllSellerCoupons } from "@/store/slices/coupon";
@@ -33,29 +34,35 @@ function Coupon() {
 
   const data = [
     {
-      label: `New (${coupons?.couponsList?.length})`,
+      label: `New (${coupons?.couponsList?.data?.length})`,
       value: "new",
-      desc: coupons?.couponsList,
+      desc: coupons?.couponsList?.data,
     },
     {
       label: `Active Coupon (${
-        coupons?.couponsList?.filter((item) => item?.status === "active").length
+        coupons?.couponsList?.data?.filter((item) => item?.status === "active")
+          .length
       })`,
       value: "active",
-      desc: coupons?.couponsList?.filter((item) => item?.status === "active"),
+      desc: coupons?.couponsList?.data?.filter(
+        (item) => item?.status === "active"
+      ),
     },
     {
       label: `Inactive Coupon (${
-        coupons?.couponsList?.filter((item) => item?.status === "inactive")
-          .length
+        coupons?.couponsList?.data?.filter(
+          (item) => item?.status === "inactive"
+        ).length
       })`,
       value: "inactive",
-      desc: coupons?.couponsList?.filter((item) => item?.status === "inactive"),
+      desc: coupons?.couponsList?.data?.filter(
+        (item) => item?.status === "inactive"
+      ),
     },
   ];
 
   const handleOpen = (itemId) => {
-    const activeData = coupons?.couponsList?.find(
+    const activeData = coupons?.couponsList?.data?.find(
       (item) => item?.id === itemId
     );
     setSelectedCoupon(activeData);
@@ -116,15 +123,21 @@ function Coupon() {
                     <TabPanel key={value} value={value}>
                       <Container>
                         <div className="grid grid-cols-4 mobile:grid-cols-1 md:grid-cols-3 sm:grid-cols-3 gap-4">
-                          {desc?.map((item, index) => (
-                            <div
-                              key={index}
-                              onClick={() => handleOpen(item?.id)}
-                              className="cursor-pointer"
-                            >
-                              <CouponCard data={item} />
-                            </div>
-                          ))}
+                          {desc?.length === 0 ? (
+                            <h5 className="text-sm text-gray-500 text-center font-semibold">
+                              No Data
+                            </h5>
+                          ) : (
+                            desc?.map((item, index) => (
+                              <div
+                                key={index}
+                                onClick={() => handleOpen(item?.id)}
+                                className="cursor-pointer"
+                              >
+                                <CouponCard data={item} />
+                              </div>
+                            ))
+                          )}
                         </div>
                       </Container>
                     </TabPanel>
@@ -155,10 +168,13 @@ function Coupon() {
             <div className="p-5">
               <div className="">
                 <div className="mb-3">
-                  <img
-                    className="w-16 h-16 rounded-full shadow p-1"
+                 
+                  <Image
                     src={config.IMAGE_URL_PATH + selectedCoupon?.coupon_image}
+                    width={500}
+                    height={500}
                     alt="gift"
+                    className="w-16 h-16 rounded-full shadow p-1"
                   />
                 </div>
 

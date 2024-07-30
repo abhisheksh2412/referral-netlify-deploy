@@ -49,7 +49,11 @@ function CouponsCard({ data, handleView, isdelete = true }) {
     <div>
       <div className="bg-gray-100 rounded-lg p-3 relative group">
         <Image
-          src={config.IMAGE_URL_PATH + data?.coupon_image}
+          src={
+            data?.coupon_image
+              ? config.IMAGE_URL_PATH + data?.coupon_image
+              : "/assets/coupondefault.jpg"
+          }
           alt="Picture of the author"
           width={90}
           height={90}
@@ -58,7 +62,7 @@ function CouponsCard({ data, handleView, isdelete = true }) {
         />
 
         <div className="flex items-center justify-center gap-1  py-1 px-1 rounded-full w-20 absolute top-0 right-0 m-2 ">
-          <div className="flex gap-2 mb-3 opacity-0 group-hover:opacity-100">
+          <div className="flex gap-2 mb-3 lg:opacity-0 group-hover:opacity-100">
             {isdelete && (
               <div
                 className="cursor-pointer bg-red-700 p-1 rounded"

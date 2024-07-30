@@ -1,17 +1,22 @@
 import React from "react";
 import { FiMapPin } from "react-icons/fi";
 import { HiMiniDevicePhoneMobile } from "react-icons/hi2";
+import Image from "next/image";
 
 function StoreCard({ data }) {
   return (
     <div>
       <div className="p-5  pt-0 text-gray-700 bg-white new-shadow bg-clip-border rounded-xl">
         <div className="relative mx-4  overflow-hidden text-gray-700 bg-white  bg-clip-border w-2/4 mx-auto	-top-[35px]">
-          <img
+        
+          <Image
             src={data?.stores?.logo}
-            alt="store"
+            width={500}
+            height={500}
+             alt="store"
             className="h-32 w-32 rounded-full table mx-auto shadow bg-slate-100  shadow p-1"
           />
+
         </div>
         <div className="p-0 text-center mb-8">
           <h4 className="block mb-2 text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">

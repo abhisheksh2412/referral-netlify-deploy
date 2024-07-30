@@ -12,7 +12,7 @@ function PartnerAddStore() {
       <TopHeader />
       <PartnerHeader />
       <InnerBanner title={"Partner Add Store"} />
-      <div className="py-5">
+      <div className="py-8">
         <AddStoreForm />
       </div>
       <DashboardFooter />

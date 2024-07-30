@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/image";
 
 function Card({ data }) {
   return (
@@ -13,9 +14,14 @@ function Card({ data }) {
           </div>
 
           <div className="pt-6">
-            <img
-              class="border-2 border-white p-1 w-16 rounded"
+           
+
+            <Image
               src="/assets/credit-card.svg"
+              width={500}
+              height={500}
+              alt="Picture of the author"
+              class="border-2 border-white p-1 w-16 rounded"
             />
           </div>
         </div>

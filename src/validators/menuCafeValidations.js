@@ -17,15 +17,23 @@ export const CreateMenuValidationSchema = Yup.object().shape({
     })
     .test(
       "fileDimensions",
-      "Image dimensions are incorrect needed 100x60PX",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
       (value) => {
-        if (!value) return true; // Attachment is optional
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
-          const img = new Image();
-          img.src = URL.createObjectURL(value);
-          img.onload = () => {
-            resolve(img.width === IMAGE_WIDTH && img.height === IMAGE_HEIGHT);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
           };
+          reader.readAsDataURL(value);
         });
       }
     )
@@ -52,15 +60,23 @@ export const UpdateMenuValidationSchema = Yup.object().shape({
     })
     .test(
       "fileDimensions",
-      "Image dimensions are incorrect, needed 100x60PX",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
       (value) => {
-        if (!value) return true; // Attachment is optional
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
-          const img = new Image();
-          img.src = URL.createObjectURL(value);
-          img.onload = () => {
-            resolve(img.width === IMAGE_WIDTH && img.height === IMAGE_HEIGHT);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
           };
+          reader.readAsDataURL(value);
         });
       }
     ),

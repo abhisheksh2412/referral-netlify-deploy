@@ -12,6 +12,7 @@ import {
 } from "@/store/slices/orders";
 import Swal from "sweetalert2";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 function StoreBirthdayCard({ data, handleEdit = null }) {
   const dispatch = useDispatch();
@@ -57,11 +58,15 @@ function StoreBirthdayCard({ data, handleEdit = null }) {
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <img
-            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
+         
+          <Image
             src={config.IMAGE_URL_PATH + data?.birthday_image}
-            alt=""
+            width={500}
+            height={500}
+            alt="Picture of the author"
+            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
           />
+
           <div>
             <h5 className="mb-2 text-md font-semibold tracking-tight text-gray-900 dark:text-white text-pink-400">
               {data?.store?.name}

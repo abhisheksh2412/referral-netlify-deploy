@@ -13,9 +13,18 @@ import Loader from "@/components/globals/Loader";
 import { GetManagerCoupons } from "@/store/slices/coupon";
 import withAuth from "@/hoc/withAuth";
 import CouponDetails from "@/components/managerdashboard/coupons/couponDetails";
+import TabFiltter from "@/components/customerdashboard/more/tabFiltter";
 
 function MoreCoupon() {
+  const filtertabs = [
+    { name: "New", id: 1 },
+    { name: "Active Coupon", id: 2 },
+    { name: "In Active Coupon", id: 3 },
+  ];
+
+  const [activeTab, setActiveTab] = useState(1);
   const user = useSelector((state) => state.auth.data);
+  const [search, setSearch] = useState("");
   const { managerCoupons, isLoading, isSuccess } = useSelector(
     (state) => state.coupon
   );
@@ -26,15 +35,34 @@ function MoreCoupon() {
 
   const dispatch = useDispatch();
 
-  const fetchManagerCoupon = useCallback(() => {
-    if (user?.id) {
-      dispatch(GetManagerCoupons(user?.id));
+  const fetchManagerCoupon = useCallback(
+    async (status) => {
+      if ((user?.id, status)) {
+        let couponStatus = null;
+        if (status === 2) {
+          couponStatus = "active";
+        } else if (status === 3) {
+          couponStatus = "inactive";
+        }
+        await dispatch(GetManagerCoupons(user?.id, couponStatus));
+      }
+    },
+    [dispatch, user?.id]
+  );
+  const filteredData = (search, data) => {
+    let newdata = data;
+    if (search?.length > 0) {
+      const regex = new RegExp(search, "i");
+      newdata = data?.filter((item) => regex.test(item.coupon_code));
     }
-  }, [dispatch, user?.id]);
+    return newdata;
+  };
 
   useEffect(() => {
-    fetchManagerCoupon();
-  }, [fetchManagerCoupon]);
+    if (activeTab) {
+      fetchManagerCoupon(activeTab);
+    }
+  }, [fetchManagerCoupon, activeTab]);
 
   return (
     <Loader isLoading={isLoading}>
@@ -44,30 +72,35 @@ function MoreCoupon() {
         <InnerBanner title={"Products"} />
         <div className="p-28 px-12 mobile:py-6 mobile:p-4 tab:px-4 tab:py-10 bg-gray-100">
           <Container>
-            {/* <TabFiltter
+            <TabFiltter
               tabs={filtertabs}
               active={activeTab}
               setActive={setActiveTab}
-            /> */}
-            {managerCoupons?.data?.length === 0 ? (
+              inputOnChange={setSearch}
+              inputValue={search}
+            />
+            {filteredData(search, managerCoupons?.data)?.length === 0 ? (
               <h6 className="text-gray-600 text-center font-semibold text-sm py-5">
                 No Data Found
               </h6>
             ) : (
               <div className="grid grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-4 sm:gap-4">
-                {managerCoupons?.data?.map((item, index) => (
-                  <div
-                    key={index}
-                    className="lg:col-span-3 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-6"
-                  >
-                    <div>
-                      <MoreCouponCard
-                        data={item}
-                        handleView={handleCustomerCouponDetailsModel}
-                      />
+                {filteredData(search, managerCoupons?.data)?.map(
+                  (item, index) => (
+                    <div
+                      key={index}
+                      className="lg:col-span-3 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-6"
+                    >
+                      <div>
+                        <MoreCouponCard
+                          activateBtn={false}
+                          data={item}
+                          handleView={handleCustomerCouponDetailsModel}
+                        />
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  )
+                )}
               </div>
             )}
           </Container>

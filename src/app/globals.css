@@ -350,6 +350,17 @@ input:-webkit-autofill:active {
     padding: 0;
 }
 
+.css-tr4s17-option {
+    background-color: #f8bfd2 !important;}
+
+.css-d7l1ni-option {
+    background-color: #fbf3f5 !important;}
+
+
+.css-1fdsijx-ValueContainer {
+        padding: 8px 8px !important;}
+
+
 
 /*Mobile*/
 
@@ -374,6 +385,15 @@ input:-webkit-autofill:active {
         height: 18px;
     }
 
+
+    /**********ALERT*********/
+
+div:where(.swal2-container) {display: inline-block !important;}
+.top-right-alert.swal2-modal {width: 100% !important;}
+
+.nav ul li a {
+    background-color: #0e0a38 !important;
+}
 
 
 }

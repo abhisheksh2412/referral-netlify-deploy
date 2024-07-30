@@ -1,12 +1,23 @@
+import { handleShare } from "@/_utils/browser_utils";
 import { config } from "@/config/config";
-import { CheckCheck } from "lucide-react";
-import Image from 'next/image'
+import { CheckCheck, Share2Icon } from "lucide-react";
+import Image from "next/image";
 
-export default function ProductDetails({ data }) {
+export default function ProductDetails({ data, isSharable }) {
   return (
     <>
-      <div className="bg-gradient-to-r from-blush-red to-pink-300 text-lg font-semibold text-white p-2 text-left rounded-t-md">
+      <div className=" relative bg-gradient-to-r from-blush-red to-pink-300 text-lg font-semibold text-white p-2 text-left rounded-t-md">
         <h1>Product Details</h1>
+        {isSharable && (
+          <span
+            className="absolute right-2 top-2 p-1 bg-blush-red shadow-md text-white rounded-full"
+            onClick={() =>
+              handleShare(typeof window === "undefined" ? location.href : "")
+            }
+          >
+            <Share2Icon />
+          </span>
+        )}
       </div>
       {/* details */}
       <div className="flex flex-col p-5 gap-2 max-h-[90vh] overflow-auto">
@@ -27,11 +38,11 @@ export default function ProductDetails({ data }) {
             </div>
           </div>
           <Image
-            src={config.IMAGE_URL_PATH + data?.path}  
+            src={config.IMAGE_URL_PATH + data?.path}
             width={250}
             height={500}
             alt="Picture of the author"
-             className="!w-36 !h-36 rounded-full shadow-lg p-2"
+            className="!w-36 !h-36 rounded-full shadow-lg p-2"
           />
         </div>
         <div className="flex flex-col">

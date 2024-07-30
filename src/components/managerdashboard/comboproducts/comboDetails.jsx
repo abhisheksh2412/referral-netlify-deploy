@@ -1,5 +1,6 @@
 import { config } from "@/config/config";
 import { CheckCheck } from "lucide-react";
+import Image from "next/image";
 
 export default function ComboDetails({ data }) {
   return (
@@ -11,11 +12,15 @@ export default function ComboDetails({ data }) {
       <div className="p-3 grid grid-cols-2 gap-2">
         {data?.productData?.slice(0, 4)?.map((item, index) => (
           <div key={index} className="w-full p-1 rounded-md border shadow-md">
-            <img
+
+            <Image
               src={config.IMAGE_URL_PATH + item?.path}
-              className="rounded-md h-28 w-full object-contain"
+              width={500}
+              height={500}
               alt="product_image"
+              className="rounded-md h-28 w-full object-contain"
             />
+
           </div>
         ))}
       </div>

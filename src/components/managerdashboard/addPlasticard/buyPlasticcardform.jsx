@@ -3,7 +3,6 @@ import EasySelect from "@/components/globals/EasySelect";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoMdHome } from "react-icons/io";
-
 import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { Radio } from "@material-tailwind/react";
 import { useStateManager } from "@/providers/useStateManager";

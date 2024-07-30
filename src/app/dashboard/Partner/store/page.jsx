@@ -14,6 +14,7 @@ import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 import Swal from "sweetalert2";
 
 function PartnerStore() {
@@ -112,11 +113,16 @@ function PartnerStore() {
                         onClick={() => handleViewModal(item)}
                         className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
                       >
-                        <img
-                          class="w-32 h-32 mx-auto object-cover"
+                     
+
+                        <Image
                           src={config.IMAGE_URL_PATH + item?.logo}
+                          width={500}
+                          height={500}
                           alt="StoreImage"
+                          class="w-32 h-32 mx-auto object-cover"
                         />
+
                       </div>
                       <h3 className="text-center p-4 font-medium">
                         {item?.name}

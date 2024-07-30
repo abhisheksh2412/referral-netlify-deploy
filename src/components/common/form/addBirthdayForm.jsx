@@ -10,6 +10,7 @@ import { config } from "@/config/config";
 import { BithdayFormValidation } from "@/validators/comboValidation";
 import { useStateManager } from "@/providers/useStateManager";
 import { useDispatch, useSelector } from "react-redux";
+import Image from 'next/image'
 import {
   AddStoreBirthdayData,
   FetchStoreBirthdayList,
@@ -273,12 +274,16 @@ export default function AddBirthdayForm({ options }) {
               />
             </div>
             {previewUrl && (
-              <img
-                src={previewUrl}
-                alt="Preview"
-                style={{ maxWidth: "100%", maxHeight: 200 }}
-              />
+              <Image
+              src={previewUrl}
+              width={500}
+              height={500}
+              alt="Preview"
+              style={{ maxWidth: "100%", maxHeight: 200 }}
+            />
             )}
+
+
 
             <div className="mt-6 w-full">
               <p className="text-base font-semibold mb-2">

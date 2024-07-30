@@ -1,13 +1,16 @@
 import { popup } from "@/_utils/alerts";
 import EasySelect from "@/components/globals/EasySelect";
 import GlobalInput from "@/components/globals/globalInput";
+import UseSampleImage from "@/components/globals/useSampleImage";
 import { config } from "@/config/config";
 import { GetAllProduct, UpdateProductApi } from "@/store/slices/products";
 import { GetStores } from "@/store/slices/seller";
+import { UpdateProductvalidationSchema } from "@/validators/productValidations";
 import { useFormik } from "formik";
 import { Minus, Pen, Plus } from "lucide-react";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 export default function UpdateProduct({ data, handleModal }) {
   const [imagePreview, setImagePreview] = useState(
@@ -26,6 +29,7 @@ export default function UpdateProduct({ data, handleModal }) {
       weight: data?.weight || "",
       store_id: data?.store_id || "",
     },
+    validationSchema: UpdateProductvalidationSchema,
     onSubmit: async (values, { resetForm }) => {
       const formdata = new FormData();
       formdata.append("name", values.name);
@@ -96,11 +100,16 @@ export default function UpdateProduct({ data, handleModal }) {
       </div>
       <div className="w-full max-h-[80vh] flex flex-col items-center overflow-auto">
         <div className="relative w-40 h-40">
-          <img
+        
+
+          <Image
             src={imagePreview}
+            width={500}
+            height={500}
             alt="store Image"
             className="w-40 h-40 rounded-full p-2 shadow-md"
           />
+
           <button
             type="button"
             className="p-2 bg-gray-200 rounded-full absolute right-2 m-1  top-2"
@@ -114,6 +123,7 @@ export default function UpdateProduct({ data, handleModal }) {
             />
           </button>
         </div>
+        <UseSampleImage popper={false} buttonClass="!max-w-fit" />
         {/*  Product image Upload */}
         <form onSubmit={formik.handleSubmit}>
           <input

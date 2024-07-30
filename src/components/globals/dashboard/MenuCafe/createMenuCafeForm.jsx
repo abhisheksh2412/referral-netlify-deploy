@@ -18,6 +18,7 @@ import Loader from "../../Loader";
 import { popup } from "@/_utils/alerts";
 import { useRouter } from "next/navigation";
 import { config } from "@/config/config";
+import UseSampleImage from "../../useSampleImage";
 
 export default function CreateMenuCafeForm({
   menuPlacement = "bottom",
@@ -27,7 +28,9 @@ export default function CreateMenuCafeForm({
 }) {
   const navigate = useRouter();
   const [selectedImage, setSelectedImage] = useState(
-    config.IMAGE_URL_PATH + editData?.menu_shop_cafe_img || null
+    editData?.menu_shop_cafe_img
+      ? config.IMAGE_URL_PATH + editData?.menu_shop_cafe_img
+      : null
   );
   const { stores } = useSelector((state) => state.seller);
   const { isLoading, isSuccess } = useSelector((state) => state.menu);
@@ -81,26 +84,23 @@ export default function CreateMenuCafeForm({
 
   const handleCreateCafe = async (formdata, resetForm) => {
     await dispatch(CreateMenuShopCafe(formdata));
-    setTimeout(() => {
-      if (isSuccess) {
-        popup({ status: "success", message: "create Successfully" });
-        resetForm();
-        navigate.back();
-      }
-    }, 400);
+
+    if (isSuccess) {
+      popup({ status: "success", message: "create Successfully" });
+      resetForm();
+      navigate.back();
+    }
   };
   const handleUpdateCafe = async (formdata, resetForm) => {
     await dispatch(UpdateMenuCafe({ id: editData?.id, data: formdata }));
     for (const [key, value] of formdata.entries()) {
       console.log(`${key}:`, value);
     }
-    dispatch(GetMenuCafeList());
-    setTimeout(() => {
-      if (isSuccess) {
-        handleModal(null);
-        popup({ status: "success", message: "Updated Successfully" });
-      }
-    }, 400);
+    await dispatch(GetMenuCafeList());
+    if (isSuccess) {
+      handleModal(null);
+      popup({ status: "success", message: "Updated Successfully" });
+    }
     resetForm();
   };
 
@@ -112,6 +112,11 @@ export default function CreateMenuCafeForm({
       <form onSubmit={formik.handleSubmit}>
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Menu Cafe Image</p>
+          <UseSampleImage
+            buttonClass="!w-fit"
+            popper={false}
+            imageUrl="/assets/menucafedemo.png"
+          />
           <label
             htmlFor="dropzone-file"
             className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -155,7 +160,7 @@ export default function CreateMenuCafeForm({
                     drag and drop
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
-                    JPG, JPEG, or PNG (MAX. 2MB, 100x60px)
+                    JPG, JPEG, or PNG (MIN. 200x200px ,MAX. 500x500px , 2MB)
                   </p>
                 </>
               )}
@@ -175,7 +180,7 @@ export default function CreateMenuCafeForm({
             type="text"
             id="title"
             name="title"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
             placeholder="Enter Title"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -186,13 +191,15 @@ export default function CreateMenuCafeForm({
           )}
         </div>
 
+
+       <div className="md:grid md:grid-flow-col md:gap-4 lg:grid lg:grid-flow-col lg:gap-4">
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Point</p>
           <input
             type="text"
             id="points"
             name="points"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
             placeholder="Enter Point"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -202,13 +209,14 @@ export default function CreateMenuCafeForm({
             <p className="text-red-500 text-xs">{formik.errors.points}</p>
           )}
         </div>
+
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Price</p>
           <input
             type="number"
             id="price"
             name="price"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
             placeholder="Enter Point"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -225,7 +233,7 @@ export default function CreateMenuCafeForm({
             type="text"
             id="weight"
             name="weight"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
             placeholder="Enter Weight"
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -235,6 +243,8 @@ export default function CreateMenuCafeForm({
             <p className="text-red-500 text-xs">{formik.errors.weight}</p>
           )}
         </div>
+        </div>
+
 
         <div className="mt-5 w-full">
           <p className="text-base font-semibold mb-2">Description</p>
@@ -242,7 +252,7 @@ export default function CreateMenuCafeForm({
             id="description"
             name="description"
             rows="4"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block p-3 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Description..."
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}

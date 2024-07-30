@@ -75,14 +75,12 @@ export default function StoresSlider({ details = true }) {
                       className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer hover:shadow-md transition-shadow"
                     >
                       <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                     
-
                         <Image
                           src={config.IMAGE_URL_PATH + item?.logo}
                           width={300}
                           height={300}
                           alt="Picture of the author"
-                            class="w-32 h-32 mx-auto object-cover"
+                          class="w-32 h-32 mx-auto object-cover"
                         />
                       </div>
                       <h3 className="text-center p-4 font-medium">
@@ -104,12 +102,17 @@ export default function StoresSlider({ details = true }) {
                 </h1>
               </div>
               <div className="max-h-[80vh] overflow-auto">
-                <div className="relative m-2 rounded-full flex items-center	 w-48 h-48 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                  <img
+                <div className="relative m-2 rounded-lg flex items-center	 w-40 h-40 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
+                 
+
+                  <Image
                     src={config.IMAGE_URL_PATH + selectedData?.logo}
+                    width={500}
+                    height={500}
                     alt="Store Image"
                     className="w-36 h-36 mx-auto  rounded-md"
                   />
+
                   <span className="absolute right-3 bottom-0 p-1 px-2 text-xs font-medium text-white bg-green-300 rounded-full">
                     {selectedData?.status}
                   </span>
@@ -160,8 +163,7 @@ export default function StoresSlider({ details = true }) {
                         <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                           <th
                             scope="row"
-                            className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-                          >
+                            className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                             <h5>Town</h5>
                           </th>
                           <td className="px-6 py-2">

@@ -1,6 +1,7 @@
 import EasySelect from "@/components/globals/EasySelect";
 import Loader from "@/components/globals/Loader";
 import Modal from "@/components/globals/Modal";
+import UseSampleImage from "@/components/globals/useSampleImage";
 import { config } from "@/config/config";
 import {
   AddStoreBirthdayData,
@@ -87,6 +88,7 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
       try {
         if (!editData) {
           await dispatch(AddStoreBirthdayData(formdata));
+
           if (orders.isSuccess) {
             popup({ status: "success", message: "created Successfully" });
             router.back();
@@ -218,6 +220,11 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
 
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Birthday Image</p>
+          <UseSampleImage
+            popper={false}
+            buttonClass="!w-fit"
+            imageUrl="/assets/coupondemo.png"
+          />
           <label
             for="brithday_image_upload"
             className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -252,7 +259,7 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
                   drop
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  SVG, PNG, JPG or GIF (MIN. 200x200 ,MAX. 500x500px , 2MB)
                 </p>
               </div>
             )}
@@ -351,6 +358,11 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
                   <p className="text-base font-semibold mb-2 text-black">
                     Upload Attachment
                   </p>
+                  <UseSampleImage
+                    popper={false}
+                    buttonClass="!w-fit"
+                    imageUrl="/assets/coupondemo.png"
+                  />
                   <label
                     htmlFor="upload_couponImage"
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"

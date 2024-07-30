@@ -38,7 +38,9 @@ export default function CouponSlider() {
           <div className="p-8 mobile:p-0 rounded-lg relative coupon-slider-area">
             <div className="flex justify-between items-center mb-4">
               <div>
-                <h4 className="text-2xl mobile:text-lg font-semibold">Coupons</h4>
+                <h4 className="text-2xl mobile:text-lg font-semibold">
+                  Coupons
+                </h4>
               </div>
               <div>
                 <button
@@ -99,7 +101,11 @@ export default function CouponSlider() {
             handleOpen={() => handleViewcoupon(null)}
           >
             <div>
-              <CouponDetails data={viewCoupon} />
+              <CouponDetails
+                data={viewCoupon}
+                isdelete={true}
+                refreshFunc={fetchManagerCoupon}
+              />
             </div>
           </Modal>
         </Container>

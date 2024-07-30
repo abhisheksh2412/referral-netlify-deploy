@@ -29,25 +29,34 @@ function Store() {
   }, [getSellerStores]);
 
   return (
-    <div>
-      <TopHeader />
-      <DashboardHeader />
-      <InnerBanner title={"Store"} />
+    <Loader isLoading={isLoading}>
+      <div>
+        <TopHeader />
+        <DashboardHeader />
+        <InnerBanner title={"Store"} />
 
-      <div className="p-20 mobile:p-4 mobile:pt-14">
-        <Container>
-          <Loader isLoading={isLoading}>
-            {stores.map((item, index) => (
-              <div key={index} className="lg:w-1/2 mobile:w-full md:w-3/4 sm:w-3/4   mx-auto">
-                <StoreCard data={item} />
-              </div>
-            ))}
-          </Loader>
-        </Container>
+        <div className="p-20 mobile:p-4 mobile:pt-14">
+          <Container>
+            {stores?.length === 0 ? (
+              <h5 className="text-sm text-gray-500 text-center font-semibold">
+                No Stores Found
+              </h5>
+            ) : (
+              stores.map((item, index) => (
+                <div
+                  key={index}
+                  className="lg:w-1/2 mobile:w-full md:w-3/4 sm:w-3/4   mx-auto"
+                >
+                  <StoreCard data={item} />
+                </div>
+              ))
+            )}
+          </Container>
+        </div>
+
+        <DashboardFooter />
       </div>
-
-      <DashboardFooter />
-    </div>
+    </Loader>
   );
 }
 

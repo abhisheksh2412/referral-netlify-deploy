@@ -52,13 +52,13 @@ function PartnerOrder() {
               <div className="flex w-full gap-2 items-center ">
                 <button
                   onClick={() => handleModalContent("manager")}
-                  className="p-2 px-3 bg-blush-red text-white rounded-md w-full hover:bg-pink-300 transition-colors"
+                  className="p-4 px-3 bg-blush-red text-white rounded-md w-full hover:bg-pink-300 transition-colors"
                 >
                   Project Manager
                 </button>
                 <button
                   onClick={() => handleModalContent("seller")}
-                  className="p-2 px-3 bg-blush-red text-white rounded-md w-full hover:bg-pink-300 transition-colors"
+                  className="p-4 px-3 bg-blush-red text-white rounded-md w-full hover:bg-pink-300 transition-colors"
                 >
                   Seller
                 </button>
@@ -133,12 +133,12 @@ function PartnerOrder() {
           <div className="lg:w-6/12 mobile:w-full sm:w-10/12 md:w-10/12 md-landscape:w-8/12 mx-auto mb-10 p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-6 dark:bg-gray-800 dark:border-gray-700">
             <div className="flex justify-between items-center bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 hover:bg-gray-100  p-2 rounded-md">
               <h4>Partner Website</h4>
-              <Image src="/assets/refferals_img.svg" width={60} height={60} />
+              <Image src="/assets/refferals_img.svg" width={60} height={60} alt="Picture of the author" />
             </div>
 
             <div className="w-full py-3 flex flex-col gap-2">
               <div className="flex justify-between items-center w-full">
-                <h6 className="text-xs text-blush-red">Partner Link</h6>
+                <h6 className="text-lg text-blush-red">Partner Link</h6>
                 <Globe className="text-blush-red" size={15} />
               </div>
               <a

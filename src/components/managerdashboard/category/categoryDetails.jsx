@@ -1,3 +1,4 @@
+import Image from "next/image";
 export default function CategoryDetails({ data }) {
   console.log(data);
   return (
@@ -6,11 +7,15 @@ export default function CategoryDetails({ data }) {
         <h1>Category Details</h1>
       </div>
       <div className="pt-4 flex flex-col items-center">
-        <img
+       
+        <Image
           src={data?.category_image}
+          width={500}
+          height={500}
           alt="category_image"
           className="object-cover w-36 h-36 rounded-full shadow-lg p-2"
         />
+
         <div className="p-3  font-semibold text-lg text-center rounded-b-md text-blush-red">
           {data?.name}
         </div>

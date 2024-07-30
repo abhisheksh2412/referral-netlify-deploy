@@ -5,6 +5,7 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "@/store/slices/authSlice";
+import Image from 'next/image'
 
 function CustomerProfileDropdown() {
   const user = useSelector((state) => state.auth);
@@ -26,12 +27,16 @@ function CustomerProfileDropdown() {
         className=" focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
         type="button"
       >
-        <img
-          className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
-          src={user?.data?.profile_photo_url}
-          alt=""
-        ></img>
+      
+        <Image
+       src={user?.data?.profile_photo_url}
+        width={500}
+        height={500}
+        alt="Picture of the author"
+        className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
+        />
 
+    
         <div className="text-left">
           <h4 className="mb-1">{user?.data?.name}</h4>
           <span class=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">

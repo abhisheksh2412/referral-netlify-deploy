@@ -1,6 +1,7 @@
 import { config } from "@/config/config";
 import clsx from "clsx";
 import React from "react";
+import Image from "next/image";
 
 function CouponCard({ data }) {
   return (
@@ -8,10 +9,12 @@ function CouponCard({ data }) {
       <div class="block max-w-sm p-3 bg-white border border-gray-200 rounded-lg shadow">
         <div className="flex justify-between items-center">
           <div>
-            <img
-              className="w-16 h-16 rounded-full shadow p-1 bg-white"
+            <Image
               src={config.IMAGE_URL_PATH + data?.coupon_image}
+              width={500}
+              height={500}
               alt="gift"
+              className="w-16 h-16 rounded-full shadow p-1 bg-white"
             />
           </div>
           <div>

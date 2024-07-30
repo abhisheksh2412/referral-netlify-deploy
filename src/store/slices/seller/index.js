@@ -582,7 +582,7 @@ export const DeleteAssignedCards = (id) => async (dispatch) => {
   dispatch(loading());
   try {
     const response = await axiosInstance.delete(
-      "api/seller/delete/assign_card/" + id
+      "/seller/delete/assign_card/" + id
     );
     if (response.status === 200) {
       dispatch(success());

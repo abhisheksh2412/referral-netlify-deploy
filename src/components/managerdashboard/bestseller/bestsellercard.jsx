@@ -4,10 +4,16 @@ import { FaRegEye } from "react-icons/fa";
 import { config } from "@/config/config";
 import clsx from "clsx";
 import Swal from "sweetalert2";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import { DeleteBestSeller, GetBestSellerByToken } from "@/store/slices/seller";
 
-function BestSellerCard({ data, handleView, ClassName = "" }) {
+function BestSellerCard({
+  data,
+  handleView,
+  ClassName = "",
+  isActionAllow = true,
+}) {
   const user = useSelector((state) => state.auth.data);
   const seller = useSelector((state) => state.seller);
   const dispatch = useDispatch();
@@ -45,12 +51,14 @@ function BestSellerCard({ data, handleView, ClassName = "" }) {
         <div className="flex items-center	">
           <div className="w-3/6">
             <div className="flex gap-2 mb-3 opacity-0 group-hover:opacity-100">
-              <div
-                className="cursor-pointer bg-red-700 p-1 rounded"
-                onClick={() => deleteBestSeller(data?.id)}
-              >
-                <MdDeleteOutline className="text-white" />
-              </div>
+              {isActionAllow && (
+                <div
+                  className="cursor-pointer bg-red-700 p-1 rounded"
+                  onClick={() => deleteBestSeller(data?.id)}
+                >
+                  <MdDeleteOutline className="text-white" />
+                </div>
+              )}
               {/* <div className="cursor-pointer bg-green-700 p-1 rounded">
                 <TiPencil className="text-white" />
               </div> */}
@@ -71,11 +79,15 @@ function BestSellerCard({ data, handleView, ClassName = "" }) {
           </div>
           <div className="w-3/6">
             <div className="">
-              <img
-                className="w-36 h-36 mx-auto"
+
+              <Image
                 src={config?.IMAGE_URL_PATH + data?.product?.path}
+                width={500}
+                height={500}
                 alt="product_image"
+                 className="w-36 h-36 mx-auto"
               />
+
             </div>
           </div>
         </div>

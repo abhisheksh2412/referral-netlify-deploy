@@ -12,22 +12,27 @@ export const CreateBestSellerValidations = Yup.object({
     .test("fileType", "Unsupported file format", (value) =>
       ["image/jpeg", "image/png", "image/jpg"].includes(value && value.type)
     )
-    .test("dimensions", "Image must be 120x60px", async (value) => {
-      if (value) {
-        const file = value;
-        const image = new Image();
-        image.src = URL.createObjectURL(file);
-
+    .test(
+      "fileDimensions",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
-          image.onload = function () {
-            const width = image.naturalWidth;
-            const height = image.naturalHeight;
-            URL.revokeObjectURL(image.src);
-            resolve(width === 120 && height === 60);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
           };
+          reader.readAsDataURL(value);
         });
       }
-      return true;
-    }),
+    ),
   description: Yup.string().required("Description is required"),
 });

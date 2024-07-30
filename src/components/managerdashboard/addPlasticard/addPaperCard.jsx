@@ -121,6 +121,7 @@ function AddPaperCardForm() {
                   width={300}
                   height={300}
                   className="!w-full"
+                  alt="card"
                 />
               )}
               <input
@@ -166,7 +167,7 @@ function AddPaperCardForm() {
                     }
                     width={100}
                     height={100}
-                    alt="Picture of the author"
+                    alt="card"
                     className="rounded-lg mx-auto"
                   />
                 </div>

@@ -20,22 +20,28 @@ export const CreateStoreValidationSchema = Yup.object({
     .test("fileFormat", "Unsupported Format", (value) => {
       return value && SUPPORTED_FORMATS.includes(value.type);
     })
-    .test("fileDimensions", "Image dimensions must be 100x100", (value) => {
-      return new Promise((resolve) => {
-        if (!value) {
-          resolve(false);
-        }
-        const reader = new FileReader();
-        reader.onload = (event) => {
-          const img = new Image();
-          img.onload = () => {
-            resolve(img.width === 100 && img.height === 100);
+    .test(
+      "fileDimensions",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If no file is provided, skip this test
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
           };
-          img.src = event.target.result;
-        };
-        reader.readAsDataURL(value);
-      });
-    }),
+          reader.readAsDataURL(value);
+        });
+      }
+    ),
 });
 export const UpdateStoreValidationSchema = Yup.object({
   name: Yup.string().required("Store Name is required"),
@@ -60,16 +66,20 @@ export const UpdateStoreValidationSchema = Yup.object({
     })
     .test(
       "fileDimensions",
-      "Image dimensions must be 100x100",
-      function (value) {
-        if (!value) return true; // Skip if no file uploaded
+      "Image dimensions should be between 200x200 and 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
           const reader = new FileReader();
           reader.onload = (event) => {
             const img = new Image();
             img.onload = () => {
-              resolve(img.width === 100 && img.height === 100);
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
             };
+            img.onerror = () => resolve(false);
             img.src = event.target.result;
           };
           reader.readAsDataURL(value);
@@ -90,7 +100,36 @@ export const AddProductPointsvalidation = Yup.object().shape({
   productList: Yup.array().of(
     Yup.object().shape({
       product_name: Yup.string().required("Product name is required"),
-      product_image: Yup.mixed().required("Product image is required"),
+      product_image: Yup.mixed()
+        .required("Product image is required")
+        .test(
+          "fileType",
+          "Unsupported File Format. Only JPEG, JPG and PNG are allowed.",
+          (value) => value && SUPPORTED_FORMATS.includes(value.type)
+        )
+        .test(
+          "fileSize",
+          "File size is too large. Maximum size is 2MB.",
+          (value) => value && value.size <= MAX_FILE_SIZE
+        )
+        .test(
+          "fileDimensions",
+          "Image dimensions must be 500x500",
+          function (value) {
+            if (!value) return true; // Skip if no file uploaded
+            return new Promise((resolve) => {
+              const reader = new FileReader();
+              reader.onload = (event) => {
+                const img = new Image();
+                img.onload = () => {
+                  resolve(img.width === 500 && img.height === 500);
+                };
+                img.src = event.target.result;
+              };
+              reader.readAsDataURL(value);
+            });
+          }
+        ),
       barcode: Yup.string().required("Barcode is required"),
       product_points: Yup.number()
         .required("Product points are required")
@@ -101,4 +140,47 @@ export const AddProductPointsvalidation = Yup.object().shape({
         .integer("Quantity must be an integer"),
     })
   ),
+});
+
+export const UpdateProductSchema = Yup.object().shape({
+  product_name: Yup.string().required("Product name is required"),
+  product_image: Yup.mixed()
+    .nullable()
+    .notRequired()
+    .test(
+      "fileType",
+      "Unsupported File Format. Only JPEG, JPG and PNG are allowed.",
+      (value) => !value || (value && SUPPORTED_FORMATS.includes(value.type))
+    )
+    .test(
+      "fileSize",
+      "File size is too large. Maximum size is 2MB.",
+      (value) => !value || (value && value.size <= MAX_FILE_SIZE)
+    )
+    .test(
+      "fileDimensions",
+      "Image dimensions must be 500x500",
+      function (value) {
+        if (!value) return true; // Skip if no file uploaded
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              resolve(img.width === 500 && img.height === 500);
+            };
+            img.src = event.target.result;
+          };
+          reader.readAsDataURL(value);
+        });
+      }
+    ),
+  barcode: Yup.string().required("Barcode is required"),
+  earn_point: Yup.number()
+    .required("Points are required")
+    .positive("Points must be positive"),
+  quantity: Yup.number()
+    .required("Quantity is required")
+    .positive("Quantity must be positive")
+    .integer("Quantity must be an integer"),
 });

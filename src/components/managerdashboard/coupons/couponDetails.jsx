@@ -73,12 +73,17 @@ export default function CouponDetails({
           {/* coupon info  */}
           <div className="p-4 flex flex-col gap-2">
             <Image
-              src={config.IMAGE_URL_PATH + data?.coupon_image}
+              src={
+                data?.coupon_image
+                  ? config.IMAGE_URL_PATH + data?.coupon_image
+                  : "/assets/coupondefault.jpg"
+              }
               // src="/assets/store-10.png"
               alt="Coupon_Image"
               width={150}
               height={150}
               className="rounded-md mx-auto"
+              
             />
             <h4 className="text-sm font-medium text-gray-700 text-center">
               COUPON CODE : <strong>{data?.coupon_code}</strong>

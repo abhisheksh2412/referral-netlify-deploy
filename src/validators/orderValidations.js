@@ -22,16 +22,23 @@ export const SendMessageAddCouponValidation = Yup.object().shape({
     })
     .test(
       "fileDimensions",
-      "Image dimensions should be 500x500 pixels",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
       (value) => {
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
-          if (!value) resolve(false);
-          const img = new Image();
-          img.src = URL.createObjectURL(value);
-          img.onload = () => {
-            const isValid = img.width === 500 && img.height === 500;
-            resolve(isValid);
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
           };
+          reader.readAsDataURL(value);
         });
       }
     ),
@@ -57,18 +64,21 @@ export const UserBirthdayCrationValidate = Yup.object({
     )
     .test(
       "fileDimensions",
-      "Image dimensions should be 500x500 pixels",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
       (value) => {
-        if (!value) return true; // If there is no file, we pass the test.
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
           const reader = new FileReader();
-          reader.onload = (e) => {
+          reader.onload = (event) => {
             const img = new Image();
             img.onload = () => {
-              resolve(img.width === 500 && img.height === 500);
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
             };
             img.onerror = () => resolve(false);
-            img.src = e.target.result;
+            img.src = event.target.result;
           };
           reader.readAsDataURL(value);
         });

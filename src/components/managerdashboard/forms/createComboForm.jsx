@@ -1,6 +1,7 @@
 import { popup } from "@/_utils/alerts";
 import EasySelect from "@/components/globals/EasySelect";
 import Loader from "@/components/globals/Loader";
+import UseSampleImage from "@/components/globals/useSampleImage";
 import { config } from "@/config/config";
 import { AddCombo } from "@/store/slices/combo";
 import { GetProductsByStoreId } from "@/store/slices/products";
@@ -139,11 +140,16 @@ export default function CreateComboForm() {
                 )}
               >
                 <div className="">
-                  <img
-                    className="w-16 h-16 mx-auto p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                 
+
+                  <Image
                     src={config?.IMAGE_URL_PATH + item?.path}
+                    width={500}
+                    height={500}
                     alt="product_img"
+                    className="w-16 h-16 mx-auto p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
                   />
+
                   <p className="text-center text-sm">{item?.name}</p>
                 </div>
               </div>
@@ -163,6 +169,7 @@ export default function CreateComboForm() {
         )}
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Combo Image</p>
+          <UseSampleImage popper={false} imageUrl="/assets/combodemo.png" />
           <label
             htmlFor="dropzone-file"
             className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -173,6 +180,7 @@ export default function CreateComboForm() {
                 width={100}
                 height={100}
                 className="!w-full min-h-[20vh]"
+                alt="product_img"
               />
             )}
             {!imagePreview && (
@@ -197,7 +205,7 @@ export default function CreateComboForm() {
                   and drop
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  SVG, PNG, JPG or GIF (MIN 200x200px , MAX. 500x500px , 2MB)
                 </p>
               </div>
             )}
@@ -223,7 +231,7 @@ export default function CreateComboForm() {
             onChange={formik.handleChange}
             value={formik.values.points}
             name="points"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-4"
             placeholder="Enter Products Points"
             required
           />
@@ -240,7 +248,7 @@ export default function CreateComboForm() {
             name="title"
             onChange={formik.handleChange}
             value={formik.values.title}
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-2.5"
+            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-4"
             placeholder="Enter Category Title"
             required
           />

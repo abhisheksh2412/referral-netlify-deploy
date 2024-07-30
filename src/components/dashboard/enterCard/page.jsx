@@ -1,6 +1,7 @@
 import { GetUserByCard } from "@/store/slices/userSlice";
 import { useFormik } from "formik";
 import { ArrowRight } from "lucide-react";
+import Image from "next/image";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
@@ -59,10 +60,13 @@ function EnterCard({ reset }) {
     >
       <div className="flex gap-4">
         <div>
-          <img
-            alt="cardImage"
-            className="border-2 border-white p-1 w-20 rounded"
+       
+          <Image
             src="/assets/credit-card.svg"
+            width={500}
+            height={500}
+            alt="Picture of the author"
+            className="border-2 border-white p-1 w-20 rounded"
           />
         </div>
         <div>

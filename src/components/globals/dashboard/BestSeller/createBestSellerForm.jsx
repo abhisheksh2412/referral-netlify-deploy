@@ -10,6 +10,7 @@ import { popup } from "@/_utils/alerts";
 import { useRouter } from "next/navigation";
 import { CloudUpload } from "lucide-react";
 import Image from "next/image";
+import UseSampleImage from "../../useSampleImage";
 
 export default function CreateBestSellerForm() {
   const navigate = useRouter();
@@ -95,6 +96,11 @@ export default function CreateBestSellerForm() {
             <p className="text-base font-semibold mb-2">
               Upload Best Seller Image
             </p>
+            <UseSampleImage
+              popper={false}
+              buttonClass="!w-fit"
+              imageUrl="/assets/bestsellerdemo.png"
+            />
             <label
               htmlFor="banner_image"
               className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -116,7 +122,7 @@ export default function CreateBestSellerForm() {
                       <span class="font-semibold">Click to upload</span>
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      SVG, PNG, JPG or GIF (MAX. 800x400px)
+                      JPG, JPEG, or PNG (MIN 200x200px ,Max. 500x500px , 2MB)
                     </p>
                   </>
                 )}

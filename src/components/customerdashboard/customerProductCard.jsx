@@ -5,6 +5,7 @@ import Modal from "../globals/Modal";
 import ProductDetails from "../managerdashboard/products/ProductDetails";
 import { config } from "@/config/config";
 import clsx from "clsx";
+import Image from "next/image";
 import { useDispatch, useSelector } from "react-redux";
 import {
   AddProductAsFavorite,
@@ -52,11 +53,14 @@ function CustomerProductCard({ data }) {
     <div>
       <div className="shadow bg-white rounded-lg p-0 relative pb-2 rounded-b-lg mb-4 group cursor-pointer">
         <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
-          <img
-            className="w-36 h-36 mx-auto"
+          <Image
             src={config?.IMAGE_URL_PATH + data?.path}
-            alt=""
+            width={500}
+            height={500}
+            alt="Picture of the author"
+            className="w-36 h-36 mx-auto"
           />
+
           <button disabled={isLoading}>
             <CiHeart
               onClick={() => {

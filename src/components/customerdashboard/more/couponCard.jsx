@@ -4,7 +4,7 @@ import { config } from "@/config/config";
 import clsx from "clsx";
 import moment from "moment";
 
-function MoreCouponCard({ data, handleView = null }) {
+function MoreCouponCard({ data, handleView = null, activateBtn = true }) {
   return (
     <div>
       <div className="shadow rounded-md bg-[#fce4ec]">
@@ -16,7 +16,11 @@ function MoreCouponCard({ data, handleView = null }) {
                 className="p-1 shadow rounded-md w-20 bg-white"
               >
                 <Image
-                  src={config?.IMAGE_URL_PATH + data?.coupon_image}
+                  src={
+                    data?.coupon_image
+                      ? config?.IMAGE_URL_PATH + data?.coupon_image
+                      : "/assets/coupondefault.jpg"
+                  }
                   width={65}
                   height={65}
                   alt="coupon img"
@@ -29,7 +33,7 @@ function MoreCouponCard({ data, handleView = null }) {
               <h5
                 className={clsx(
                   " text-xs font-medium me-2 px-4 py-2.5 rounded-full  inline-block",
-                  data?.status === "activated"
+                  data?.status === "active"
                     ? "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-300"
                     : "bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-300"
                 )}
@@ -55,11 +59,13 @@ function MoreCouponCard({ data, handleView = null }) {
               {moment(data?.expire_at).format("YYYY-MM-HH : hh:mm A")}
             </h3>
           </div>
-          <div>
-            <button className="relative px-3 py-3 text-xs  font-normal text-center text-white bg-[#0e0a38] rounded-lg">
-              Activate Coupon
-            </button>
-          </div>
+          {activateBtn && (
+            <div>
+              <button className="relative px-3 py-3 text-xs  font-normal text-center text-white bg-[#0e0a38] rounded-lg">
+                Activate Coupon
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </div>

@@ -5,6 +5,8 @@ import { IoIosSend } from "react-icons/io";
 import { TiPencil } from "react-icons/ti";
 import calculateAge from "@/_utils/ageCalculator";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
+
 import {
   DeleteUserBirthday,
   GetUserBirthdayList,
@@ -86,11 +88,14 @@ function UserBirthdayCard({ data, handleEdit = null }) {
           </button>
         </div>
         <div className="flex items-center gap-2">
-          <img
-            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
+          <Image
             src={data?.user?.profile_photo_url}
-            alt=""
+            width={500}
+            height={500}
+            alt="Picture of the author"
+            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
           />
+
           <div>
             <h5 className="mb-2 text-md font-semibold tracking-tight text-gray-900 dark:text-white text-pink-400">
               {data?.user?.name}

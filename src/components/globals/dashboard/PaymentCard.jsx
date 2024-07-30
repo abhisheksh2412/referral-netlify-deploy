@@ -1,13 +1,24 @@
 "use client";
 
-import { GetInvoiceData, PayInvoiceData } from "@/store/slices/common";
+import {
+  BillPaymentApi,
+  BillPaymentSuccessApi,
+  GetInvoiceData,
+  PayInvoiceData,
+} from "@/store/slices/common";
 import { CalendarCheck } from "lucide-react";
 import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Loader from "../Loader";
+import usePaymentCheckout from "@/hooks/usePaymentCheckout";
+import { popup } from "@/_utils/alerts";
+import Swal from "sweetalert2";
 
 export default function PaymentCard() {
+  const user = useSelector((state) => state.auth.data);
+  const partnerId = user?.role === "Partner" ? user?.id : user?.partner_id;
   const dispatch = useDispatch();
+  const checkOut = useSelector((state) => state.common);
 
   const { payInvoiceData, lastInvoices, isLoading } = useSelector(
     (state) => state.common
@@ -19,16 +30,67 @@ export default function PaymentCard() {
     dispatch(PayInvoiceData());
   }, [dispatch]);
 
+  const { status, sessionId } = usePaymentCheckout(
+    checkOut?.checkoutData?.redirect_url || null,
+    "payment"
+  );
+
   const floatToFixed = (data, fixed = 2) => {
     return parseFloat(data).toFixed(fixed).toString().replace(".", ",");
   };
+
+  const handlePaymentAfterPay = useCallback(async () => {
+    if (status === "success") {
+      const formdata = new FormData();
+      const partnerId = user?.role === "Partner" ? user?.id : user?.partner_id;
+      formdata.append("session_id", sessionId);
+      formdata.append("partner_id", partnerId);
+      await dispatch(BillPaymentSuccessApi(formdata));
+      getInvoiceData();
+      getLastInvoices();
+      await Swal.mixin({ toast: true }).fire({
+        icon: "success",
+        text: "Payment Successfull",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    } else if (status === "cancel") {
+      console.log("cancle hai");
+      await Swal.mixin({ toast: true }).fire({
+        icon: "error",
+        text: "Payment cancel",
+        timer: 1500,
+        showConfirmButton: false,
+      });
+    }
+  }, [status, sessionId, user]);
+
+  const handleBillPayment = useCallback(
+    async (totalPrice) => {
+      if (totalPrice) {
+        const formdata = new FormData();
+        let url = `${location.href}`;
+        const partnerId =
+          user?.role === "Partner" ? user?.id : user?.partner_id;
+        formdata.append("url", url);
+        formdata.append("total_price", totalPrice);
+        formdata.append("partner_id", partnerId);
+
+        await dispatch(BillPaymentApi(formdata));
+      }
+    },
+    [dispatch, user]
+  );
+
+  useEffect(() => {
+    handlePaymentAfterPay();
+  }, [handlePaymentAfterPay]);
 
   useEffect(() => {
     getInvoiceData();
     getLastInvoices();
   }, [getInvoiceData, getLastInvoices]);
 
-  // implememt the invoice data
   return (
     <Loader isLoading={isLoading}>
       <div className="p-10 mobile:p-4 shadow-xl flex flex-col gap-2 lg:w-1/3  mobile:w-full  md:w-2/3 md-landscape:w-2/4 sm:w-1/3 bg-gray-100">
@@ -146,7 +208,10 @@ export default function PaymentCard() {
           </div>
           <div className="p-2 col-span-2 relative">
             <button
+              // loading={checkOut.isLoading}
               type="button"
+              disabled={parseInt(payInvoiceData?.total_amount) === 0}
+              onClick={() => handleBillPayment(10)}
               className="rounded-md shadow-md p-3 px-5  bottom-0 left-1/2  text-white font-semibold bg-blush-red   w-full text-sm"
             >
               Make Payment

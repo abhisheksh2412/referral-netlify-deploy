@@ -5,6 +5,7 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
+import Image from "next/image";
 import moment from "moment";
 import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -62,11 +63,16 @@ function Notification() {
                     className="flex px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-700"
                   >
                     <div className="flex-shrink-0">
-                      <img
-                        className="rounded-full w-11 h-11"
-                        src="https://static.vecteezy.com/system/resources/previews/010/366/202/original/bell-icon-transparent-notification-free-png.png"
+                     
+
+                      <Image
+                        src="/assets/bell-icon-transparent-notification-free-png.png"
+                        width={500}
+                        height={500}
                         alt="Jese image"
+                        className="rounded-full w-11 h-11"
                       />
+
                       {/* <div className="absolute flex items-center justify-center w-5 h-5 ms-6 -mt-5 bg-blue-600 border border-white rounded-full dark:border-gray-800">
                       <svg
                         className="w-2 h-2 text-white"

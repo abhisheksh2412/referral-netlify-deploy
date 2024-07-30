@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GetSellerStores, SendInvitation } from "@/store/slices/seller";
 import Swal from "sweetalert2";
-
+import Image from "next/image";
 export default function Invite({ handleModel, inviteModal }) {
   const user = useSelector((state) => state.auth.data);
   const stores = useSelector((state) => state.seller);
@@ -71,11 +71,15 @@ export default function Invite({ handleModel, inviteModal }) {
               setSelcted(item);
             }}
           >
-            <img
-              className="w-20 h-20 rounded-md p-2 object-contain shadow-custom-inset bg-white"
+          
+            <Image
               src={item?.stores?.qr_code_img_path}
-              alt="qrcode"
+              width={500}
+              height={500}
+             alt="qrcode"
+              className="w-20 h-20 rounded-md p-2 object-contain shadow-custom-inset bg-white"
             />
+
             <div className="flex flex-col gap-1 w-full">
               <span className="flex justify-between w-full">
                 <h1 className="text-sm text-gray-800 font-semibold">

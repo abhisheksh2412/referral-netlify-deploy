@@ -6,6 +6,7 @@ import moment from "moment";
 import { useCallback } from "react";
 import { CiHeart } from "react-icons/ci";
 import { useDispatch, useSelector } from "react-redux";
+import Image from "next/image";
 
 export default function StoreDetails({ selectedData, addFavBtn = false }) {
   const user = useSelector((state) => state.auth.data);
@@ -48,16 +49,19 @@ export default function StoreDetails({ selectedData, addFavBtn = false }) {
         )}
 
         <div className="relative m-2 rounded-md flex items-center	 w-48 h-48 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-          <img
-            src={
+          
+          <Image
+             src={
               selectedData?.logo.includes("/public/storage/")
                 ? selectedData?.logo
                 : config?.IMAGE_URL_PATH + selectedData?.logo
             }
-            // src={selectedData?.logo}
-            alt="Store Image"
-            className="w-42 h-42 mx-auto  rounded-md"
+            width={500}
+            height={500}
+             alt="Store Image"
+              className="w-42 h-42 mx-auto  rounded-md"
           />
+
           <span className="absolute right-3 bottom-0 p-1 px-2 text-xs font-medium text-white bg-green-300 rounded-full">
             {selectedData?.status}
           </span>

@@ -259,3 +259,23 @@ export const DeleteProductPoints = (productid) => async (dispatch) => {
     );
   }
 };
+
+export const UpdateProductsAndPoints =
+  (productId, data) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "/seller/update/products_and_points/" + productId,
+        data
+      );
+      if (response.status === 200) {
+        dispatch(success(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "unkown error"
+        )
+      );
+    }
+  };

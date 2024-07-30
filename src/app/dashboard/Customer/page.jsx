@@ -216,6 +216,7 @@ function CustomerDashboard() {
                   <SwiperSlide key={index}>
                     <ProductCard
                       data={item}
+                      isActionAllow={false}
                       handleModal={handleProductDetailsModal}
                     />
                   </SwiperSlide>
@@ -228,7 +229,7 @@ function CustomerDashboard() {
             open={productDetailsModal !== null}
             handleOpen={() => handleProductDetailsModal("close", null)}
           >
-            <ProductDetails data={productDetailsModal} />
+            <ProductDetails data={productDetailsModal} isSharable={false} />
           </Modal>
         </Container>
       </div>
@@ -291,6 +292,7 @@ function CustomerDashboard() {
                   <SwiperSlide key={index}>
                     <ComboProductsCard
                       data={item}
+                      isdelete={false}
                       handleClose={handleComboDetails}
                     />
                   </SwiperSlide>
@@ -430,6 +432,7 @@ function CustomerDashboard() {
                   <SwiperSlide key={index}>
                     <ProductCard
                       data={item}
+                      isActionAllow={false}
                       handleModal={handleViewFavoriteModal}
                     />
                   </SwiperSlide>
@@ -502,6 +505,7 @@ function CustomerDashboard() {
                   <SwiperSlide key={index}>
                     <BestSellerCard
                       data={item}
+                      isActionAllow={false}
                       handleView={handleViewSellerModal}
                       ClassName="!bg-gray-100"
                     />
@@ -692,6 +696,7 @@ function CustomerDashboard() {
                   <SwiperSlide key={index}>
                     <MmenuShopCafeCard
                       data={item}
+                      isActionAllow={false}
                       handleView={handleMenuCafeViewModal}
                     />
                   </SwiperSlide>

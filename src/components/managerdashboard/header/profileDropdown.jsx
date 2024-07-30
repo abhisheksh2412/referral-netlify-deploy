@@ -7,6 +7,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "@/store/slices/authSlice";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
+import Image from 'next/image'
+
 
 function ManagerProfileDropdown() {
   const user = useSelector((state) => state.auth);
@@ -29,11 +31,15 @@ function ManagerProfileDropdown() {
         type="button"
       >
         {user?.data?.profile_photo_url ? (
-          <img
-            className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
-            src={user.data.profile_photo_url}
-            alt=""
-          />
+
+          <Image
+          src={user.data.profile_photo_url}
+          width={500}
+          height={500}
+          alt="Picture of the author"
+          className="inline-block h-10 w-10 mobile:rounded-md rounded-full  ring-2 ring-white"
+        />
+
         ) : (
           <Skeleton circle={true} height={40} width={40} />
         )}

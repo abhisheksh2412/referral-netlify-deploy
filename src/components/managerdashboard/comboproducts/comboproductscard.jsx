@@ -8,6 +8,7 @@ import { TiPencil } from "react-icons/ti";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import UpdateComboForm from "../forms/updateComboForm";
+import Image from "next/image";
 
 function ComboProductsCard({ data, handleClose = null, isdelete = true }) {
   const { isSuccess } = useSelector((state) => state.combo);
@@ -40,18 +41,20 @@ function ComboProductsCard({ data, handleClose = null, isdelete = true }) {
       <div className="bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 rounded-lg p-5 group">
         <div className="flex items-center	">
           <div className="w-3/6">
-            <div className="flex gap-2 mb-3 opacity-0 group-hover:opacity-100">
+            <div className="flex gap-2 mb-3 lg:opacity-0 group-hover:opacity-100">
               {isdelete && (
                 <div
                   className="cursor-pointer bg-red-700 p-1 rounded"
-                  onClick={() => DeleteAllCombo(data?.id)}>
-                  <MdDeleteOutline className="text-white"/>
+                  onClick={() => DeleteAllCombo(data?.id)}
+                >
+                  <MdDeleteOutline className="text-white" />
                 </div>
               )}
             </div>
             <h4
               onClick={() => handleClose(data)}
-              className="text-xl font-semibold w-fit hover:text-pink-600 cursor-pointer mb-2 line-clamp-1">
+              className="text-xl font-semibold w-fit hover:text-pink-600 cursor-pointer mb-2 line-clamp-1"
+            >
               {data?.title}
             </h4>
             <p className=" text-sm line-clamp-2 h-[50px]">
@@ -68,11 +71,16 @@ function ComboProductsCard({ data, handleClose = null, isdelete = true }) {
             <div className="grid grid-cols-4 gap-2">
               {data?.productData?.slice(0, 4)?.map((item, index) => (
                 <div key={index} className="col-span-2">
-                  <img
-                    className="w-20 h-20 mx-auto"
+                 
+
+                  <Image
                     src={config?.IMAGE_URL_PATH + item?.path}
+                    width={500}
+                    height={500}
                     alt="product_image"
+                    className="w-20 h-20 mx-auto"
                   />
+
                 </div>
               ))}
             </div>

@@ -22,6 +22,7 @@ import { config } from "@/config/config";
 import { popup } from "@/_utils/alerts";
 import { useRouter } from "next/navigation";
 import usePaymentCheckout from "@/hooks/usePaymentCheckout";
+import UseSampleImage from "../../useSampleImage";
 
 const AddStoreForm = ({ edit = false, editData = null }) => {
   const [SelectedImage, setSelectedImage] = useState("");
@@ -109,7 +110,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
     } else {
       setPreviewImage(null);
     }
-  };
+  }; 
 
   // handle Payment checkout to open a new window and checkout
   const { status, sessionId } = usePaymentCheckout(
@@ -176,6 +177,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
           {/* Image upload */}
           <div className="w-full">
             <p className="text-base font-semibold mb-2">Upload Store Logo</p>
+            <UseSampleImage popper={false} imageUrl="/assets/storedemo.png" />
             <label
               htmlFor="dropzone-file"
               className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -186,6 +188,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
                     src={previewImage}
                     width={100}
                     height={100}
+                    alt="Store logo"
                     className="!w-full !h-full"
                   />
                 ) : SelectedImage ? (
@@ -197,6 +200,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
                     }
                     width={100}
                     height={100}
+                     alt="Store logo"
                     className="!w-full !h-full"
                   />
                 ) : (
@@ -221,7 +225,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
                       drag and drop
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
-                      PNG, JPG or JPEG (MAX. 100x100px, 2MB)
+                      PNG, JPG or JPEG (MIN. 200x200px , MAX. 500x500px, 2MB)
                     </p>
                   </>
                 )}
@@ -246,7 +250,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               name="name"
               placeholder="Enter Store Name"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.name}
@@ -288,7 +292,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               type="number"
               placeholder="Enter Store House No"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.number}
@@ -308,7 +312,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               type="text"
               placeholder="Enter Store Street"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.street}
@@ -328,7 +332,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               type="text"
               placeholder="Enter Town"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.town}
@@ -348,7 +352,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               type="text"
               placeholder="12-345"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.postal_code}
@@ -368,7 +372,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
               type="text"
               placeholder="Enter Mobile No"
               inputClassName="outline-none text-sm"
-              parentClassName="p-1.5 px-2 rounded-md border"
+              parentClassName="p-3 rounded-md border"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}
               value={formik.values.mobile_number}
@@ -386,7 +390,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
             <textarea
               name="description"
               rows={3}
-              className="w-full px-2 p-1.5 text-sm border rounded-md outline-none"
+              className="w-full p-3 text-sm border rounded-md outline-none"
               placeholder="Enter Short Description"
               onChange={formik.handleChange}
               onBlur={formik.handleBlur}

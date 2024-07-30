@@ -60,7 +60,9 @@ export default function ProductsSlider() {
             <div className="bg-white p-8 mobile:p-3 rounded-lg relative top-[60px] mobile:top-[30px]">
               <div className="flex justify-between items-center">
                 <div>
-                  <h4 className="text-2xl mobile:text-lg font-semibold">Products</h4>
+                  <h4 className="text-2xl mobile:text-lg font-semibold">
+                    Products
+                  </h4>
                 </div>
                 <div>
                   <button

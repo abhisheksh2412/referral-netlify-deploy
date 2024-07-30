@@ -11,7 +11,7 @@ import { GetStores } from "@/store/slices/seller";
 import moment from "moment";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-
+import Image from "next/image";
 function ManagerStore() {
   const dispatch = useDispatch();
   const [selectedData, setSelectedData] = useState(null);
@@ -53,10 +53,12 @@ function ManagerStore() {
                       className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer hover:shadow-md transition-shadow"
                     >
                       <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                        <img
-                          class="w-32 h-32 mx-auto object-cover"
+                        <Image
                           src={config.IMAGE_URL_PATH + item?.logo}
-                          alt="StoreImage"
+                          width={500}
+                          height={500}
+                          alt="Picture of the author"
+                          class="w-32 h-32 mx-auto object-cover"
                         />
                       </div>
                       <h3 className="text-center p-4 font-medium">
@@ -79,8 +81,10 @@ function ManagerStore() {
                 </div>
                 <div className="max-h-[80vh] overflow-auto">
                   <div className="relative m-2 rounded-full flex items-center	 w-48 h-48 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                    <img
+                    <Image
                       src={config.IMAGE_URL_PATH + selectedData?.logo}
+                      width={500}
+                      height={500}
                       alt="Store Image"
                       className="w-36 h-36 mx-auto  rounded-md"
                     />

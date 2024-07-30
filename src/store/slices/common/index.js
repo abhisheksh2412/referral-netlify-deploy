@@ -84,9 +84,9 @@ const CommonSlice = createSlice({
       state.notifications = action.payload;
     },
     successTransactionData: (state, action) => {
+      state.isSuccess = true;
       state.isLoading = false;
       state.isError = false;
-      state.isSuccess = true;
       state.successTransactionData = action.payload;
     },
   },
@@ -255,6 +255,25 @@ export const StoreAddCheckout = (data) => async (dispatch) => {
     console.log(error);
   }
 };
+export const BillPaymentApi = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/stripe/pay_invoice_checkout_web",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(CheckOutOrder(response.data.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    popup({ status: "error", message: errorMessage });
+    dispatch(failed(errorMessage));
+  }
+};
 export const PayInvoiceData = () => async (dispatch) => {
   dispatch(loading());
   try {
@@ -357,6 +376,25 @@ export const PlasticCardSuccessApi = (data) => async (dispatch) => {
   try {
     const response = await axiosInstance.post(
       "/stripe/card_order_success",
+      data
+    );
+    if (response.status === 200) {
+      dispatch(successTransactionData(response.data));
+    }
+  } catch (error) {
+    const errorMessage =
+      error.response?.data?.message ||
+      error.message ||
+      "An unknown error occurred";
+    dispatch(failed(errorMessage));
+    console.log(error);
+  }
+};
+export const BillPaymentSuccessApi = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/stripe/pay_invoice_success",
       data
     );
     if (response.status === 200) {

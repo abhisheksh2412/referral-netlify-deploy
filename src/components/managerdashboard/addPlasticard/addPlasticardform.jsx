@@ -116,6 +116,7 @@ function AddPlasticCardForm() {
                   width={300}
                   height={300}
                   className="!w-full"
+                  alt="img"
                 />
               )}
               <input

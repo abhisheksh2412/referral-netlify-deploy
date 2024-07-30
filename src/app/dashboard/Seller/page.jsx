@@ -24,8 +24,10 @@ import AssignCouponToCard from "@/components/dashboard/AssignCoupon";
 import { useSellerContext } from "@/providers/useSellerOrders";
 import { TicketCheck } from "lucide-react";
 import VoucherLists from "@/components/dashboard/VoucherList";
+import { useRouter } from "next/navigation";
 
 const SellerDashboard = () => {
+  const router = useRouter();
   const dispatch = useDispatch();
   const { userByCard, isLoading } = useSelector((state) => state.user);
   const [reset, setReset] = useState(false);
@@ -54,9 +56,14 @@ const SellerDashboard = () => {
     // }
   }
 
+  const handleNavigateToUrl = (path) => {
+    if (!userByCard?.id) {
+      return alert("please enter the card number first");
+    }
+    return router.push(path);
+  };
+
   const { time, isActive, startCountdown } = useSellerContext();
-  const [addpointsModal, setAddPointsModal] = useState(false);
-  const HandleAddPointsModal = () => setAddPointsModal(!addpointsModal);
   const handleExtendTime = (time) => startCountdown(time);
 
   useEffect(() => {
@@ -169,13 +176,16 @@ const SellerDashboard = () => {
                   </div>
 
                   <div>
-                    <Link
-                      onClick={HandleAddPointsModal}
-                      href="/dashboard/Seller/editProductsPoints"
+                    <button
+                      onClick={() =>
+                        handleNavigateToUrl(
+                          "/dashboard/Seller/editProductsPoints"
+                        )
+                      }
                       className="text-white bg-[#0e0a38] text-md rounded-lg py-3 px-8  flex items-center gap-2 justify-center"
                     >
                       <FaPlusCircle /> <span>Add Points</span>
-                    </Link>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -210,6 +220,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                      alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                     <FaCheckCircle className="absolute top-[10px] right-[12px] text-[30px] text-green-500" />
@@ -225,6 +236,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                   </div>
@@ -239,6 +251,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                   </div>
@@ -253,6 +266,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                   </div>
@@ -267,63 +281,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
-                      className="!w-24 !h-24 mx-auto object-cover"
-                    />
-                    <FaCheckCircle className="absolute top-[10px] right-[12px] text-[30px] text-green-500" />
-                  </div>
-                  <div className="py-2 px-1 border-t">
-                    <h4 className="font-medium text-blush-red">Product Name</h4>
-                    <p className="font-bold"> Points</p>
-                  </div>
-                </div>
-                <div className="shadow text-center cursor-pointer rounded-b-lg">
-                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
-                    <Image
-                      src="/assets/combo-3.png"
-                      width={250}
-                      height={250}
-                      className="!w-24 !h-24 mx-auto object-cover"
-                    />
-                  </div>
-                  <div className="py-2 px-1 border-t">
-                    <h4 className="font-medium text-blush-red">Product Name</h4>
-                    <p className="font-bold"> Points</p>
-                  </div>
-                </div>
-                <div className="shadow text-center cursor-pointer rounded-b-lg">
-                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
-                    <Image
-                      src="/assets/combo-3.png"
-                      width={250}
-                      height={250}
-                      className="!w-24 !h-24 mx-auto object-cover"
-                    />
-                  </div>
-                  <div className="py-2 px-1 border-t">
-                    <h4 className="font-medium text-blush-red">Product Name</h4>
-                    <p className="font-bold"> Points</p>
-                  </div>
-                </div>
-                <div className="shadow text-center cursor-pointer rounded-b-lg">
-                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
-                    <Image
-                      src="/assets/combo-3.png"
-                      width={250}
-                      height={250}
-                      className="!w-24 !h-24 mx-auto object-cover"
-                    />
-                  </div>
-                  <div className="py-2 px-1 border-t">
-                    <h4 className="font-medium text-blush-red">Product Name</h4>
-                    <p className="font-bold"> Points</p>
-                  </div>
-                </div>
-                <div className="shadow text-center cursor-pointer rounded-b-lg">
-                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
-                    <Image
-                      src="/assets/combo-3.png"
-                      width={250}
-                      height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                     <FaCheckCircle className="absolute top-[10px] right-[12px] text-[30px] text-green-500" />
@@ -339,6 +297,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                   </div>
@@ -353,6 +312,7 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                   </div>
@@ -367,6 +327,68 @@ const SellerDashboard = () => {
                       src="/assets/combo-3.png"
                       width={250}
                       height={250}
+                       alt="combo"
+                      className="!w-24 !h-24 mx-auto object-cover"
+                    />
+                  </div>
+                  <div className="py-2 px-1 border-t">
+                    <h4 className="font-medium text-blush-red">Product Name</h4>
+                    <p className="font-bold"> Points</p>
+                  </div>
+                </div>
+                <div className="shadow text-center cursor-pointer rounded-b-lg">
+                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
+                    <Image
+                      src="/assets/combo-3.png"
+                      width={250}
+                      height={250}
+                       alt="combo"
+                      className="!w-24 !h-24 mx-auto object-cover"
+                    />
+                    <FaCheckCircle className="absolute top-[10px] right-[12px] text-[30px] text-green-500" />
+                  </div>
+                  <div className="py-2 px-1 border-t">
+                    <h4 className="font-medium text-blush-red">Product Name</h4>
+                    <p className="font-bold"> Points</p>
+                  </div>
+                </div>
+                <div className="shadow text-center cursor-pointer rounded-b-lg">
+                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
+                    <Image
+                      src="/assets/combo-3.png"
+                      width={250}
+                      height={250}
+                       alt="combo"
+                      className="!w-24 !h-24 mx-auto object-cover"
+                    />
+                  </div>
+                  <div className="py-2 px-1 border-t">
+                    <h4 className="font-medium text-blush-red">Product Name</h4>
+                    <p className="font-bold"> Points</p>
+                  </div>
+                </div>
+                <div className="shadow text-center cursor-pointer rounded-b-lg">
+                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
+                    <Image
+                      src="/assets/combo-3.png"
+                      width={250}
+                      height={250}
+                       alt="combo"
+                      className="!w-24 !h-24 mx-auto object-cover"
+                    />
+                  </div>
+                  <div className="py-2 px-1 border-t">
+                    <h4 className="font-medium text-blush-red">Product Name</h4>
+                    <p className="font-bold"> Points</p>
+                  </div>
+                </div>
+                <div className="shadow text-center cursor-pointer rounded-b-lg">
+                  <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative">
+                    <Image
+                      src="/assets/combo-3.png"
+                      width={250}
+                      height={250}
+                       alt="combo"
                       className="!w-24 !h-24 mx-auto object-cover"
                     />
                     \
@@ -425,7 +447,7 @@ const SellerDashboard = () => {
               <VoucherLists />
             </Modal>
             <Modal open={addCoupon} handleOpen={handleAddCoupon}>
-              <AssignCouponToCard />
+              <AssignCouponToCard handleClose={handleAddCoupon} />
             </Modal>
           </Container>
         </div>

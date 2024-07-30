@@ -9,6 +9,7 @@ import Loader from "../../Loader";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import Swal from "sweetalert2";
 import { UpdateProfileByPartnerId } from "@/store/slices/partner";
+import Image from "next/image";
 
 export default function PartnerEditProfile({ handleOpen }) {
   const dispatch = useDispatch();
@@ -72,11 +73,15 @@ export default function PartnerEditProfile({ handleOpen }) {
       <div className="max-h-[80vh] overflow-y-auto">
         <form onSubmit={formik.handleSubmit}>
           <span className="relative table mx-auto">
-            <img
-              className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
+
+            <Image
               src={selectedImage || user.profile_photo_url}
+              width={500}
+              height={500}
               alt="seller avatar"
+              className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
             />
+
             <div
               onClick={() => document.getElementById("file-select").click()}
               className="absolute right-2.5 top-0 w-5 h-5 !bg-blush-red rounded-full flex items-center justify-center cursor-pointer"

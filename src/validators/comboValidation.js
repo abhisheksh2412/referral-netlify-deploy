@@ -68,10 +68,25 @@ export const CreateComboValidation = yup.object({
       return value && value.size <= MAX_FILE_SIZE;
     })
     .test(
-      "dimensions",
-      "Please upload images with dimensions of 120x60 px",
-      async (value) => {
-        return await checkImageDimensions(value);
+      "fileDimensions",
+      "Image dimensions should be between 200x200 and 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If no file is provided, skip this test
+        return new Promise((resolve) => {
+          const reader = new FileReader();
+          reader.onload = (event) => {
+            const img = new Image();
+            img.onload = () => {
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
+            };
+            img.onerror = () => resolve(false);
+            img.src = event.target.result;
+          };
+          reader.readAsDataURL(value);
+        });
       }
     ),
   title: yup.string().required("Title is required"),
@@ -79,11 +94,11 @@ export const CreateComboValidation = yup.object({
   points: yup.string().required("Points is required"),
 });
 
-export const BithdayFormValidation =  yup.object({
-    selectField: yup.string().required('Please select an option'),
-    date: yup.date().required("Date Field is required"),
-    message: yup.string().required('Message is required'),
-    imageField: yup
+export const BithdayFormValidation = yup.object({
+  selectField: yup.string().required("Please select an option"),
+  date: yup.date().required("Date Field is required"),
+  message: yup.string().required("Message is required"),
+  imageField: yup
     .mixed()
     .notRequired() // Allows the field to be empty
     .test("fileFormat", "Unsupported file format", (value) => {
@@ -98,27 +113,32 @@ export const BithdayFormValidation =  yup.object({
       async (value) => {
         if (!value) return true; // Skip validation if value is not present
         return await checkImageDimensions(value);
-      }),
-})
+      }
+    ),
+});
 
-export const BithdayCouponFormValidation =  yup.object({
-  coupon_name: yup.string().required('Coupon name is required'),
-  points: yup.number().typeError('Must be a number').required('Points is required'),
-  validity: yup.date().required('Validity is required'),
+export const BithdayCouponFormValidation = yup.object({
+  coupon_name: yup.string().required("Coupon name is required"),
+  points: yup
+    .number()
+    .typeError("Must be a number")
+    .required("Points is required"),
+  validity: yup.date().required("Validity is required"),
   coupon_image: yup
-  .mixed()
-  .notRequired() // Allows the field to be empty
-  .test("fileFormat", "Unsupported file format", (value) => {
-    return !value || SUPPORTED_FORMATS.includes(value.type);
-  })
-  .test("fileSize", "File size too large", (value) => {
-    return !value || value.size <= MAX_FILE_SIZE;
-  })
-  .test(
-    "dimensions",
-    "Please upload images with dimensions of 100x100 px",
-    async (value) => {
-      if (!value) return true; // Skip validation if value is not present
-      return await checkImageDimensions(value);
-    }),
-})
+    .mixed()
+    .notRequired() // Allows the field to be empty
+    .test("fileFormat", "Unsupported file format", (value) => {
+      return !value || SUPPORTED_FORMATS.includes(value.type);
+    })
+    .test("fileSize", "File size too large", (value) => {
+      return !value || value.size <= MAX_FILE_SIZE;
+    })
+    .test(
+      "dimensions",
+      "Please upload images with dimensions of 100x100 px",
+      async (value) => {
+        if (!value) return true; // Skip validation if value is not present
+        return await checkImageDimensions(value);
+      }
+    ),
+});

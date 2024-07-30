@@ -23,6 +23,10 @@ import { AddExtraPoints } from "@/store/slices/seller";
 import { popup } from "@/_utils/alerts";
 import { config } from "@/config/config";
 import Link from "next/link";
+import Modal from "@/components/globals/Modal";
+import UpdateProductsPoints from "../updateProductsPoints/page";
+import GlobalInput from "@/components/globals/globalInput";
+import UpdateProduct from "./updateProduct";
 
 const useFetchProductsAndPoints = (userId) => {
   const dispatch = useDispatch();
@@ -46,6 +50,7 @@ const ProductCard = ({
   item,
   index,
   mode,
+  handleEdit,
   selectedProduct,
   handleSelectProduct,
 }) => {
@@ -97,7 +102,10 @@ const ProductCard = ({
             >
               <MdDelete className="text-md" />
             </button>
-            <button className="text-white bg-[#0e0a38] text-md rounded-lg py-2 px-2 mobile:px-3 block w-full">
+            <button
+              onClick={() => handleEdit(item)}
+              className="text-white bg-[#0e0a38] text-md rounded-lg py-2 px-2 mobile:px-3 block w-full"
+            >
               <FaPen className="text-sm" />
             </button>
           </div>
@@ -114,6 +122,8 @@ const EditProductsPoints = () => {
   const { selectedProduct, setSelectedProduct } = useSellerContext();
   const seller = useSelector((state) => state.seller);
   const [extraPoints, setExtraPoints] = useState("");
+  const [editProduct, setEditProduct] = useState(null);
+  const handleEditProduct = (value) => setEditProduct(value);
   const user = useSelector((state) => state.auth.data);
   const userId = user?.id;
   const { userByCard } = useSelector((state) => state.user);
@@ -162,18 +172,26 @@ const EditProductsPoints = () => {
                 </button>
               </div>
             )}
-            <div className="grid grid-cols-1 md:grid-cols-2 transition-all md-landscape:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-3	 lg:gap-5">
-              {sellerUserProducts?.AllProductPoints?.map((item, index) => (
-                <ProductCard
-                  key={index}
-                  item={item}
-                  index={index}
-                  mode={mode}
-                  selectedProduct={selectedProduct}
-                  handleSelectProduct={handleSelectProduct}
-                />
-              ))}
-            </div>
+            {sellerUserProducts?.AllProductPoints?.length === 0 ? (
+              <h5 className="text-sm font-semibold text-center text-gray-600">
+                {" "}
+                No Product & Points Found
+              </h5>
+            ) : (
+              <div className="grid grid-cols-1 md:grid-cols-2 transition-all md-landscape:grid-cols-3 lg:grid-cols-4 gap-2 lg:gap-3	 lg:gap-5">
+                {sellerUserProducts?.AllProductPoints?.map((item, index) => (
+                  <ProductCard
+                    key={index}
+                    item={item}
+                    index={index}
+                    handleEdit={handleEditProduct}
+                    mode={mode}
+                    selectedProduct={selectedProduct}
+                    handleSelectProduct={handleSelectProduct}
+                  />
+                ))}
+              </div>
+            )}
             <div className="flex flex-wrap items-center bg-white p-3 mt-8 rounded-lg">
               <div className="w-full md:w-1/2 !md-landscape:w-4/4 lg:w-1/2">
                 {mode === "show" && (
@@ -228,6 +246,12 @@ const EditProductsPoints = () => {
         </div>
         <DashboardFooter />
       </div>
+      <Modal
+        open={editProduct !== null}
+        handleOpen={() => handleEditProduct(null)}
+      >
+        <UpdateProduct data={editProduct} handleClose={handleEditProduct} />
+      </Modal>
     </Loader>
   );
 };

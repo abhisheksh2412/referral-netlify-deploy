@@ -21,6 +21,7 @@ import {
 import Loader from "@/components/globals/Loader";
 import { useRouter } from "next/navigation";
 import { popup } from "@/_utils/alerts";
+import UseSampleImage from "@/components/globals/useSampleImage";
 
 export default function AddUserBirthdayForm({
   editData = null,
@@ -225,6 +226,11 @@ export default function AddUserBirthdayForm({
 
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Birthday Image</p>
+          <UseSampleImage
+            popper={false}
+            buttonClass="!w-fit"
+            imageUrl="/assets/coupondemo.png"
+          />
           <label
             for="brithday_image_upload"
             className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -259,7 +265,7 @@ export default function AddUserBirthdayForm({
                   drop
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
-                  SVG, PNG, JPG or GIF (MAX. 800x400px)
+                  PNG, JPG or JPEG (MIN. 200x200 , MAX. 500x500px , 2MB)
                 </p>
               </div>
             )}
@@ -427,17 +433,25 @@ export default function AddUserBirthdayForm({
                   <p className="text-base font-semibold mb-2 text-black">
                     Upload Attachment
                   </p>
+                  <UseSampleImage
+                    popper={false}
+                    buttonClass="!w-fit"
+                    imageUrl="/assets/coupondemo.png"
+                  />
                   <label
                     htmlFor="coupon_image_upload"
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {imagePreview ? (
-                        <img
-                          src={imagePreview}
-                          alt="Preview"
-                          className="w-24 h-24 mb-4"
-                        />
+                        <Image
+                        src={imagePreview}
+                        width={500}
+                        height={500}
+                       alt="Preview"
+                       className="w-24 h-24 mb-4"
+                      />
+
                       ) : (
                         <>
                           <svg

@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react'
 import { useFormik } from 'formik';
 import { BithdayCouponFormValidation } from "@/validators/comboValidation";
 import { useStateManager } from '@/providers/useStateManager';
+import Image from 'next/image'
+
 
 
 
@@ -60,11 +62,16 @@ export default function BirthdayCouponForm({ handleCouponModal }) {
                             </p>
                         ) : null}
                         {previewImage && (
-                            <img
-                            src={previewImage}
-                            alt="Preview"
-                            style={{ maxWidth: '100%', maxHeight: 200 }}
-                        />
+                           
+
+                        <Image
+                        src={previewImage}
+                        width={500}
+                        height={500}
+                         alt="Preview"
+                        style={{ maxWidth: '100%', maxHeight: 200 }}
+                      />
+
                         )}
                     </div>
 

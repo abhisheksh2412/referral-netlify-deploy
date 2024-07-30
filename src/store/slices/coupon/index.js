@@ -1,5 +1,7 @@
+import { popup } from "@/_utils/alerts";
 import axiosInstance from "@/_utils/axiosUtils";
 import { createSlice } from "@reduxjs/toolkit";
+import Swal from "sweetalert2";
 
 const initialState = {
   isLoading: false,
@@ -24,6 +26,7 @@ const CouponSlice = createSlice({
     failed: (state, error) => {
       state.isError = true;
       state.isLoading = false;
+      state.isSuccess = false;
       state.error = error.payload;
     },
     success: (state, action) => {
@@ -145,7 +148,7 @@ export const GetAllSellerCoupons = (sellerId) => async (dispatch) => {
   try {
     const response = await axiosInstance.get("/get/seller/coupons/" + sellerId);
     if (response.status === 200) {
-      dispatch(couponFetchedSuccess(response.data.data));
+      dispatch(couponFetchedSuccess(response.data));
     }
   } catch (error) {
     dispatch(
@@ -155,21 +158,52 @@ export const GetAllSellerCoupons = (sellerId) => async (dispatch) => {
   }
 };
 
-export const GetManagerCoupons = (managerId) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.get(
-      "/get/manager/coupons/" + managerId
-    );
-    if (response.status === 200) {
-      dispatch(successFetchManagerCoupons(response.data));
+export const GetManagerCoupons =
+  (managerId, status = null) =>
+  async (dispatch) => {
+    dispatch(loading());
+    try {
+      let ifStatus = "";
+      if (status) {
+        ifStatus = `/${status}`;
+      }
+      const response = await axiosInstance.get(
+        "/get/manager/coupons/" + managerId + ifStatus
+      );
+      if (response.status === 200) {
+        dispatch(successFetchManagerCoupons(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "unkown error"
+        )
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(error?.message || error?.message?.data?.message || "unkown error")
-    );
-  }
-};
+  };
+export const GetPartnerCoupons =
+  (managerId, status = null) =>
+  async (dispatch) => {
+    dispatch(loading());
+    try {
+      let ifStatus = "";
+      if (status) {
+        ifStatus = `/${status}`;
+      }
+      const response = await axiosInstance.get(
+        "/get/partner/coupons/" + managerId + ifStatus
+      );
+      if (response.status === 200) {
+        dispatch(successFetchManagerCoupons(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "unkown error"
+        )
+      );
+    }
+  };
 
 export const GetSellerConfirmCoupons =
   (cardId, sellerId) => async (dispatch) => {
@@ -229,6 +263,33 @@ export const RejectCoupon = (data, couponId) => async (dispatch) => {
     );
     if (response.status === 200) {
       dispatch(success(response.data));
+    }
+  } catch (error) {
+    dispatch(
+      failed(error?.message || error?.message?.data?.message || "unkown error")
+    );
+  }
+};
+
+export const AssignCouponCard = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/seller/assign_coupon_to_card",
+      data
+    );
+    if (response.status === 200) {
+      if (response.data.status) {
+        Swal.mixin({ toast: true }).fire({
+          icon: "error",
+          text: response?.data?.status,
+          showConfirmButton: false,
+          timer: 1200,
+        });
+        dispatch(failed(response.data?.status));
+      } else {
+        dispatch(success(response.data));
+      }
     }
   } catch (error) {
     dispatch(

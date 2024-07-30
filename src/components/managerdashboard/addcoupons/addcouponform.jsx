@@ -3,6 +3,7 @@ import { popup } from "@/_utils/alerts";
 import EasySelect from "@/components/globals/EasySelect";
 import Loader from "@/components/globals/Loader";
 import Container from "@/components/globals/container";
+import UseSampleImage from "@/components/globals/useSampleImage";
 import { AddCoupon } from "@/store/slices/coupon";
 import { GetStores } from "@/store/slices/seller";
 import { AddCouponvalidationSchema } from "@/validators/couponValidations";
@@ -68,15 +69,6 @@ function AddCouponForm() {
     }
   };
 
-  // const createdSuccessfully = useCallback(() => {
-  //   if (coupon.isSuccess) {
-  //     popup({ message: "coupon created successfully", status: "success" });
-  //     navigate.back();
-  //   }
-  // }, [coupon.isSuccess]);
-  // useEffect(() => {
-  //   createdSuccessfully();
-  // }, [createdSuccessfully]);
   return (
     <Loader isLoading={coupon.isLoading}>
       <div>
@@ -91,6 +83,11 @@ function AddCouponForm() {
                   <p className="text-base font-semibold mobile:font-medium mb-2">
                     Upload Coupon Image
                   </p>
+                  <UseSampleImage
+                    popper={false}
+                    buttonClass="!w-fit"
+                    imageUrl="/assets/coupondemo.png"
+                  />
                   <label
                     htmlFor="coupon_image"
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -101,7 +98,7 @@ function AddCouponForm() {
                         width={100}
                         height={100}
                         alt="Selected Coupon Image"
-                        className="!w-full !h-[25vh] object-cover"
+                        className="!w-full !h-[30vh] aspect-square object-contain"
                       />
                     )}
                     {!selectedImage && (
@@ -111,7 +108,8 @@ function AddCouponForm() {
                           <span className="font-semibold">Click to upload</span>
                         </p>
                         <p className="text-xs text-gray-500 dark:text-gray-400">
-                          JPG, JPEG, or PNG (Max. 2MB, 120x60px)
+                          JPG, JPEG, or PNG (MIN 200x200px ,Max. 500x500px ,
+                          2MB)
                         </p>
                       </div>
                     )}

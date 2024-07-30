@@ -14,6 +14,7 @@ import moment from "moment";
 import { popup } from "@/_utils/alerts";
 import Loader from "../globals/Loader";
 import Swal from "sweetalert2";
+import { GetUserByCard } from "@/store/slices/userSlice";
 
 function VoucherLists() {
   const dispatch = useDispatch();
@@ -23,6 +24,19 @@ function VoucherLists() {
   const { voucherList, isLoading, isSuccess } = useSelector(
     (state) => state.coupon
   );
+
+  const getUser = useCallback(() => {
+    const cardno =
+      typeof window !== "undefined" && localStorage.getItem("card_no");
+    if (cardno) {
+      dispatch(GetUserByCard(cardno));
+    } else {
+      Swal.mixin({ toast: true }).fire({
+        icon: "error",
+        text: "oops ! card missing",
+      });
+    }
+  }, [dispatch]);
   const getAllVouchers = useCallback(() => {
     if (userByCard) {
       dispatch(GetCustomerCouponsByCard(userByCard?.id));
@@ -49,6 +63,7 @@ function VoucherLists() {
         formdata.append("card_id", cardId);
         formdata.append("seller_id", sellerId);
         await dispatch(ConfirmCoupon(formdata, couponId));
+        getUser();
         if (isSuccess) {
           Swal.mixin({
             toast: true,
@@ -71,8 +86,8 @@ function VoucherLists() {
         const formdata = new FormData();
         formdata.append("card_id", cardId);
         formdata.append("seller_id", sellerId);
-
         await dispatch(RejectCoupon(formdata, couponId));
+        getUser();
         if (isSuccess) {
           Swal.mixin({
             toast: true,

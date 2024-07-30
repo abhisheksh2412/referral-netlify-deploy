@@ -2,12 +2,7 @@
 import { useStateManager } from "@/providers/useStateManager";
 import { VerifyCode, VerifyOtpAndActivateUser } from "@/store/slices/common";
 import { useRouter } from "next/navigation";
-import React, {
-  useState,
-  forwardRef,
-  useImperativeHandle,
-  useEffect,
-} from "react";
+import React, {useState,forwardRef,useImperativeHandle,useEffect,} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";

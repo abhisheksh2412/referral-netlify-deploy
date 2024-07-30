@@ -20,16 +20,20 @@ export const AddCouponvalidationSchema = Yup.object().shape({
     })
     .test(
       "fileDimensions",
-      "Image dimensions must be 120x60",
-      function (value) {
-        if (!value) return true; // Skip if no file uploaded
+      "Image dimensions should be between 200x200 and 500x500 pixels",
+      (value) => {
+        if (!value) return true; // If no file is provided, skip this test
         return new Promise((resolve) => {
           const reader = new FileReader();
           reader.onload = (event) => {
             const img = new Image();
             img.onload = () => {
-              resolve(img.width === 120 && img.height === 60);
+              const { width, height } = img;
+              resolve(
+                width >= 200 && height >= 200 && width <= 500 && height <= 500
+              );
             };
+            img.onerror = () => resolve(false);
             img.src = event.target.result;
           };
           reader.readAsDataURL(value);

@@ -18,6 +18,7 @@ import { useSelector } from "react-redux";
 import PartnerEditProfile from "@/components/globals/dashboard/EditProfileForms/PartnerEditProfile";
 import Loader from "@/components/globals/Loader";
 import withAuth from "@/hoc/withAuth";
+import Image from "next/image";
 
 function PartnerProfilePage() {
   const { data: user, isLoading } = useSelector((state) => state.auth);
@@ -41,10 +42,12 @@ function PartnerProfilePage() {
                 <div className="flex justify-center items-center text-center ">
                   <div className="">
                     <div className="text-center relative -top-[30px] w-36 h-36 mx-auto bg-gray-100 rounded-full py-5">
-                      <img
-                        class="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
+                      <Image
                         src={user?.profile_photo_url}
-                        alt="sellar avatar"
+                        width={500}
+                        height={500}
+                        alt="Picture of the author"
+                        class="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
                       />
                     </div>
                     <div>
