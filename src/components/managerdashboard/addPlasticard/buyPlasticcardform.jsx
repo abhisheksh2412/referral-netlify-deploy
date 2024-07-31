@@ -71,16 +71,20 @@ function BuyPlasticCardForm() {
         partner_id: user?.role !== "Partner" ? user?.partner_id : user?.id,
         session_id: sessionId,
       };
-      await dispatch(PlasticCardSuccessApi(data));
+      await dispatch(
+        PlasticCardSuccessApi(data, cardFormData, () =>
+          router.push(`/dashboard/${RemoveSpaces(user?.role)}/order`)
+        )
+      );
       if (typeof window !== "undefined") {
         localStorage.removeItem("store_payment");
       }
-      if (await checkOut.isSuccess) {
-        await dispatch(StorePlasticCardOrder(cardFormData));
-        router.push(`/dashboard/${RemoveSpaces(user?.role)}/order`);
-      } else {
-        popup({ status: "error", message: "failed to success order" });
-      }
+      // if (await checkOut.isSuccess) {
+      //   await dispatch(StorePlasticCardOrder(cardFormData));
+      //   router.push(`/dashboard/${RemoveSpaces(user?.role)}/order`);
+      // } else {
+      //   popup({ status: "error", message: "failed to success order" });
+      // }
     } else if (status === "cancel" || status === "failed") {
       if (typeof window !== "undefined") {
         localStorage.removeItem("store_payment");

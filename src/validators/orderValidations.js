@@ -2,6 +2,7 @@ import * as Yup from "yup";
 
 const FILE_SIZE = 2 * 1024 * 1024; // 2MB
 const SUPPORTED_FORMATS = ["image/jpg", "image/jpeg", "image/png"];
+const today = new Date().toISOString().split("T")[0]; // e.g., '2024-07-31'
 
 export const SendMessageAddCouponValidation = Yup.object().shape({
   coupon_name: Yup.string().required("Coupon name is required"),
@@ -175,8 +176,10 @@ export const PlasticCardValidationSchema = Yup.object({
 });
 
 export const StoreBirthdayCreateValidation = Yup.object().shape({
-  store_id: Yup.string().required("Store ID is required"),
-  dob: Yup.date().required("Date of birth is required"),
+  store_id: Yup.string().required("Store is required"),
+  dob: Yup.date()
+    .required("Date of birth is required")
+    .max(today, "Date of birth cannot be today or in the future"),
   message: Yup.string().required("Message is required"),
   birthday_image: Yup.mixed()
     .required("Birthday image is required")
@@ -212,8 +215,10 @@ export const StoreBirthdayCreateValidation = Yup.object().shape({
 });
 
 export const StoreBirthdayUpdateValidation = Yup.object().shape({
-  store_id: Yup.string().required("Store ID is required"),
-  dob: Yup.date().required("Date of birth is required"),
+  store_id: Yup.string().required("Store is required"),
+  dob: Yup.date()
+    .required("Date of birth is required")
+    .max(today, "Date of birth cannot be today or in the future"),
   message: Yup.string().required("Message is required"),
   birthday_image: Yup.mixed()
     .nullable()

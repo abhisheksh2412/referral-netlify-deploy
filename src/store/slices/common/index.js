@@ -369,44 +369,64 @@ export const SuccessPaymentTransaction =
       console.log(error);
     }
   };
-export const PaperCardSuccessApi = (data) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post(
-      "/stripe/paper_card_order_success",
-      data
-    );
-    if (response.status === 200) {
-      dispatch(successTransactionData(response.data));
+export const PaperCardSuccessApi =
+  (data, cardData, route) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "/stripe/paper_card_order_success",
+        data
+      );
+      if (response.status === 200) {
+        const storePaperCard = await axiosInstance.post(
+          "/manager/store_paper_card_order",
+          cardData
+        );
+        if (storePaperCard.status === 201) {
+          dispatch(successTransactionData(response.data));
+          popup({ status: "success", message: "ordered Successfully" });
+          route();
+        }
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred";
+      dispatch(failed(errorMessage));
+      toast.error(errorMessage);
+      console.log(error);
     }
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "An unknown error occurred";
-    dispatch(failed(errorMessage));
-    console.log(error);
-  }
-};
-export const PlasticCardSuccessApi = (data) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post(
-      "/stripe/card_order_success",
-      data
-    );
-    if (response.status === 200) {
-      dispatch(successTransactionData(response.data));
+  };
+export const PlasticCardSuccessApi =
+  (data, cardFormData, route) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "/stripe/card_order_success",
+        data
+      );
+      if (response.status === 200) {
+        const storePlasticCard = await axiosInstance.post(
+          "/manager/store_card_order",
+          cardFormData
+        );
+        if (storePlasticCard.status === 201) {
+          dispatch(successTransactionData(response.data));
+          route();
+          popup({ status: "success", message: "Order Successfully" });
+        }
+      }
+    } catch (error) {
+      const errorMessage =
+        error.response?.data?.message ||
+        error.message ||
+        "An unknown error occurred";
+      dispatch(failed(errorMessage));
+      toast.error(errorMessage);
+      console.log(error);
     }
-  } catch (error) {
-    const errorMessage =
-      error.response?.data?.message ||
-      error.message ||
-      "An unknown error occurred";
-    dispatch(failed(errorMessage));
-    console.log(error);
-  }
-};
+  };
 export const BillPaymentSuccessApi = (data) => async (dispatch) => {
   dispatch(loading());
   try {

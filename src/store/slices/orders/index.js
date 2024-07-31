@@ -2,6 +2,7 @@ import { popup } from "@/_utils/alerts";
 import axiosInstance from "@/_utils/axiosUtils";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 const initialState = {
   isLoading: false,
@@ -103,21 +104,37 @@ export const FetchAllSellerOrders = () => async (dispatch) => {
   }
 };
 
-export const AddStoreBirthdayData = (data) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post("add/store/birthday", data);
-    if (response.data.status == "success") {
-      dispatch(success(response.data));
-    } else {
-      dispatch(failed(response.data));
+export const AddStoreBirthdayData =
+  (data, route = null) =>
+  async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post("add/store/birthday", data);
+      if (response.status === 200) {
+        if (response.data?.errors) {
+          for (let value of Object.values(response.data?.errors)) {
+            toast.error(value);
+          }
+          dispatch(failed(response.data));
+        } else {
+          dispatch(success(response.data));
+          toast.success("Store birthday Added");
+          route();
+        }
+      } else {
+        dispatch(failed(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "Unknown error"
+        )
+      );
+      toast.error(
+        error?.message || error?.message?.data?.message || "Unknown error"
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(error?.message || error?.message?.data?.message || "Unknown error")
-    );
-  }
-};
+  };
 
 export const FetchStoreForBirthday = () => async (dispatch) => {
   dispatch(loading());
@@ -162,25 +179,37 @@ export const DeleteStoreBirthday = (id) => async (dispatch) => {
   }
 };
 
-export const UpdateStoreBirthdayData = (data, id) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post(
-      "update/store/birthday/" + id,
-      data
-    );
+export const UpdateStoreBirthdayData =
+  (data, id, route) => async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "update/store/birthday/" + id,
+        data
+      );
 
-    if (response.data) {
-      dispatch(success(response.data));
-    } else {
-      dispatch(failed(response.data));
+      if (response.status === 200) {
+        if (response.data.errors) {
+          for (let value of Object.values(response.data.errors)) {
+            toast.error(value);
+          }
+          dispatch(failed(response.data));
+        } else {
+          dispatch(success(response.data));
+          toast.success("Updated Successfully");
+          route();
+        }
+      } else {
+        dispatch(failed(response.data));
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "Unknown error"
+        )
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(error?.message || error?.message?.data?.message || "Unknown error")
-    );
-  }
-};
+  };
 
 export const GetSendMessageList = () => async (dispatch) => {
   dispatch(loading());

@@ -17,6 +17,7 @@ import {
 import { useFormik } from "formik";
 import { Trash2 } from "lucide-react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { FaPlusCircle } from "react-icons/fa";
 import { IoCloseCircleOutline } from "react-icons/io5";
@@ -24,6 +25,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
   const dispatch = useDispatch();
+  const router = useRouter();
   const orders = useSelector((state) => state.orders);
   const [coupons, setCoupons] = useState([]);
   const [birthdayImage, setBirthdayImage] = useState(null);
@@ -57,7 +59,6 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
       ? StoreBirthdayCreateValidation
       : StoreBirthdayUpdateValidation,
     onSubmit: async (values) => {
-      console.log(values);
       const formdata = new FormData();
 
       // Append the image if present
@@ -87,19 +88,14 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
 
       try {
         if (!editData) {
-          await dispatch(AddStoreBirthdayData(formdata));
-
-          if (orders.isSuccess) {
-            popup({ status: "success", message: "created Successfully" });
-            router.back();
-          }
+          await dispatch(AddStoreBirthdayData(formdata, () => router.back()));
         } else {
-          await dispatch(UpdateStoreBirthdayData(formdata, editData?.id));
+          await dispatch(
+            UpdateStoreBirthdayData(formdata, editData?.id, () =>
+              handleClose(null)
+            )
+          );
           getAllBirthdayList();
-          if (orders.isSuccess) {
-            popup({ status: "success", message: "updated Successfully" });
-            handleClose(null);
-          }
         }
       } catch (error) {
         console.error("Error submitting the form:", error);
