@@ -4,6 +4,7 @@ import Loader from "@/components/globals/Loader";
 import { GetInvoiceData } from "@/store/slices/partner";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import { Button, Input } from "@material-tailwind/react";
+import { current } from "@reduxjs/toolkit";
 import moment from "moment";
 import { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -60,6 +61,17 @@ export default function InvoiceList() {
     filterInvoiceData(invoiceData);
   }, [filterInvoiceData]);
 
+  const handleGetLastMonthData = useCallback(() => {
+    const currentDate = new Date();
+    const oneMonthBeforeDate = new Date();
+    oneMonthBeforeDate.setMonth(currentDate.getMonth() - 1);
+    const lastMonthStartDate = new Date();
+    lastMonthStartDate.setMonth(currentDate.getMonth() - 2);
+
+    setFromDate(moment(lastMonthStartDate).format("YYYY-MM-DD"));
+    setToDate(moment(oneMonthBeforeDate).format("YYYY-MM-DD"));
+  }, []);
+
   return (
     <Loader isLoading={isLoading}>
       <div>
@@ -69,12 +81,18 @@ export default function InvoiceList() {
               <div className="grid lg:grid-cols-3 mobile:grid-cols-1 md:grid-cols-3 gap-2 md:gap-3">
                 <div className="col-span-2 grid lg:grid-cols-3 mobile:grid-cols-1 gap-2 md:grid-cols-2 mobile:gap-4">
                   <Button
+                    className="bg-[#2A0134]"
+                    onClick={() => handleGetLastMonthData()}
+                  >
+                    Last Month
+                  </Button>
+                  <Button
                     className="bg-blush-red"
                     onClick={() => handleSetMonth()}
                   >
                     This Month
                   </Button>
-                  <Input
+                  {/* <Input
                     type="date"
                     label="From"
                     value={fromDate}
@@ -88,11 +106,11 @@ export default function InvoiceList() {
                     value={toDate}
                     onChange={(e) => setToDate(e.target.value)}
                     className="!w-full"
-                  />
+                  /> */}
                 </div>
                 <div className="col-span-1">
                   <Input
-                    label="Search"
+                    label="Search By Subscriber Name"
                     value={search}
                     onChange={(e) => setSearch(e.target.value)}
                     icon={<MagnifyingGlassIcon className="h-5 w-5" />}

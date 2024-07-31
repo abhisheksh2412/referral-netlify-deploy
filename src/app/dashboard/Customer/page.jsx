@@ -150,7 +150,7 @@ function CustomerDashboard() {
               </Link>
               <Link
                 class="relative inline-flex justify-center items-center gap-1 px-6 mobile:px-2 whitespace-nowrap	 py-2.5 text-sm font-medium text-center text-white bg-blush-red rounded-lg mobile:w-1/2"
-                href="/dashboard/Customer/addStore"
+                href="/dashboard/Customer/viewStore"
               >
                 <FaPlus />
                 Add Favorite Stores

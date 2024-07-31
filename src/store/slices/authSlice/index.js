@@ -3,6 +3,7 @@ import axiosInstance from "@/_utils/axiosUtils";
 import { config } from "@/config/config";
 import { createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import toast from "react-hot-toast";
 import Swal from "sweetalert2";
 
 const initialState = {
@@ -48,11 +49,13 @@ const AuthSlice = createSlice({
       state.isError = false;
       state.token = null;
       state.error = null;
+      state.isSuccess = false;
     },
     onSignupError: (state, action) => {
       state.isAuthenticated = false;
       state.isLoading = false;
       state.isError = true;
+      state.isSuccess = false;
       state.token = null;
       state.error = action.payload;
     },
@@ -70,8 +73,16 @@ const AuthSlice = createSlice({
     },
     onLogoutSuccess: (state) => {
       state.isAuthenticated = false;
+      state.isLoading = false;
       state.token = null;
       state.isLoggedOut = true;
+    },
+    resetUser: (state) => {
+      state.isAuthenticated = false;
+      state.isLoading = false;
+      state.isError = false;
+      state.data = null;
+      state.error = null;
     },
   },
 });
@@ -85,6 +96,7 @@ export const {
   onSignupSuccess,
   onLogoutSuccess,
   onSuccessUserUpdate,
+  resetUser,
 } = AuthSlice.actions;
 
 export default AuthSlice.reducer;
@@ -119,15 +131,16 @@ export const LoginUser = (credentials) => async (dispatch) => {
   }
 };
 
-export const RegisterPartner = (credentials) => async (dispatch) => {
+export const RegisterPartner = (credentials, otppopup) => async (dispatch) => {
   dispatch(onSignupLoading());
+
   try {
     const response = await axios.post(
-      config.BASE_URL + "/partner/register",
+      `${config.BASE_URL}/partner/register`,
       credentials
     );
 
-    if (response.status === 200) {
+    if (response.status >= 200 && response.status < 300) {
       Swal.fire({
         position: "top-end",
         icon: "success",
@@ -135,26 +148,22 @@ export const RegisterPartner = (credentials) => async (dispatch) => {
         showConfirmButton: false,
         timer: 1000,
       });
+      otppopup();
       setToken({ token: response.data.token, userId: response.data.data?.id });
       dispatch(onSignupSuccess(response.data.data));
+    } else {
+      toast.error("Unexpected response status.");
+      dispatch(onSignupError("Unexpected response status."));
     }
   } catch (error) {
-    if (error.response && error.response.status === 422) {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text:
-          error.response.data?.message ||
-          "There was an error with your submission",
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Something went wrong!",
-      });
-    }
-    dispatch(onSignupError(error.message));
+    const errorMessage =
+      error?.response?.data?.message ||
+      error?.response?.data?.error?.message ||
+      error?.message ||
+      "Unknown error occurred";
+
+    toast.error(errorMessage);
+    dispatch(onSignupError(errorMessage));
   }
 };
 
@@ -188,12 +197,16 @@ export const LogoutUser = () => async (dispatch) => {
   try {
     const response = await axiosInstance.post("/logout");
     if (response.status === 200) {
-      removeToken(config.TOKEN_KEY);
+      await removeToken(config.TOKEN_KEY);
       dispatch(onLogoutSuccess());
+      return Promise.resolve();
+    } else {
+      throw new Error("failed to Logout");
     }
   } catch (error) {
     console.log(error);
     dispatch(onErrorAuthentication(error.message));
+    return Promise.reject();
   }
 };
 

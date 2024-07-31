@@ -5,6 +5,7 @@ import { RegisterNormalUser } from "@/store/slices/authSlice";
 import { UserSignupValidationsSchema } from "@/validators/authValidations";
 import { Key, LucideCalendarSearch, Mail, Phone, User } from "lucide-react";
 import toast from "react-hot-toast";
+import Link from "next/link";
 
 export default function UserSignup() {
   const dispatch = useDispatch();
@@ -168,9 +169,9 @@ export default function UserSignup() {
         <div className="col-span-12 text-sm text-center">
           <h6>
             Already have an Account?{" "}
-            <a href="/login" className="underline text-blush-red">
+            <Link href="/login" className="underline text-blush-red">
               Login
-            </a>
+            </Link>
           </h6>
         </div>
         {/* social authentications */}

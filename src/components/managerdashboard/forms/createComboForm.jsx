@@ -140,14 +140,12 @@ export default function CreateComboForm() {
                 )}
               >
                 <div className="">
-                 
-
                   <Image
                     src={config?.IMAGE_URL_PATH + item?.path}
                     width={500}
                     height={500}
                     alt="product_img"
-                    className="w-16 h-16 mx-auto p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
+                    className="w-16 h-16 mx-auto p-1  rounded-full ring-2 ring-gray-300 dark:ring-gray-500"
                   />
 
                   <p className="text-center text-sm">{item?.name}</p>
@@ -169,7 +167,11 @@ export default function CreateComboForm() {
         )}
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Combo Image</p>
-          <UseSampleImage popper={false} imageUrl="/assets/combodemo.png" />
+          <UseSampleImage
+            popper={false}
+            buttonClass="!w-fit"
+            imageUrl="/assets/combodemo.png"
+          />
           <label
             htmlFor="dropzone-file"
             className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded cursor-pointer bg-gray-50 dark:hover:bg-bray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -179,7 +181,7 @@ export default function CreateComboForm() {
                 src={imagePreview}
                 width={100}
                 height={100}
-                className="!w-full min-h-[20vh]"
+                className="!w-full min-h-[20vh] object-contain max-h-[30vh]"
                 alt="product_img"
               />
             )}

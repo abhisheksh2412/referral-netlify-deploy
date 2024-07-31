@@ -25,14 +25,14 @@ const withAuth = (WrappedComponent) => {
 
     useEffect(() => {
       const checkAuth = async () => {
-        if (!isAuthenticated) {
+        if (!isAuthenticated && !token) {
           setInstruction("User not authenticated, checking for token");
           if (!token) {
             setInstruction("User Not found to authenticate");
             router.push("/login");
           } else {
-            setInstruction("User Found, logging in user");
             await fetchUser();
+            setInstruction("User Found, logging in user");
           }
         } else {
           const pathname = location.pathname.split("/");

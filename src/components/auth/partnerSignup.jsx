@@ -18,16 +18,24 @@ import {
   User,
   UsersRound,
 } from "lucide-react";
-import { popup } from "@/_utils/alerts";
-import { useRef } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import OtpForm from "./PartnerOptVerify";
 import { useStateManager } from "@/providers/useStateManager";
 import toast from "react-hot-toast";
+import Link from "next/link";
+import Swal from "sweetalert2";
+import { VerifyOtpAndActivateUser } from "@/store/slices/common";
+import { useRouter } from "next/navigation";
 
 export default function PartnerSignup() {
   const { setPartnerVerifyEmail } = useStateManager();
+  const router = useRouter();
   const otpRef = useRef();
   const { isSuccess } = useSelector((state) => state.auth);
+  const { isLoading, isActivated } = useSelector((state) => state.common);
+  const [openOtpPopup, setOpenOtpPop] = useState(false);
+  const [fromdata, setFormData] = useState(null);
+  const { partnerVerifyEmail } = useStateManager();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -49,25 +57,49 @@ export default function PartnerSignup() {
       agreestoterms: false,
     },
     onSubmit: async (values, { resetForm }) => {
-      if (!values.agreestoterms) {
+      if (values.agreestoterms === false) {
         toast.error("Please Agree the Terms and Conditions");
       } else {
+        setFormData(values);
         setPartnerVerifyEmail(values.email);
-        await dispatch(RegisterPartner(values));
-        if (await isSuccess) {
-          resetForm();
-          if (otpRef.current) {
-            otpRef.current.triggerOtp();
-          }
-        }
+        await dispatch(RegisterPartner(values, () => setOpenOtpPop(true)));
       }
     },
     validationSchema: partnerSignupValidationsSchema,
   });
 
+  const handleOtpVerify = useCallback(async () => {
+    if (await openOtpPopup) {
+      const { value: otp } = await Swal.fire({
+        input: "number",
+        inputLabel: "Enter Opt",
+        inputPlaceholder: "Enter the Otp",
+      });
+      if (otp) {
+        const formdata = {
+          remember_token: otp,
+          email: fromdata.email,
+        };
+        toast.promise(
+          dispatch(VerifyOtpAndActivateUser(formdata, () => router.back())),
+
+          {
+            loading: "Verifying Code ...",
+            success: "Verified and Registered User Successfully",
+            error: "failed to verify code",
+          }
+        );
+      }
+      setOpenOtpPop(false);
+    }
+  }, [openOtpPopup]);
+
+  useEffect(() => {
+    handleOtpVerify();
+  }, [openOtpPopup]);
   return (
     <div className="flex w-full items-center justify-center">
-      <OtpForm ref={otpRef} />
+      {/* <OtpForm ref={otpRef} /> */}
       <form
         onSubmit={formik.handleSubmit}
         className=" bg-white w-full grid grid-cols-12 gap-4 "
@@ -329,16 +361,11 @@ export default function PartnerSignup() {
           }
         />
         <div className="flex items-start col-span-12 gap-2">
-          <GlobalInput
-            name="agreestoterms"
+          <input
+            type="checkBox"
             onChange={formik.handleChange}
-            value={formik.values.agreestoterms}
-            type="checkbox"
-            error={
-              formik.touched.agreestoterms && formik.errors.agreestoterms
-                ? formik.errors.agreestoterms
-                : null
-            }
+            name="agreestoterms"
+            checked={formik.values.agreestoterms === true}
           />
           <p className="text-xs">
             Please read the terms and conditions. you must agree by checking the
@@ -358,9 +385,9 @@ export default function PartnerSignup() {
         <div className="col-span-12 text-sm text-center">
           <h6>
             Already have an Account?{" "}
-            <a href="/login" className="underline text-blush-red">
+            <Link href="/login" className="underline text-blush-red">
               Login
-            </a>
+            </Link>
           </h6>
         </div>
       </form>

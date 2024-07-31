@@ -44,7 +44,10 @@ export const partnerSignupValidationsSchema = Yup.object({
   street: Yup.string().required("Street is required"),
   house_no: Yup.string().required("house no is required"),
   city: Yup.string().required("city is required"),
-  postal_code: Yup.string().required("Postal Code is required"),
+  postal_code: Yup.string()
+    .min(5, "Postal Code required min 5 digit")
+    .max(5, "Postal Code should max 5 digit")
+    .required("Postal Code is required"),
   password: Yup.string()
     .required("password is required")
     .matches(/[a-z]/, "Password must contain at least one lowercase letter")
@@ -57,10 +60,9 @@ export const partnerSignupValidationsSchema = Yup.object({
   password_confirmation: Yup.string()
     .required("confirm password is required")
     .oneOf([Yup.ref("password"), null], "Passwords must match"),
-  mobile_number: Yup.string().matches(
-    /^\d+$/,
-    "Mobile number must be digits only"
-  ),
+  mobile_number: Yup.string()
+    .matches(/^\d{9}$/, "Mobile number must consist of exactly 9 digits.")
+    .required("Mobile number is required."),
   website: Yup.string().url("Invalid URL").required("Website is required"),
   business_name: Yup.string().required("bussiness name is required"),
   nip_number: Yup.string().required("NIP number is required"),

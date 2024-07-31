@@ -2,21 +2,20 @@ import Link from "next/link";
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa";
 import { RiLockPasswordFill } from "react-icons/ri";
-import { PiUsersFill } from "react-icons/pi";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
-import { FaCartArrowDown } from "react-icons/fa";
 import { LogoutUser } from "@/store/slices/authSlice";
 import Image from "next/image";
 import Loader from "@/components/globals/Loader";
+import toast from "react-hot-toast";
 import {
+  Button,
   Popover,
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
-import toast from "react-hot-toast";
 
-function ProfileDropdown() {
+function CustomerProfileDropdown() {
   const user = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -43,7 +42,7 @@ function ProfileDropdown() {
             type="button"
           >
             <Image
-              src={user?.data?.profile_photo_url || "/assets/defaultseller.jpg"}
+              src={user?.data?.profile_photo_url}
               width={500}
               height={500}
               alt="Picture of the author"
@@ -52,7 +51,7 @@ function ProfileDropdown() {
 
             <div className="text-left">
               <h4 className="mb-1">{user?.data?.name}</h4>
-              <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              <span class=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                 {user?.data?.role}
               </span>
             </div>
@@ -61,7 +60,7 @@ function ProfileDropdown() {
         <PopoverContent>
           <div
             id="dropdown"
-            className={` block bg-white divide-y divide-gray-100 rounded-lg w-54 dark:bg-gray-700 `}
+            className={`bg-white divide-y divide-gray-100 rounded-lg dark:bg-gray-700`}
           >
             <ul
               className=" text-sm text-gray-700 dark:text-gray-200"
@@ -69,39 +68,23 @@ function ProfileDropdown() {
             >
               <li>
                 <Link
-                  href={"/dashboard/Seller/profile"}
+                  href={"/dashboard/Customer/profile"}
                   className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <FaUser /> Profile
                 </Link>
               </li>
+
               <li>
                 <Link
-                  href={"/dashboard/Seller/allusers"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-                >
-                  <PiUsersFill /> All User
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/dashboard/Seller/allorders"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-                >
-                  <FaCartArrowDown />
-                  All Orders
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/dashboard/Seller/change-password"
+                  href="/dashboard/Customer/change-password"
                   className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <RiLockPasswordFill /> Change Password
                 </Link>
               </li>
               <li>
-                <hr class="my-0 border-blue-gray-50" role="menuitem" />
+                <hr className="my-0 border-blue-gray-50" role="menuitem" />
               </li>
               <li>
                 <button
@@ -123,7 +106,7 @@ function ProfileDropdown() {
           type="button"
         >
           <Image
-            src={user?.data?.profile_photo_url || "/assets/defaultseller.jpg"}
+            src={user?.data?.profile_photo_url}
             width={500}
             height={500}
             alt="Picture of the author"
@@ -132,7 +115,7 @@ function ProfileDropdown() {
 
           <div className="text-left">
             <h4 className="mb-1">{user?.data?.name}</h4>
-            <span className="rounded-full bg-green-50 px-3 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+            <span class=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
               {user?.data?.role}
             </span>
           </div>
@@ -142,7 +125,7 @@ function ProfileDropdown() {
           id="dropdown"
           className={`z-10 ${
             isOpen ? "block" : "hidden"
-          } block bg-white divide-y divide-gray-100 rounded-lg shadow w-54 dark:bg-gray-700 absolute mt-3 -ml-[136px] mt-[17px] rounded-none `}
+          } bg-white divide-y divide-gray-100 rounded-lg shadow w-54 dark:bg-gray-700 absolute mt-3 -ml-[136px] mt-[17px] rounded-none`}
         >
           <ul
             className=" text-sm text-gray-700 dark:text-gray-200"
@@ -150,39 +133,23 @@ function ProfileDropdown() {
           >
             <li>
               <Link
-                href={"/dashboard/Seller/profile"}
+                href={"/dashboard/Customer/profile"}
                 className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
               >
                 <FaUser /> Profile
               </Link>
             </li>
+
             <li>
               <Link
-                href={"/dashboard/Seller/allusers"}
-                className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-              >
-                <PiUsersFill /> All User
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/dashboard/Seller/allorders"}
-                className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-              >
-                <FaCartArrowDown />
-                All Orders
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/dashboard/Seller/change-password"
+                href="/dashboard/Customer/change-password"
                 className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
               >
                 <RiLockPasswordFill /> Change Password
               </Link>
             </li>
             <li>
-              <hr class="my-0 border-blue-gray-50" role="menuitem" />
+              <hr className="my-0 border-blue-gray-50" role="menuitem" />
             </li>
             <li>
               <button
@@ -199,4 +166,4 @@ function ProfileDropdown() {
   );
 }
 
-export default ProfileDropdown;
+export default CustomerProfileDropdown;

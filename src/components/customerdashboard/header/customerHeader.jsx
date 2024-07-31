@@ -9,12 +9,12 @@ import { RiCouponLine } from "react-icons/ri";
 import { FaRegCreditCard, FaStore } from "react-icons/fa";
 import { FaGift } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
-import ManagerProfileDropdown from "./profileDropdown";
+import ManagerProfileDropdown from "./CustomerProfileDropdown";
 import { IoGridOutline } from "react-icons/io5";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";
 import { useRouter } from "next/navigation";
-import CustomerProfileDropdown from "./profileDropdown";
+import CustomerProfileDropdown from "./CustomerProfileDropdown";
 
 export default function CustomerHeader() {
   const router = useRouter();

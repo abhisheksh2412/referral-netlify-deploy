@@ -215,7 +215,7 @@ const AddStoreForm = ({ edit = false, editData = null }) => {
                     width={100}
                     height={100}
                     alt="Store logo"
-                    className="!w-full !h-full"
+                    className="!w-full !h-full max-h-[30vh] object-contain"
                   />
                 ) : SelectedImage ? (
                   <Image

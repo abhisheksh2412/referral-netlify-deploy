@@ -30,7 +30,7 @@ export default function SignupPage() {
             </div>
           </div>
           <div className="w-full flex items-center justify-center p-6 py-12  md:p-20 lg:p-20 rounded-md m-landscape:p-3 m-landscape:py-12">
-            <div className=" border shadow-lg p-4 md:p-8 lg:p-8 rounded-md  w-full sm:w-6/12 md:w-10/12 lg:w-9/12 xl:w-6/12	m-landscape:w-10/12 ">
+            <div className=" border shadow-lg p-4 md:p-8 lg:p-8 rounded-md  w-full sm:w-6/12 md:w-10/12 lg:w-9/12 xl:w-7/12	m-landscape:w-10/12 ">
               <Tabs id="custom-animation" value="user">
                 <TabsHeader
                   className="bg-pink-50 h-14"

@@ -7,7 +7,10 @@ export const CreateStoreValidationSchema = Yup.object({
   number: Yup.number().required("Store No is required"),
   street: Yup.string().required("Street is required"),
   town: Yup.string().required("Town is required"),
-  postal_code: Yup.string().required("Postal Code is required"),
+  postal_code: Yup.string()
+    .min(5, "Postal Code min 5 digit")
+    .max(5, "Postal Code max 5 digit")
+    .required("Postal Code is required"),
   mobile_number: Yup.string()
     .max(9, "Mobile Number contains only max 9 digit")
     .required("Mobile No is required"),
@@ -49,7 +52,10 @@ export const UpdateStoreValidationSchema = Yup.object({
   number: Yup.number().required("Store No is required"),
   street: Yup.string().required("Street is required"),
   town: Yup.string().required("Town is required"),
-  postal_code: Yup.string().required("Postal Code is required"),
+  postal_code: Yup.string()
+    .min(5, "Postal Code must be 5 digit")
+    .max(5, "Postal Code should not greater then 5 ")
+    .required("Postal Code is required"),
   mobile_number: Yup.string()
     .max(9, "Mobile Number contains only max 9 digit")
     .required("Mobile No is required"),

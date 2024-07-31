@@ -220,12 +220,19 @@ export const OrderSuccess = (data) => async (dispatch) => {
 
 // Customer Activate
 
-export const VerifyOtpAndActivateUser = (data) => async (dispatch) => {
+export const VerifyOtpAndActivateUser = (data, router) => async (dispatch) => {
   dispatch(loading());
   try {
     const response = await axiosInstance.post("/customer/activate", data);
     if (response.status === 200) {
-      dispatch(SuccessUserActivated(response.data));
+      if (response.data?.error) {
+        toast.error(response.data?.error);
+        return Promise.reject();
+      } else {
+        dispatch(SuccessUserActivated(response.data));
+        router();
+        return Promise.resolve();
+      }
     }
   } catch (error) {
     const errorMessage =
@@ -234,6 +241,7 @@ export const VerifyOtpAndActivateUser = (data) => async (dispatch) => {
       "An unknown error occurred";
     dispatch(failed(errorMessage));
     console.log(error);
+    return Promise.reject();
   }
 };
 

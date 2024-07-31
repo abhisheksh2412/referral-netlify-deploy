@@ -9,7 +9,7 @@ import { FaBorderAll } from "react-icons/fa6";
 import { FaRegCreditCard, FaStore } from "react-icons/fa";
 import { IoMdHome } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
-import ManagerProfileDropdown from "./profileDropdown";
+import ManagerProfileDropdown from "./ManagerProfileDropdown";
 import { config } from "@/config/config";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";

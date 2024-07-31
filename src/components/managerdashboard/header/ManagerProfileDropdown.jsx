@@ -5,20 +5,18 @@ import { RiLockPasswordFill } from "react-icons/ri";
 import { IoLogOutSharp } from "react-icons/io5";
 import { useDispatch, useSelector } from "react-redux";
 import { LogoutUser } from "@/store/slices/authSlice";
-import { Users2 } from "lucide-react";
-import { PiAperture } from "react-icons/pi";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import Image from "next/image";
-import Loader from "@/components/globals/Loader";
 import toast from "react-hot-toast";
+import Loader from "@/components/globals/Loader";
 import {
   Popover,
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
 
-function PartnerProfileDropdown() {
+function ManagerProfileDropdown() {
   const user = useSelector((state) => state.auth);
   const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
@@ -35,13 +33,13 @@ function PartnerProfileDropdown() {
     });
   }
   return (
-    <Loader isLoading={user.isLoading}>
+    <Loader isLoading={user?.isLoading}>
       <Popover>
         <PopoverHandler>
           <button
             id="dropdownDefaultButton"
             // onClick={toggleDropdown}
-            className=" focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            className="focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             type="button"
           >
             {user?.data?.profile_photo_url ? (
@@ -66,10 +64,10 @@ function PartnerProfileDropdown() {
             </div>
           </button>
         </PopoverHandler>
-        <PopoverContent className="z-50">
+        <PopoverContent>
           <div
             id="dropdown"
-            className={` block bg-white divide-y divide-gray-100 rounded-lg w-54 dark:bg-gray-700`}
+            className={`block  bg-white divide-y divide-gray-100 rounded-lg  w-54 dark:bg-gray-700`}
           >
             <ul
               className=" text-sm text-gray-700 dark:text-gray-200"
@@ -77,41 +75,17 @@ function PartnerProfileDropdown() {
             >
               <li>
                 <Link
-                  href={"/dashboard/Partner/profile"}
-                  className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  href="/dashboard/Project-manager/profile"
+                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <FaUser /> Profile
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/dashboard/Partner/subscribers"}
-                  className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-                >
-                  <Users2 size={15} /> Subscribers
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/dashboard/Partner/invoices"}
-                  className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-                >
-                  <PiAperture /> Invoices
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href={"/dashboard/Partner/settings"}
-                  className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-                >
-                  <PiAperture /> Change Settings
                 </Link>
               </li>
 
               <li>
                 <Link
-                  href="/dashboard/Partner/change-password"
-                  className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  href="/dashboard/Project-manager/change-password"
+                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <RiLockPasswordFill /> Change Password
                 </Link>
@@ -122,7 +96,7 @@ function PartnerProfileDropdown() {
               <li>
                 <button
                   onClick={LogOutUser}
-                  className="px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className="block px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <IoLogOutSharp /> Logout
                 </button>
@@ -135,7 +109,7 @@ function PartnerProfileDropdown() {
         <button
           id="dropdownDefaultButton"
           onClick={toggleDropdown}
-          className=" focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+          className="focus:ring-blue-300 font-medium rounded-lg gap-2 mobile:gap-0 mobile:p-0 p-1.5 text-sm text-center inline-flex items-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
           type="button"
         >
           {user?.data?.profile_photo_url ? (
@@ -162,9 +136,9 @@ function PartnerProfileDropdown() {
 
         <div
           id="dropdown"
-          className={`z-20 ${
+          className={`z-10 ${
             isOpen ? "block" : "hidden"
-          } block bg-white divide-y divide-gray-100 rounded-lg shadow w-54 dark:bg-gray-700 absolute mt-3 -ml-[136px] mt-[17px] rounded-none `}
+          } block block bg-white divide-y divide-gray-100 rounded-lg shadow w-54 dark:bg-gray-700 absolute mt-3 -ml-[136px] mt-[17px] rounded-none`}
         >
           <ul
             className=" text-sm text-gray-700 dark:text-gray-200"
@@ -172,41 +146,17 @@ function PartnerProfileDropdown() {
           >
             <li>
               <Link
-                href={"/dashboard/Partner/profile"}
-                className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                href="/dashboard/Project-manager/profile"
+                className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
               >
                 <FaUser /> Profile
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/dashboard/Partner/subscribers"}
-                className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-              >
-                <Users2 size={15} /> Subscribers
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/dashboard/Partner/invoices"}
-                className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-              >
-                <PiAperture /> Invoices
-              </Link>
-            </li>
-            <li>
-              <Link
-                href={"/dashboard/Partner/settings"}
-                className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
-              >
-                <PiAperture /> Change Settings
               </Link>
             </li>
 
             <li>
               <Link
-                href="/dashboard/Partner/change-password"
-                className=" px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                href="/dashboard/Project-manager/change-password"
+                className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
               >
                 <RiLockPasswordFill /> Change Password
               </Link>
@@ -217,7 +167,7 @@ function PartnerProfileDropdown() {
             <li>
               <button
                 onClick={LogOutUser}
-                className="px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                className="block px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
               >
                 <IoLogOutSharp /> Logout
               </button>
@@ -229,4 +179,4 @@ function PartnerProfileDropdown() {
   );
 }
 
-export default PartnerProfileDropdown;
+export default ManagerProfileDropdown;
