@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { StateManagerProvider } from "@/providers/useStateManager";
 import { SellerProvider } from "@/providers/useSellerOrders";
 import { useEffect } from "react";
+import FcmTokenComp from "@/components/firebaseForeground";
 export default function Providers({ children }) {
   useEffect(() => {
     const script = document.createElement("script");
@@ -41,7 +42,11 @@ export default function Providers({ children }) {
   return (
     <Provider store={store}>
       <StateManagerProvider>
-        <SellerProvider>{children}</SellerProvider>
+        <SellerProvider>
+          {typeof window !== "undefined" ? <FcmTokenComp /> : null}
+
+          {children}
+        </SellerProvider>
       </StateManagerProvider>
     </Provider>
   );

@@ -5,6 +5,7 @@ import "swiper/swiper-bundle.css";
 import { Toaster } from "react-hot-toast";
 import { Suspense } from "react";
 import Head from "next/head";
+import FcmTokenComp from "@/components/firebaseForeground";
 
 const inter = Poppins({
   weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"],
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning className={inter.className}>
         <Toaster />
         <Providers>
+      
           <div id="google_translate_element" style={{ display: "none" }}></div>
           <Suspense fallback={<h5>Loading ...</h5>}>{children}</Suspense>
         </Providers>

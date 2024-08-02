@@ -14,10 +14,10 @@ import {
   DeleteAssignedCards,
   GetAllCardsByUserId,
 } from "@/store/slices/seller";
-import { Spinner } from "@material-tailwind/react";
 import Loader from "@/components/globals/Loader";
 import Swal from "sweetalert2";
 import withAuth from "@/hoc/withAuth";
+import toast from "react-hot-toast";
 
 function CardList() {
   const [search, setSearch] = useState("");
@@ -26,49 +26,36 @@ function CardList() {
   const dispatch = useDispatch();
 
   const GetAllCard = useCallback(() => {
-    dispatch(GetAllCardsByUserId(user?.data?.id)); // Use user's ID from state if available
+    dispatch(GetAllCardsByUserId(user?.data?.id));
   }, [dispatch, user?.data?.id]);
 
   const handleDeleteCard = async (id) => {
-    const swalWithBootstrapButtons = Swal.mixin({
-      customClass: {
-        confirmButton: "p-2 px-3 bg-blue-500 rounded-md",
-        cancelButton: "p-1 px-3 bg-red-500 rounded-md",
-      },
-      buttonsStyling: false,
-    });
-    swalWithBootstrapButtons
-      .fire({
-        title: "Are you sure?",
-        text: "You won't be able to revert this!",
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonText: "Yes, delete it!",
-        cancelButtonText: "No, cancel!",
-        reverseButtons: true,
-      })
-      .then(async (result) => {
-        if (result.isConfirmed) {
-          await dispatch(DeleteAssignedCards(id));
-          await dispatch(GetAllCardsByUserId(user?.data?.id));
-          if (cards?.isSuccess) {
-            swalWithBootstrapButtons.fire({
-              title: "Deleted!",
-              text: "Your file has been deleted.",
-              icon: "success",
-            });
-          }
-        } else if (
-          /* Read more about handling dismissals below */
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire({
-            title: "Cancelled",
-            text: "Your imaginary file is safe :)",
-            icon: "error",
-          });
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Yes, delete it!",
+      cancelButtonText: "No, cancel!",
+      reverseButtons: true,
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await dispatch(DeleteAssignedCards(id));
+        await dispatch(GetAllCardsByUserId(user?.data?.id));
+        if (cards?.isSuccess) {
+          toast.success("Deleted Successfully", { position: "top-right" });
         }
-      });
+      } else if (
+        /* Read more about handling dismissals below */
+        result.dismiss === Swal.DismissReason.cancel
+      ) {
+        Swal.fire({
+          title: "Cancelled",
+          text: "Your imaginary file is safe :)",
+          icon: "error",
+        });
+      }
+    });
   };
 
   const handleSearch = (data, search) => {
