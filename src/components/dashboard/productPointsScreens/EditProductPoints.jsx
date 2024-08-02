@@ -18,9 +18,9 @@ import { useDispatch, useSelector } from "react-redux";
 import { ArrowLeft, MoveLeft } from "lucide-react";
 import Modal from "@/components/globals/Modal";
 import clsx from "clsx";
-import UpdateProduct from "@/components/managerdashboard/forms/updateProductForm";
 import AddProductsPoints from "./AddProductsPoints";
 import { GetUserByCard } from "@/store/slices/userSlice";
+import UpdateProduct from "@/app/dashboard/Seller/editProductsPoints/updateProduct";
 
 const useFetchProductsAndPoints = (userId) => {
   const dispatch = useDispatch();
@@ -125,7 +125,10 @@ const EditProductsPoints = ({ handleClose }) => {
       setAddProductModal(!addProductModal);
     }
   };
-  const handleEditProduct = (value) => setEditProduct(value);
+  const handleEditProduct = (value) => {
+    console.log(value);
+    setEditProduct(value);
+  };
   const user = useSelector((state) => state.auth.data);
   const userId = user?.id;
   const { userByCard } = useSelector((state) => state.user);

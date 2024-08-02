@@ -8,7 +8,7 @@ export default function Loader({ isLoading, children }) {
     <>
       {isLoading && (
         <BarLoader
-          className="!fixed top-0 left-0 !w-full"
+          className="!fixed top-0 !z-50 left-0 !w-full"
           loading={isLoading}
           color="red"
         />

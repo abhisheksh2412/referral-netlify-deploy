@@ -100,8 +100,6 @@ export default function UpdateProduct({ data, handleModal }) {
       </div>
       <div className="w-full max-h-[80vh] flex flex-col items-center overflow-auto">
         <div className="relative w-40 h-40">
-        
-
           <Image
             src={imagePreview}
             width={500}
