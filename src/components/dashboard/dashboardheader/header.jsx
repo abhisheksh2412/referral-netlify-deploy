@@ -101,7 +101,6 @@ export default function DashboardHeader() {
             <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 mobile:p-0 mobile:mt-0">
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  prefetch={true}
                   className={clsx(
                     "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
                     pathname === "/dashboard/Seller" && "!text-blue-700"
@@ -115,7 +114,6 @@ export default function DashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  prefetch={true}
                   className={clsx(
                     "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
                     pathname === "/dashboard/Seller/coupon" && "!text-blue-700"
@@ -128,7 +126,6 @@ export default function DashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  prefetch={true}
                   className={clsx(
                     "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
                     pathname === "/dashboard/Seller/cardlist" &&
@@ -142,7 +139,6 @@ export default function DashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  prefetch={true}
                   className={clsx(
                     "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
                     pathname === "/dashboard/Seller/store" && "!text-blue-700"
