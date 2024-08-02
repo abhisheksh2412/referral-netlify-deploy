@@ -4,18 +4,12 @@ import DashboardHeader from "@/components/dashboard/dashboardheader/header";
 import Container from "@/components/globals/container";
 import TopHeader from "@/components/home/homeHeader/topheader";
 import Select from "react-select";
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 import GlobalInput from "@/components/globals/globalInput";
-import Image from "next/image";
 import { GoPlusCircle } from "react-icons/go";
 import { MdDelete } from "react-icons/md";
 
-import {
-  Popover,
-  PopoverHandler,
-  PopoverContent,
-  Button,
-} from "@material-tailwind/react";
+import { Button } from "@material-tailwind/react";
 import { useFormik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { AddProductAndPoints } from "@/store/slices/products";

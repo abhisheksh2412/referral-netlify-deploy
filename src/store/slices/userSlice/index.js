@@ -1,6 +1,7 @@
 import { popup } from "@/_utils/alerts";
 import axiosInstance from "@/_utils/axiosUtils";
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
 
 const initialState = {
   isLoading: false,
@@ -214,20 +215,30 @@ export const ChangePasswordByUserId = (data) => async (dispatch) => {
 
 // Get user by the card
 
-export const GetUserByCard = (cardNo) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.get(
-      "/seller/get/user_by_card/" + cardNo
-    );
-    if (response.status === 200) {
-      dispatch(userByCardSuccess(response.data));
+export const GetUserByCard =
+  ({ cardNo, success = false }) =>
+  async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.get(
+        "/seller/get/user_by_card/" + cardNo
+      );
+      if (response.status === 200) {
+        if (response.data?.message) {
+          toast.error(response.data.message, { position: "top-right" });
+          dispatch(failed(response.data.message));
+        } else {
+          dispatch(userByCardSuccess(response.data));
+          if (success) {
+            toast.success("Card Success", { position: "top-right" });
+          }
+        }
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.response?.data?.message || error?.message || "unknown Error"
+        )
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(
-        error?.response?.data?.message || error?.message || "unknown Error"
-      )
-    );
-  }
-};
+  };

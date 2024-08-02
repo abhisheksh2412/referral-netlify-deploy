@@ -255,30 +255,39 @@ export const SendMessage = (itemid) => async (dispatch) => {
   }
 };
 
-export const AddUserSendMessage = (data) => async (dispatch) => {
-  dispatch(loading());
-  for (const value of Object.values(data)) {
-    console.log(value);
-  }
-  try {
-    const response = await axiosInstance.post("/add/user/send_message", data, {
-      headers: {
-        "Content-Type": "multipart/form-data", // Ensure this header is set
-      },
-    });
-    if (response.status === 200) {
-      if (response.data?.success === false) {
-        popup({ status: "error", message: response.data?.message });
-      } else {
-        dispatch(success(response.data));
+export const AddUserSendMessage =
+  (data, route = null) =>
+  async (dispatch) => {
+    dispatch(loading());
+
+    try {
+      const response = await axiosInstance.post(
+        "/add/user/send_message",
+        data,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data", // Ensure this header is set
+          },
+        }
+      );
+      if (response.status === 200) {
+        if (response.data?.success === false) {
+          toast.error(response.data.message);
+          dispatch(failed(response.data.message));
+        } else {
+          toast.success("Send Message Added Successfully");
+          dispatch(success(response.data));
+          route();
+        }
       }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "Unknown error"
+        )
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(error?.message || error?.message?.data?.message || "Unknown error")
-    );
-  }
-};
+  };
 
 export const UpdateUserSendMessage = (data, itemid) => async (dispatch) => {
   dispatch(loading());
@@ -367,12 +376,19 @@ export const CardGetByUserId = (userid) => async (dispatch) => {
   }
 };
 
-export const AddUserBirthday = (data) => async (dispatch) => {
+export const AddUserBirthday = (data, route) => async (dispatch) => {
   dispatch(loading());
   try {
     const response = await axiosInstance.post("/add/user/birthday", data);
     if (response.status === 200) {
-      dispatch(success());
+      if (response.data?.success === false) {
+        toast.error(response.data.message);
+        dispatch(failed(response.data.message));
+      } else {
+        dispatch(success(response.data));
+        toast.success("User Birthday Added Success");
+        route();
+      }
     }
   } catch (error) {
     const errorMessage =

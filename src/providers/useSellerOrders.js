@@ -20,8 +20,14 @@ export const SellerProvider = ({ children }) => {
     if (isActive && time > 0) {
       interval = setInterval(() => {
         setTime((prevTime) => prevTime - 1000);
+        if (typeof window !== "undefined") {
+          sessionStorage.setItem("time", time - 1000);
+        }
       }, 1000);
     } else if (time === 0) {
+      if (typeof window !== "undefined") {
+        sessionStorage.removeItem("time");
+      }
       setIsActive(false);
     }
 
@@ -42,6 +48,7 @@ export const SellerProvider = ({ children }) => {
   return (
     <SellerContext.Provider
       value={{
+        orignalTime: time,
         time: formatTime(time),
         isActive,
         startCountdown,

@@ -50,6 +50,7 @@ export const StateManagerProvider = ({ children }) => {
     }
   };
 
+
   return (
     <StateManagerContext.Provider
       value={{

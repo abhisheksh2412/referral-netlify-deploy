@@ -20,7 +20,7 @@ export default function AssignCouponToCard({ handleClose }) {
     const cardno =
       typeof window !== "undefined" && localStorage.getItem("card_no");
     if (cardno) {
-      dispatch(GetUserByCard(cardno));
+      dispatch(GetUserByCard({cardNo:cardno}));
     } else {
       Swal.mixin({ toast: true }).fire({
         icon: "error",

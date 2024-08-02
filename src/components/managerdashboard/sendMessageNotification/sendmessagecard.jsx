@@ -86,10 +86,8 @@ function SendMessageCard({ data, handleEdit }) {
           </div>
         </div>
         <div className="flex items-center gap-2">
-        
-
           <Image
-            src={data?.user?.profile_photo_url}
+            src={data?.user?.profile_photo_url || "/assets/defaultseller.jpg"}
             width={500}
             height={500}
             alt="Picture of the author"

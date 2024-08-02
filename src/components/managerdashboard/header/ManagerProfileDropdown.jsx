@@ -15,15 +15,13 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
+import clsx from "clsx";
 
 function ManagerProfileDropdown() {
   const user = useSelector((state) => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
 
   async function LogOutUser() {
     toast.promise(dispatch(LogoutUser()), {
@@ -76,7 +74,11 @@ function ManagerProfileDropdown() {
               <li>
                 <Link
                   href="/dashboard/Project-manager/profile"
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Project-manager/profile" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <FaUser /> Profile
                 </Link>
@@ -85,7 +87,11 @@ function ManagerProfileDropdown() {
               <li>
                 <Link
                   href="/dashboard/Project-manager/change-password"
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    "px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Project-manager/change-password" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <RiLockPasswordFill /> Change Password
                 </Link>

@@ -17,7 +17,6 @@ import { useRouter } from "next/navigation";
 
 function UserBirthdayCard({ data, handleEdit = null }) {
   const dispatch = useDispatch();
-  const router = useRouter();
   const order = useSelector((state) => state.orders);
   const userBirthdayList = useCallback(() => {
     dispatch(GetUserBirthdayList());
@@ -89,7 +88,7 @@ function UserBirthdayCard({ data, handleEdit = null }) {
         </div>
         <div className="flex items-center gap-2">
           <Image
-            src={data?.user?.profile_photo_url}
+            src={data?.user?.profile_photo_url || "/assets/defaultseller.jpg"}
             width={500}
             height={500}
             alt="Picture of the author"
@@ -124,7 +123,7 @@ function UserBirthdayCard({ data, handleEdit = null }) {
 
         <button
           onClick={() => handlesend(data?.id)}
-          class=" bg-blush-red inline-block flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6"
+          class=" bg-blush-red  flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6"
         >
           Send <IoIosSend />
         </button>

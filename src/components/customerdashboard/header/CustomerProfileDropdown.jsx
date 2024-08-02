@@ -14,15 +14,13 @@ import {
   PopoverContent,
   PopoverHandler,
 } from "@material-tailwind/react";
+import clsx from "clsx";
 
 function CustomerProfileDropdown() {
   const user = useSelector((state) => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
-  const dispatch = useDispatch();
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
 
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
+  const dispatch = useDispatch();
 
   async function LogOutUser() {
     toast.promise(dispatch(LogoutUser()), {
@@ -69,7 +67,11 @@ function CustomerProfileDropdown() {
               <li>
                 <Link
                   href={"/dashboard/Customer/profile"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Customer/profile" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <FaUser /> Profile
                 </Link>
@@ -78,7 +80,11 @@ function CustomerProfileDropdown() {
               <li>
                 <Link
                   href="/dashboard/Customer/change-password"
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Customer/change-password" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <RiLockPasswordFill /> Change Password
                 </Link>
@@ -89,7 +95,7 @@ function CustomerProfileDropdown() {
               <li>
                 <button
                   onClick={LogOutUser}
-                  className="block px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className=" px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <IoLogOutSharp /> Logout
                 </button>

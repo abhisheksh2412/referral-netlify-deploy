@@ -138,9 +138,11 @@ export const AddProductPointsvalidation = Yup.object().shape({
         ),
       barcode: Yup.string().required("Barcode is required"),
       product_points: Yup.number()
+        .typeError("Product Points must be a number.")
         .required("Product points are required")
         .positive("Product points must be a positive number"),
       quantity: Yup.number()
+        .typeError("Quantity must be a number.")
         .required("Quantity is required")
         .positive("Quantity must be a positive number")
         .integer("Quantity must be an integer"),

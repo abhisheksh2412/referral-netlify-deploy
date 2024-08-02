@@ -12,7 +12,6 @@ import { GetAllCustomer } from "@/store/slices/customer";
 import Loader from "../../Loader";
 import { Delete, Trash2 } from "lucide-react";
 
-
 import {
   AddSendMessageValidations,
   SendMessageAddCouponValidation,
@@ -100,13 +99,7 @@ export default function AddSendMessage({ editData = null, handleClose }) {
           ...values,
           coupons_list: coupons,
         };
-        await dispatch(AddUserSendMessage(formData));
-        setTimeout(() => {
-          if (orders.isSuccess) {
-            popup({ message: "Create Successfully", status: "success" });
-            navigate.back();
-          }
-        }, 400);
+        await dispatch(AddUserSendMessage(formData, () => navigate.back()));
       } else {
         await dispatch(UpdateUserSendMessage(values, editData?.id));
         setTimeout(() => {
@@ -182,7 +175,10 @@ export default function AddSendMessage({ editData = null, handleClose }) {
           {formik.values.user_id && (
             <div className="flex items-center gap-3 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-lg w-64">
               <Image
-                src={selectedCustomer?.profile_photo_url}
+                src={
+                  selectedCustomer?.profile_photo_url ||
+                  "/assets/defaultseller.jpg"
+                }
                 width={60}
                 height={60}
                 alt="Picture of the author"
@@ -289,15 +285,13 @@ export default function AddSendMessage({ editData = null, handleClose }) {
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {imagePreview ? (
-                       
                         <Image
-                        src={imagePreview}
-                        width={500}
-                        height={500}
-                        alt="Preview"
-                        className="w-24 h-24 mb-4"
-                      />
-
+                          src={imagePreview}
+                          width={500}
+                          height={500}
+                          alt="Preview"
+                          className="w-24 h-24 mb-4"
+                        />
                       ) : (
                         <>
                           <svg

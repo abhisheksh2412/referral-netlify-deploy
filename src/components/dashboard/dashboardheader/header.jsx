@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import Logo from "../../globals/logo";
 import Container from "../../globals/container";
 import ProfileDropdown from "./profileDropdown";
@@ -8,16 +8,16 @@ import { IoMdHome } from "react-icons/io";
 import { FaRegCreditCard } from "react-icons/fa";
 import { BiSolidCoupon } from "react-icons/bi";
 import { FaStore } from "react-icons/fa";
-import { CgMoreVerticalO } from "react-icons/cg";
 import Notification from "./notification";
 import { useDispatch, useSelector } from "react-redux";
-import { FindSelfUser, LogoutUser } from "@/store/slices/authSlice";
+import { FindSelfUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";
 import { useRouter } from "next/navigation";
-import { GetUserByCard } from "@/store/slices/userSlice";
+import clsx from "clsx";
 
 export default function DashboardHeader() {
   const router = useRouter();
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
   const [isOpen, setIsOpen] = useState(false);
   const { token } = useStateManager();
 
@@ -47,28 +47,6 @@ export default function DashboardHeader() {
       fetchSelfUser();
     }
   }, [fetchSelfUser, token]);
-
-  // fetch data using card
-
-  const getUser = useCallback(
-    (cardno) => {
-      dispatch(GetUserByCard(cardno));
-    },
-    [dispatch]
-  );
-
-  const getUserByCard = useCallback(() => {
-    if (typeof window !== "undefined") {
-      const cardno = localStorage.getItem("card_no");
-      if (cardno) {
-        getUser(cardno);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    getUserByCard();
-  }, [getUserByCard]);
 
   return (
     <nav className="bg-rose-300">
@@ -124,7 +102,10 @@ export default function DashboardHeader() {
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
                   prefetch={true}
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Seller" && "!text-blue-700"
+                  )}
                   aria-current="page"
                   href={`/dashboard/${user?.data?.role}`}
                 >
@@ -135,7 +116,10 @@ export default function DashboardHeader() {
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
                   prefetch={true}
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Seller/coupon" && "!text-blue-700"
+                  )}
                   href={"/dashboard/Seller/coupon"}
                 >
                   <BiSolidCoupon /> Coupon
@@ -145,7 +129,11 @@ export default function DashboardHeader() {
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
                   prefetch={true}
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Seller/cardlist" &&
+                      "!text-blue-700"
+                  )}
                   href={"/dashboard/Seller/cardlist"}
                 >
                   <FaRegCreditCard /> Card
@@ -155,7 +143,10 @@ export default function DashboardHeader() {
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
                   prefetch={true}
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Seller/store" && "!text-blue-700"
+                  )}
                   href={"/dashboard/Seller/store"}
                 >
                   <FaStore /> Store

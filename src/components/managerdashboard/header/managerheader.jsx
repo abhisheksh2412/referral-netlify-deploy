@@ -7,16 +7,17 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import { FaBorderAll } from "react-icons/fa6";
 import { FaRegCreditCard, FaStore } from "react-icons/fa";
-import { IoMdHome } from "react-icons/io";
 import { useDispatch, useSelector } from "react-redux";
 import ManagerProfileDropdown from "./ManagerProfileDropdown";
-import { config } from "@/config/config";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";
 import { useRouter } from "next/navigation";
 import { MdPayments } from "react-icons/md";
+import { IoMdHome } from "react-icons/io";
+import clsx from "clsx";
 
 export default function ManagerDashboardHeader() {
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
   const router = useRouter();
 
   const { token } = useStateManager();
@@ -106,17 +107,25 @@ export default function ManagerDashboardHeader() {
             <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 mobile:p-0 mobile:mt-0">
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:text-blue-700 md:p-0 dark:text-white md:dark:text-blue-500 text-base md:text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:p-0 dark:text-white text-base md:text-base mobile:rounded-none",
+                    pathname === "/dashboard/Project-manager" &&
+                      "!text-blue-700"
+                  )}
                   aria-current="page"
                   href="/dashboard/Project-manager"
                 >
-                  Home
+                  <IoMdHome /> Home
                 </Link>
               </li>
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Project-manager/order" &&
+                      "!text-blue-700"
+                  )}
                   href="/dashboard/Project-manager/order"
                 >
                   <FaBorderAll />
@@ -126,7 +135,11 @@ export default function ManagerDashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Project-manager/managerStore" &&
+                      "!text-blue-700"
+                  )}
                   href="/dashboard/Project-manager/managerStore"
                 >
                   <FaStore /> Store
@@ -135,7 +148,11 @@ export default function ManagerDashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded  md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Project-manager/more" &&
+                      "!text-blue-700"
+                  )}
                   href="/dashboard/Project-manager/more"
                 >
                   <FaRegCreditCard /> More
@@ -144,7 +161,11 @@ export default function ManagerDashboardHeader() {
 
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Project-manager/pay" &&
+                      "!text-blue-700"
+                  )}
                   href="/dashboard/Project-manager/pay"
                 >
                   <MdPayments /> Pay

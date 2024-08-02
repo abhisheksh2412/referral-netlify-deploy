@@ -2,7 +2,7 @@ import { GetUserByCard } from "@/store/slices/userSlice";
 import { useFormik } from "formik";
 import { ArrowRight } from "lucide-react";
 import Image from "next/image";
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as yup from "yup";
 
@@ -14,7 +14,7 @@ function EnterCard({ reset }) {
 
   const getUser = useCallback(
     (cardno) => {
-      dispatch(GetUserByCard(cardno));
+      dispatch(GetUserByCard({ cardNo: cardno, success: true }));
     },
     [dispatch]
   );
@@ -36,21 +36,21 @@ function EnterCard({ reset }) {
   });
 
   useEffect(() => {
-    if (reset) {
-      formik.setFieldValue("card_no", "");
+    if (userByCard || !reset) return;
+
+    const localCardId =
+      typeof window !== "undefined" ? localStorage.getItem("card_no") : null;
+    if (localCardId) {
+      formik.setFieldValue("card_no", decodeURI(localCardId));
+      getUser(localCardId);
     }
-    if (typeof window !== "undefined") {
-      const cardno = localStorage.getItem("card_no");
-      if (cardno) {
-        formik.setFieldValue("card_no", cardno);
-        getUser(cardno);
-      }
-    }
-  }, [reset, getUser]);
+  }, [reset, getUser, userByCard]);
 
   useEffect(() => {
     if (isSuccess) {
-      localStorage.setItem("card_no", userByCard?.card_number);
+      if (typeof window !== "undefined") {
+        localStorage.setItem("card_no", encodeURI(userByCard?.card_number));
+      }
     }
   }, [isSuccess, userByCard]);
   return (
@@ -60,7 +60,6 @@ function EnterCard({ reset }) {
     >
       <div className="flex gap-4">
         <div>
-       
           <Image
             src="/assets/credit-card.svg"
             width={500}
@@ -75,14 +74,14 @@ function EnterCard({ reset }) {
         </div>
       </div>
       <input
-        type="text"
+        type="search"
         name="card_no"
         value={formik.values.card_no}
         id="card_no"
         maxLength={16}
         minLength={16}
         onChange={formik.handleChange}
-        class="block w-full rounded-full p-4  mt-5 shadow-inherit outline-none mb-6 text-center"
+        className="block w-full rounded-full p-4  mt-5 shadow-inherit outline-none mb-6 text-center"
         placeholder="Enter Card No"
       />
       {formik.touched.card_no && formik.errors.card_no ? (

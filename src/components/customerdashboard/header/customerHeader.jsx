@@ -10,18 +10,19 @@ import { FaRegCreditCard, FaStore } from "react-icons/fa";
 import { FaGift } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import ManagerProfileDropdown from "./CustomerProfileDropdown";
-import { IoGridOutline } from "react-icons/io5";
+import { IoGridOutline, IoHome } from "react-icons/io5";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import { useStateManager } from "@/providers/useStateManager";
 import { useRouter } from "next/navigation";
 import CustomerProfileDropdown from "./CustomerProfileDropdown";
+import clsx from "clsx";
 
 export default function CustomerHeader() {
   const router = useRouter();
 
   const storeId =
     typeof window !== "undefined" && localStorage.getItem("store_id");
-
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
   const { token } = useStateManager();
   const [isOpen, setIsOpen] = useState(false);
 
@@ -106,18 +107,24 @@ export default function CustomerHeader() {
             <ul className="font-medium flex flex-col items-center p-4 md:p-0 mt-4  md:flex-row md:space-x-8 rtl:space-x-reverse md:mt-0 md:border-0 mobile:p-0 mobile:mt-0">
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:text-blue-700 md:p-0
-                   dark:text-white md:dark:text-blue-500 text-base md:text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1  py-2 px-3 mobile:px-6 mobile:p-3 mobile:text-white rounded md:bg-transparent md:p-0 dark:text-white text-base md:text-base mobile:rounded-none",
+                    pathname === "/dashboard/Customer" && "!text-blue-700"
+                  )}
                   aria-current="page"
                   href="/dashboard/Customer"
                 >
-                  Home
+                  <IoHome /> Home
                 </Link>
               </li>
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
-                  href={`/dashboard/Customer/customerCoupon/?store_id=${storeId}`}
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:text-base md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Customer/customerCoupon" &&
+                      "!text-blue-700"
+                  )}
+                  href={`/dashboard/Customer/customerCoupon?store_id=${storeId}`}
                 >
                   <RiCouponLine />
                   Coupon
@@ -125,7 +132,11 @@ export default function CustomerHeader() {
               </li>
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1  py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Customer/customerCard" &&
+                      "!text-blue-700"
+                  )}
                   href={`/dashboard/Customer/customerCard?store_id=${storeId}`}
                 >
                   <FaRegCreditCard /> Card
@@ -133,7 +144,11 @@ export default function CustomerHeader() {
               </li>
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Customer/customerStoreList" &&
+                      "!text-blue-700"
+                  )}
                   href="/dashboard/Customer/customerStoreList"
                 >
                   <FaStore /> Store
@@ -141,7 +156,10 @@ export default function CustomerHeader() {
               </li>
               <li className="mobile:w-full tab:!ml-3 md-landscape:!ml-3">
                 <Link
-                  className="flex items-center gap-1 block py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none"
+                  className={clsx(
+                    "flex items-center gap-1 py-2 px-3 mobile:p-3 mobile:px-6 mobile:text-white text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:text-base dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent text-base mobile:rounded-none",
+                    pathname === "/dashboard/Customer/more" && "!text-blue-700"
+                  )}
                   href="/dashboard/Customer/more"
                 >
                   <IoGridOutline /> More

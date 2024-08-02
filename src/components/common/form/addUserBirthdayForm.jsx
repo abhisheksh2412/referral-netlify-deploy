@@ -16,6 +16,7 @@ import { Router, Trash2 } from "lucide-react";
 import {
   AddUserBirthday,
   CardGetByUserId,
+  GetUserBirthdayList,
   UpdateUserBirthday,
 } from "@/store/slices/orders";
 import Loader from "@/components/globals/Loader";
@@ -47,6 +48,9 @@ export default function AddUserBirthdayForm({
     allCustomers();
   }, [allCustomers]);
 
+  const userBirthdayList = useCallback(() => {
+    dispatch(GetUserBirthdayList());
+  }, [dispatch]);
   const customers = useMemo(() => {
     return customerList?.data?.map((item) => ({
       label: item?.name,
@@ -95,13 +99,10 @@ export default function AddUserBirthdayForm({
 
       try {
         if (!editData) {
-          await dispatch(AddUserBirthday(formdata));
-          if (orders.isSuccess) {
-            popup({ status: "success", message: "created Successfully" });
-            router.back();
-          }
+          await dispatch(AddUserBirthday(formdata, () => router.back()));
         } else {
           await dispatch(UpdateUserBirthday(formdata, editData?.id));
+          userBirthdayList();
           if (orders.isSuccess) {
             popup({ status: "success", message: "updated Successfully" });
             handleClose(null);
@@ -194,7 +195,9 @@ export default function AddUserBirthdayForm({
           {selectedUser && (
             <div className="flex items-center gap-3 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-lg w-64">
               <Image
-                src={selectedUser?.profile_photo_url}
+                src={
+                  selectedUser?.profile_photo_url || "/assets/defaultseller.jpg"
+                }
                 width={60}
                 height={60}
                 alt="Picture of the author"
@@ -445,13 +448,12 @@ export default function AddUserBirthdayForm({
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {imagePreview ? (
                         <Image
-                        src={imagePreview}
-                        width={500}
-                        height={500}
-                       alt="Preview"
-                       className="w-24 h-24 mb-4"
-                      />
-
+                          src={imagePreview}
+                          width={500}
+                          height={500}
+                          alt="Preview"
+                          className="w-24 h-24 mb-4"
+                        />
                       ) : (
                         <>
                           <svg

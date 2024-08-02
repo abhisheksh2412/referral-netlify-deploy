@@ -15,15 +15,12 @@ import {
   PopoverHandler,
 } from "@material-tailwind/react";
 import toast from "react-hot-toast";
+import clsx from "clsx";
 
 function ProfileDropdown() {
+  const pathname = typeof window !== "undefined" ? location.pathname : "";
   const user = useSelector((state) => state.auth);
-  const [isOpen, setIsOpen] = useState(false);
   const dispatch = useDispatch();
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   async function LogOutUser() {
     toast.promise(dispatch(LogoutUser()), {
@@ -70,7 +67,10 @@ function ProfileDropdown() {
               <li>
                 <Link
                   href={"/dashboard/Seller/profile"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Seller/profile" && "!text-blue-700"
+                  )}
                 >
                   <FaUser /> Profile
                 </Link>
@@ -78,7 +78,11 @@ function ProfileDropdown() {
               <li>
                 <Link
                   href={"/dashboard/Seller/allusers"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Seller/allusers" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <PiUsersFill /> All User
                 </Link>
@@ -86,7 +90,11 @@ function ProfileDropdown() {
               <li>
                 <Link
                   href={"/dashboard/Seller/allorders"}
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    " px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Seller/allorders" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <FaCartArrowDown />
                   All Orders
@@ -95,7 +103,11 @@ function ProfileDropdown() {
               <li>
                 <Link
                   href="/dashboard/Seller/change-password"
-                  className="block px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className={clsx(
+                    "px-4 py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3",
+                    pathname === "/dashboard/Seller/change-password" &&
+                      "!text-blue-700"
+                  )}
                 >
                   <RiLockPasswordFill /> Change Password
                 </Link>
@@ -106,7 +118,7 @@ function ProfileDropdown() {
               <li>
                 <button
                   onClick={LogOutUser}
-                  className="block px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
+                  className=" px-4 w-full hover:rounded-b-xl py-3 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white flex items-center gap-3"
                 >
                   <IoLogOutSharp /> Logout
                 </button>

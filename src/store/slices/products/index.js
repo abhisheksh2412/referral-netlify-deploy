@@ -1,6 +1,8 @@
 import { popup } from "@/_utils/alerts";
 import axiosInstance from "@/_utils/axiosUtils";
 import { createSlice } from "@reduxjs/toolkit";
+import toast from "react-hot-toast";
+import Swal from "sweetalert2";
 
 const initialState = {
   isLoading: false,
@@ -227,22 +229,33 @@ export const GetAllProductsAndPoints = (userid) => async (dispatch) => {
   }
 };
 
-export const AddProductAndPoints = (fromdata) => async (dispatch) => {
-  dispatch(loading());
-  try {
-    const response = await axiosInstance.post(
-      "/add/product/name/point",
-      fromdata
-    );
-    if (response.status === 200) {
-      dispatch(success(response.data));
+export const AddProductAndPoints =
+  (fromdata, route = null) =>
+  async (dispatch) => {
+    dispatch(loading());
+    try {
+      const response = await axiosInstance.post(
+        "/add/product/name/point",
+        fromdata
+      );
+      if (response.status === 200) {
+        Swal.mixin({ toast: true }).fire({
+          icon: "success",
+          text: "product added successfully",
+          timer: 1500,
+          showConfirmButton: false,
+        });
+        dispatch(success(response.data));
+        route();
+      }
+    } catch (error) {
+      dispatch(
+        failed(
+          error?.message || error?.message?.data?.message || "unkown error"
+        )
+      );
     }
-  } catch (error) {
-    dispatch(
-      failed(error?.message || error?.message?.data?.message || "unkown error")
-    );
-  }
-};
+  };
 
 export const DeleteProductPoints = (productid) => async (dispatch) => {
   dispatch(loading());

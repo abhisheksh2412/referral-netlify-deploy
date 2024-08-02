@@ -23,7 +23,11 @@ function CustomerCouponCard({ data, handleView }) {
             <div className="w-1/2">
               <div className="p-1 shadow rounded-md w-20 bg-white">
                 <Image
-                  src={config?.IMAGE_URL_PATH + data?.coupon_image}
+                  src={
+                    data?.coupon_image
+                      ? config?.IMAGE_URL_PATH + data?.coupon_image
+                      : "/assets/coupondefault.jpg"
+                  }
                   width={65}
                   height={65}
                   alt="coupon img"
