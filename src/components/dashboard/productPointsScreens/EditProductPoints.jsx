@@ -74,6 +74,7 @@ const ProductCard = ({
         <Image
           src={`${config?.IMAGE_URL_PATH}${item.product_image}`}
           width={250}
+          alt="Product_Image"
           height={250}
           className="!w-24 !h-24 mx-auto object-contain"
         />

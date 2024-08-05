@@ -40,7 +40,7 @@ function CustomerProfileDropdown() {
             type="button"
           >
             <Image
-              src={user?.data?.profile_photo_url}
+              src={user?.data?.profile_photo_url || "/assets/defaultseller.jpg"}
               width={500}
               height={500}
               alt="Picture of the author"

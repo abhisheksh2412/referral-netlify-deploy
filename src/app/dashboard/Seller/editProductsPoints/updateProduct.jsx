@@ -6,6 +6,7 @@ import {
 } from "@/store/slices/products";
 import { UpdateProductSchema } from "@/validators/storeValidatios";
 import { useFormik } from "formik";
+import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Swal from "sweetalert2";
@@ -76,10 +77,12 @@ export default function UpdateProduct({ data, handleClose }) {
                     className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
                   >
                     {imagePreview ? (
-                      <img
+                      <Image
                         src={imagePreview}
                         alt="Product Preview"
-                        className="w-full h-full object-cover rounded-lg"
+                        width={200}
+                        height={200}
+                        className="!w-full !h-full object-cover rounded-lg"
                       />
                     ) : (
                       <div className="flex flex-col items-center justify-center pt-5 pb-6">

@@ -5,6 +5,7 @@ import { getMessaging, onMessage } from "firebase/messaging";
 import { app as firebaseApp } from "@/services/firebase";
 import useFcmToken from "@/hooks/useFCMToken";
 import toast from "react-hot-toast";
+import Image from "next/image";
 
 export default function FcmTokenClientComponent() {
   const { fcmToken, notificationPermissionStatus } = useFcmToken();
@@ -28,8 +29,10 @@ export default function FcmTokenClientComponent() {
                     <div className="flex items-start">
                       <div className="flex-shrink-0 pt-0.5">
                         {payload.data?.image && (
-                          <img
-                            className="h-10 w-10 rounded-md"
+                          <Image
+                            width={100}
+                            height={100}
+                            className="!h-10 !w-10 rounded-md"
                             src={payload.data?.image}
                             alt="notification_image"
                           />

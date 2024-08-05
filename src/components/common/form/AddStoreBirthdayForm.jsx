@@ -365,10 +365,12 @@ export default function AddStoreBirthdayForm({ editData = null, handleClose }) {
                   >
                     <div className="flex flex-col items-center justify-center pt-5 pb-6">
                       {imagePreview ? (
-                        <img
+                        <Image
                           src={imagePreview}
+                          width={200}
+                          height={200}
                           alt="Preview"
-                          className="w-24 h-24 mb-4"
+                          className="!w-24 !h-24 mb-4"
                         />
                       ) : (
                         <>

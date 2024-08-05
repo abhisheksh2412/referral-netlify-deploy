@@ -15,6 +15,7 @@ import { popup } from "@/_utils/alerts";
 import Loader from "../globals/Loader";
 import Swal from "sweetalert2";
 import { GetUserByCard } from "@/store/slices/userSlice";
+import Image from "next/image";
 
 function VoucherLists() {
   const dispatch = useDispatch();
@@ -127,9 +128,11 @@ function VoucherLists() {
               <div className="shadow text-center cursor-pointer rounded-lg flex items-center gap-2 bg-white relative">
                 <div className="p-2 rounded-l-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 relative w-2/6">
                   <div className="absolute top-[47px] left-[-20px] w-[30px] h-[30px] bg-white rounded-full"></div>
-                  <img
+                  <Image
                     src={config.IMAGE_URL_PATH + item?.coupon_image}
                     alt="image"
+                    width={200}
+                    height={200}
                     className="!w-24 !h-24 mx-auto object-contain"
                   />
                 </div>
