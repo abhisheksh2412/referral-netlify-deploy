@@ -27,11 +27,13 @@ export default function FcmTokenClientComponent() {
                   <div className="flex-1 w-0 p-4">
                     <div className="flex items-start">
                       <div className="flex-shrink-0 pt-0.5">
-                        <img
-                          className="h-10 w-10 rounded-md"
-                          src={payload.data?.image}
-                          alt=""
-                        />
+                        {payload.data?.image && (
+                          <img
+                            className="h-10 w-10 rounded-md"
+                            src={payload.data?.image}
+                            alt="notification_image"
+                          />
+                        )}
                       </div>
                       <div className="ml-3 flex-1">
                         <p className="text-sm font-medium text-blush-red">
