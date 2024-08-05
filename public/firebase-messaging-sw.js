@@ -65,11 +65,11 @@ messaging.onBackgroundMessage((payload) => {
   const { title, body, image, icon, ...restPayload } = payload.data;
   const notificationOptions = {
     body,
-    icon: image || icon || "/icons/firebase-logo.png", // Ensure icon fallback is provided
+    icon: "/assets/apple.png", // Ensure icon fallback is provided
     data: restPayload,
   };
 
-  console.log(payload);
+  console.log(notificationOptions);
   return self.registration.showNotification(title, notificationOptions);
 });
 

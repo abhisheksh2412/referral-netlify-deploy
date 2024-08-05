@@ -5,6 +5,7 @@ import BreadcrumbGlobal from "@/components/globals/BreadCrumb";
 import Loader from "@/components/globals/Loader";
 import Footer from "@/components/home/footer";
 import HomeHeader from "@/components/home/homeHeader";
+import useFcmToken from "@/hooks/useFCMToken";
 import {
   Tab,
   TabPanel,
@@ -16,6 +17,7 @@ import { useSelector } from "react-redux";
 
 export default function SignupPage() {
   const { isLoading } = useSelector((state) => state.auth);
+
   return (
     <Loader isLoading={isLoading}>
       <div>
@@ -59,7 +61,7 @@ export default function SignupPage() {
                   }}
                 >
                   <TabPanel className="!px-0 !py-4" value={"user"}>
-                    <UserSignup />
+                    <UserSignup  />
                   </TabPanel>
                   <TabPanel className="!px-0 !py-4" value={"partner"}>
                     <PartnerSignup />

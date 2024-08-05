@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { getMessaging, getToken } from "firebase/messaging";
 import { app as firebaseApp } from "@/services/firebase";
+import { firebaseCred } from "@/config/config";
 
 const useFcmToken = () => {
   const [fcmToken, setFcmToken] = useState("");
@@ -20,12 +21,10 @@ const useFcmToken = () => {
 
           if (permission === "granted") {
             // Replace with your Firebase project's VAPID key
-            const vapidKey =
-              "BEVTVVkHrR0qEOI_o3hgbuFc91hnZym-luCZSdkNcaS73hUDXX26KgtBErQWJgObKxdDcAf5MFwUOXjWn8Dyk2g";
+            const vapidKey = firebaseCred.vapiId;
 
             const currentToken = await getToken(messaging, { vapidKey });
             if (currentToken) {
-              console.log("FCM Token:", currentToken);
               setFcmToken(currentToken);
             } else {
               console.log(

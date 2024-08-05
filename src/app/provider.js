@@ -6,6 +6,7 @@ import { StateManagerProvider } from "@/providers/useStateManager";
 import { SellerProvider } from "@/providers/useSellerOrders";
 import { useEffect } from "react";
 import FcmTokenComp from "@/components/firebaseForeground";
+import { Toaster } from "react-hot-toast";
 export default function Providers({ children }) {
   useEffect(() => {
     const script = document.createElement("script");
@@ -44,6 +45,7 @@ export default function Providers({ children }) {
       <StateManagerProvider>
         <SellerProvider>
           {typeof window !== "undefined" ? <FcmTokenComp /> : null}
+          <Toaster />
 
           {children}
         </SellerProvider>

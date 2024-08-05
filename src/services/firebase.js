@@ -1,16 +1,17 @@
 // services/firebase.js
 
+import { firebaseCred } from "@/config/config";
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getMessaging } from "firebase/messaging";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBWj0NQGIbMYrBAKSmQUz9SdZqUuxMQESQ",
-  authDomain: "referralsapp-e6a7c.firebaseapp.com",
-  projectId: "referralsapp-e6a7c",
-  storageBucket: "referralsapp-e6a7c.appspot.com",
-  messagingSenderId: "543599072628",
-  appId: "1:543599072628:web:33e7d17c08f91b899ec821",
-  measurementId: "G-T5QTPEEH2D",
+  apiKey: firebaseCred.apikey,
+  authDomain: firebaseCred.authDomain,
+  projectId: firebaseCred.projectId,
+  storageBucket: firebaseCred.storageBucket,
+  messagingSenderId: firebaseCred.messagingSenderId,
+  appId: firebaseCred.appId,
+  measurementId: firebaseCred.measurementId,
 };
 
 let app;

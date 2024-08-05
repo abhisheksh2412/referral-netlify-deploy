@@ -6,8 +6,11 @@ import { UserSignupValidationsSchema } from "@/validators/authValidations";
 import { Key, LucideCalendarSearch, Mail, Phone, User } from "lucide-react";
 import toast from "react-hot-toast";
 import Link from "next/link";
+import { useEffect } from "react";
+import useFcmToken from "@/hooks/useFCMToken";
 
 export default function UserSignup() {
+  const { fcmToken, notificationPermissionStatus } = useFcmToken();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -29,6 +32,12 @@ export default function UserSignup() {
     },
     validationSchema: UserSignupValidationsSchema,
   });
+
+  useEffect(() => {
+    if (notificationPermissionStatus === "granted") {
+      formik.setFieldValue("fcm_token", fcmToken);
+    }
+  }, [fcmToken, notificationPermissionStatus]);
 
   return (
     <div className="bg-gray-100 w-full h-fit flex items-center justify-center">

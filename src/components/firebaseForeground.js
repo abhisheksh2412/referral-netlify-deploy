@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { getMessaging, onMessage } from "firebase/messaging";
 import { app as firebaseApp } from "@/services/firebase";
 import useFcmToken from "@/hooks/useFCMToken";
+import toast from "react-hot-toast";
 
 export default function FcmTokenClientComponent() {
   const { fcmToken, notificationPermissionStatus } = useFcmToken();
@@ -16,7 +17,36 @@ export default function FcmTokenClientComponent() {
 
         const unsubscribe = onMessage(messaging, (payload) => {
           try {
-            console.log("Foreground push notification received:", payload);
+            toast.custom(
+              (t) => (
+                <div
+                  className={`${
+                    t.visible ? "animate-enter" : "animate-leave"
+                  } max-w-md w-full bg-[#0e0a38] shadow-lg rounded-lg pointer-events-auto flex ring-1 ring-black ring-opacity-5`}
+                >
+                  <div className="flex-1 w-0 p-4">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 pt-0.5">
+                        <img
+                          className="h-10 w-10 rounded-md"
+                          src={payload.data?.image}
+                          alt=""
+                        />
+                      </div>
+                      <div className="ml-3 flex-1">
+                        <p className="text-sm font-medium text-blush-red">
+                          {payload.data?.title}
+                        </p>
+                        <p className="mt-1 text-sm text-white">
+                          {payload.data?.body}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ),
+              { position: "bottom-right" }
+            );
           } catch (error) {
             console.error("Error handling foreground message:", error);
           }

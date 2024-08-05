@@ -7,11 +7,13 @@ import { KeyRound, Mail } from "lucide-react";
 import Link from "next/link";
 import { LoginValidationSchema } from "@/validators/authValidations";
 import { useRouter } from "next/navigation";
+import useFcmToken from "@/hooks/useFCMToken";
 
 export default function Login() {
   const navigate = useRouter();
   const dispatch = useDispatch();
   const userData = useSelector((state) => state.auth);
+
 
   // Formik integration for submit form
   const formik = useFormik({
@@ -25,6 +27,7 @@ export default function Login() {
     },
     validationSchema: LoginValidationSchema,
   });
+  
 
   return (
     <div className="bg-gray-100 w-full h-fit py-10 md:py-12 lg:py-20   flex items-center justify-center">

@@ -242,3 +242,22 @@ export const GetUserByCard =
       );
     }
   };
+
+export const UpdateFcmTokenByUserId = (data) => async (dispatch) => {
+  dispatch(loading());
+  try {
+    const response = await axiosInstance.post(
+      "/update_fcm_token_by_user_id",
+      data
+    );
+    if (response.status === 200) {
+      console.log("success updated");
+    }
+  } catch (error) {
+    dispatch(
+      failed(
+        error?.response?.data?.message || error?.message || "unknown Error"
+      )
+    );
+  }
+};

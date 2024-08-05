@@ -26,16 +26,14 @@ import Link from "next/link";
 import Swal from "sweetalert2";
 import { VerifyOtpAndActivateUser } from "@/store/slices/common";
 import { useRouter } from "next/navigation";
+import useFcmToken from "@/hooks/useFCMToken";
 
 export default function PartnerSignup() {
+  const { fcmToken, notificationPermissionStatus } = useFcmToken();
   const { setPartnerVerifyEmail } = useStateManager();
   const router = useRouter();
-  const otpRef = useRef();
-  const { isSuccess } = useSelector((state) => state.auth);
-  const { isLoading, isActivated } = useSelector((state) => state.common);
   const [openOtpPopup, setOpenOtpPop] = useState(false);
   const [fromdata, setFormData] = useState(null);
-  const { partnerVerifyEmail } = useStateManager();
   const dispatch = useDispatch();
   const formik = useFormik({
     initialValues: {
@@ -97,6 +95,11 @@ export default function PartnerSignup() {
   useEffect(() => {
     handleOtpVerify();
   }, [openOtpPopup]);
+  useEffect(() => {
+    if (notificationPermissionStatus === "granted") {
+      formik.setFieldValue("fcm_token", fcmToken);
+    }
+  }, [fcmToken, notificationPermissionStatus]);
   return (
     <div className="flex w-full items-center justify-center">
       {/* <OtpForm ref={otpRef} /> */}
