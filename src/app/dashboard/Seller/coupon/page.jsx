@@ -91,7 +91,7 @@ function Coupon() {
           <div className="p-8 mobile:p-0">
             <Container>
               <Tabs value="new" className="">
-                <div class="block p-2 bg-white border border-gray-200 rounded-full shadow  dark:bg-gray-800 dark:border-gray-700  lg:w-3/5 mobile:w-full sm:w-12/12 mx-auto">
+                <div className="block p-2 bg-white border border-gray-200 rounded-full shadow  dark:bg-gray-800 dark:border-gray-700  lg:w-3/5 mobile:w-full sm:w-12/12 mx-auto">
                   <TabsHeader
                     className="bg-transparent"
                     indicatorProps={{
@@ -168,7 +168,6 @@ function Coupon() {
             <div className="p-5">
               <div className="">
                 <div className="mb-3">
-                 
                   <Image
                     src={config.IMAGE_URL_PATH + selectedCoupon?.coupon_image}
                     width={500}

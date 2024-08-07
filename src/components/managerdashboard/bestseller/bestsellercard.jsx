@@ -79,22 +79,20 @@ function BestSellerCard({
           </div>
           <div className="w-3/6">
             <div className="">
-
               <Image
                 src={config?.IMAGE_URL_PATH + data?.product?.path}
                 width={500}
                 height={500}
                 alt="product_image"
-                 className="w-36 h-36 mx-auto"
+                className="w-36 h-36 mx-auto"
               />
-
             </div>
           </div>
         </div>
         <button
           type="button"
           onClick={() => handleView(data)}
-          class="w-full justify-center relative inline-flex items-center gap-1 px-6 py-2.5 text-sm font-medium text-center text-white bg-blush-red rounded-lg"
+          className="w-full justify-center relative inline-flex items-center gap-1 px-6 py-2.5 text-sm font-medium text-center text-white bg-blush-red rounded-lg"
         >
           <FaRegEye />
           View Details

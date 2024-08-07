@@ -21,7 +21,7 @@ function BuyPaperCard() {
       <div className="p-4  md:p-2 lg:p-16">
         <Container>
           <div className="p-3 md:p-6 lg:p-12 new-shadow  bg-white md:w-5/5 lg:w-3/5 sm:w-5/5 tab:w-5/5 md-landscape:w-5/5  mx-auto rounded-lg">
-            <h3 class="text-left text-2xl leading-tight mb-6 font-semibold text-black">
+            <h3 className="text-left text-2xl leading-tight mb-6 font-semibold text-black">
               Add Plastic Card{" "}
             </h3>
 

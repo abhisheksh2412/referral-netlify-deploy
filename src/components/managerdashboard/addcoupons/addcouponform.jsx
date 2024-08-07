@@ -85,7 +85,7 @@ function AddCouponForm() {
                   </p>
                   <UseSampleImage
                     popper={false}
-                    buttonClass="!w-fit"
+                    buttonclassName="!w-fit"
                     imageUrl="/assets/coupondemo.png"
                   />
                   <label

@@ -4,8 +4,8 @@ import Image from "next/image";
 function MoreCategoryCard({ data }) {
   return (
     <div>
-      <div class=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer shadow-md transition-shadow">
-        <div class="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
+      <div className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer shadow-md transition-shadow">
+        <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
           <Image
             src={data?.category_image}
             width={150}

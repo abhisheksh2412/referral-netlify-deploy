@@ -144,8 +144,8 @@ function AddProductsPoints({ handleModal }) {
         onSubmit={productsFormik.handleSubmit}
       >
         <div className="bg-white mb-8 p-5 rounded">
-          <div class="grid md:grid-cols-3 lg:grid-cols-3 md:gap-2 lg:gap-2  sm:rounded-lg ">
-            <div class="md:px-2 lg:px-2  py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          <div className="grid md:grid-cols-3 lg:grid-cols-3 md:gap-2 lg:gap-2  sm:rounded-lg ">
+            <div className="md:px-2 lg:px-2  py-1 font-medium text-gray-900 whitespace-nowrap dark:text-white">
               <div className="mobile:py-1">
                 <label className="text-xs	 font-semibold text-gray-700 mb-2 inline-block">
                   Select Coupon
@@ -161,7 +161,7 @@ function AddProductsPoints({ handleModal }) {
               </div>
             </div>
 
-            <div class="md:px-2 lg:px-2  py-1">
+            <div className="md:px-2 lg:px-2  py-1">
               <div className="mobile:py-1">
                 <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                   Exchange Points
@@ -179,7 +179,7 @@ function AddProductsPoints({ handleModal }) {
               </div>
             </div>
 
-            <div class="md:px-2 lg:px-2  py-1">
+            <div className="md:px-2 lg:px-2  py-1">
               <div className="mobile:py-1">
                 <label className="text-xs font-semibold text-gray-700  inline-block mb-2">
                   Please Enter Exchane Point
@@ -195,8 +195,8 @@ function AddProductsPoints({ handleModal }) {
         {/* Product  */}
         {productsFormik.values.productList?.map((item, index) => (
           <div key={index} className="p-5 bg-white shadow mb-4 rounded">
-            <div class="grid md:grid-cols-3 md-landscape:grid-cols-3 lg:grid-cols-6 md:gap-2 lg:gap-2  sm:rounded-lg ">
-              <div class="md:px-2 lg:px-2  py-1">
+            <div className="grid md:grid-cols-3 md-landscape:grid-cols-3 lg:grid-cols-6 md:gap-2 lg:gap-2  sm:rounded-lg ">
+              <div className="md:px-2 lg:px-2  py-1">
                 <div className="mobile:py-1">
                   <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                     Product Image
@@ -224,7 +224,7 @@ function AddProductsPoints({ handleModal }) {
                 </div>
               </div>
 
-              <div class="md:px-2 lg:px-2  py-1">
+              <div className="md:px-2 lg:px-2  py-1">
                 <div className="mobile:py-1">
                   <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                     Product Name
@@ -252,7 +252,7 @@ function AddProductsPoints({ handleModal }) {
                 </div>
               </div>
 
-              <div class="md:px-2 lg:px-2  py-1">
+              <div className="md:px-2 lg:px-2  py-1">
                 <div className="mobile:py-1">
                   <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                     Product Quantity
@@ -280,7 +280,7 @@ function AddProductsPoints({ handleModal }) {
                 </div>
               </div>
 
-              <div class="md:px-2 lg:px-2  py-1">
+              <div className="md:px-2 lg:px-2  py-1">
                 <div className="mobile:py-1">
                   <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                     Product Points
@@ -308,7 +308,7 @@ function AddProductsPoints({ handleModal }) {
                 </div>
               </div>
 
-              <div class="md:px-2 lg:px-2  py-1">
+              <div className="md:px-2 lg:px-2  py-1">
                 <div className="mobile:py-1">
                   <label className="text-xs font-semibold text-gray-700 mb-2 inline-block">
                     Barcode Number

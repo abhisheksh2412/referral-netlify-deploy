@@ -203,7 +203,7 @@ export default function AddUserBirthdayForm({
                 alt="Picture of the author"
                 className="rounded-full"
               />
-              <p class="text-base font-semibold">{selectedUser?.name}</p>
+              <p className="text-base font-semibold">{selectedUser?.name}</p>
             </div>
           )}
         </div>
@@ -219,7 +219,7 @@ export default function AddUserBirthdayForm({
             name="message"
             value={formik.values.message}
             onChange={formik.handleChange}
-            class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Please Write Message..."
           ></textarea>
           {formik.touched.message && formik.errors.message ? (
@@ -231,7 +231,7 @@ export default function AddUserBirthdayForm({
           <p className="text-base font-semibold mb-2">Upload Birthday Image</p>
           <UseSampleImage
             popper={false}
-            buttonClass="!w-fit"
+            buttonclassName="!w-fit"
             imageUrl="/assets/coupondemo.png"
           />
           <label
@@ -264,8 +264,8 @@ export default function AddUserBirthdayForm({
                   />
                 </svg>
                 <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                  <span class="font-semibold">Click to upload</span> or drag and
-                  drop
+                  <span className="font-semibold">Click to upload</span> or drag
+                  and drop
                 </p>
                 <p className="text-xs text-gray-500 dark:text-gray-400">
                   PNG, JPG or JPEG (MIN. 200x200 , MAX. 500x500px , 2MB)
@@ -328,7 +328,7 @@ export default function AddUserBirthdayForm({
               <button
                 onClick={handleCouponModal}
                 type="button"
-                class="flex items-center gap-2 text-white bg-blush-red font-medium rounded-lg text-sm px-5 py-3"
+                className="flex items-center gap-2 text-white bg-blush-red font-medium rounded-lg text-sm px-5 py-3"
               >
                 <FaPlusCircle />
                 Add
@@ -438,7 +438,7 @@ export default function AddUserBirthdayForm({
                   </p>
                   <UseSampleImage
                     popper={false}
-                    buttonClass="!w-fit"
+                    buttonclassName="!w-fit"
                     imageUrl="/assets/coupondemo.png"
                   />
                   <label
@@ -573,7 +573,7 @@ export default function AddUserBirthdayForm({
         <div className="mt-8 w-full">
           <button
             type="submit"
-            class="text-white w-full bg-blush-red font-medium rounded-lg text-md px-5 py-4 mb-2"
+            className="text-white w-full bg-blush-red font-medium rounded-lg text-md px-5 py-4 mb-2"
           >
             Submit
           </button>

@@ -17,7 +17,7 @@ function PaperCard() {
       <div className="p-16 mobile:p-2">
         <Container>
           <div className="p-12 mobile:p-6 tab:p-4 new-shadow  bg-white lg:w-3/5 mobile:w-full tab:w-9/12 sm:w-8/12  mx-auto rounded-lg">
-            <h3 class="text-left text-2xl leading-tight mb-6 font-semibold text-black">
+            <h3 className="text-left text-2xl leading-tight mb-6 font-semibold text-black">
               Add Paper Card{" "}
             </h3>
             <AddPaperCardForm />

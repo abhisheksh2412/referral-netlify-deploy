@@ -47,7 +47,7 @@ export default function InvoiceList() {
             const highlightedName = item.invoice.subscriber_name.replace(
               regex,
               (match) =>
-                `<span class="bg-pink-500 text-white px-1 rounded-md">${match}</span>`
+                `<span className="bg-pink-500 text-white px-1 rounded-md">${match}</span>`
             );
             return { ...item, highlightedName };
           });

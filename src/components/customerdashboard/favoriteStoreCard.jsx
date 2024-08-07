@@ -51,7 +51,7 @@ function FavoriteStoreCard({ data, handleView = null }) {
             />
           </button>
           <span
-            class={clsx(
+            className={clsx(
               "text-xs font-medium me-2 px-2.5 py-0.5 rounded-full absolute bottom-3 right-3",
               data?.status === "active"
                 ? "bg-green-100 text-green-800"

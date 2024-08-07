@@ -49,7 +49,7 @@ function CustomerProfileDropdown() {
 
             <div className="text-left">
               <h4 className="mb-1">{user?.data?.name}</h4>
-              <span class=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              <span className=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                 {user?.data?.role}
               </span>
             </div>
@@ -121,7 +121,7 @@ function CustomerProfileDropdown() {
 
           <div className="text-left">
             <h4 className="mb-1">{user?.data?.name}</h4>
-            <span class=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+            <span className=" rounded-full bg-green-50  px-3 py-1  text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
               {user?.data?.role}
             </span>
           </div>

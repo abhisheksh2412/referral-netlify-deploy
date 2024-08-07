@@ -31,7 +31,7 @@ export default function CouponFilter() {
   return (
     <Container>
       <Tabs value="new" className="">
-        <div class="block p-2 bg-white border border-gray-200 rounded-full shadow  dark:bg-gray-800 dark:border-gray-700  w-3/5 mx-auto">
+        <div className="block p-2 bg-white border border-gray-200 rounded-full shadow  dark:bg-gray-800 dark:border-gray-700  w-3/5 mx-auto">
           <TabsHeader
             className="bg-transparent"
             indicatorProps={{

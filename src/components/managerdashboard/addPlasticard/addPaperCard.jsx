@@ -104,8 +104,8 @@ function AddPaperCardForm() {
                     />
                   </svg>
                   <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                    <span class="font-semibold">Click to upload</span> or drag
-                    and drop
+                    <span className="font-semibold">Click to upload</span> or
+                    drag and drop
                   </p>
                   <p className="text-xs text-gray-500 dark:text-gray-400">
                     PNG, JPEG, or JPG (204.96 X 323.52 PX)
@@ -189,12 +189,12 @@ function AddPaperCardForm() {
             </div>
           </div>
 
-          <div class="mt-8 w-full">
+          <div className="mt-8 w-full">
             {/* Same Button For Paper and Plastic Card */}
 
             <button
               type="submit"
-              class="text-white w-full bg-blush-red font-medium rounded-lg text-md px-5 py-4 mb-2"
+              className="text-white w-full bg-blush-red font-medium rounded-lg text-md px-5 py-4 mb-2"
             >
               Save & Next
             </button>

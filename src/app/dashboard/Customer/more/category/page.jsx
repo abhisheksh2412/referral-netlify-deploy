@@ -118,7 +118,7 @@ function Category() {
                 <h1>Category Details</h1>
               </div>
               <div className="p-4 relative bg-gray-100 rounded-b-md">
-                <div class="p-2">
+                <div className="p-2">
                   <Image
                     src={viewCategoryDetailsModel?.category_image}
                     width={150}
@@ -131,7 +131,7 @@ function Category() {
                 <h3 className="text-center text-black py-1 font-medium text-lg">
                   {viewCategoryDetailsModel?.name}
                 </h3>
-                <p class="text-md text-center text-black">
+                <p className="text-md text-center text-black">
                   {viewCategoryDetailsModel?.description}
                 </p>
               </div>

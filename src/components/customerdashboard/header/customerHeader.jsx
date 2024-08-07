@@ -65,10 +65,10 @@ export default function CustomerHeader() {
           <div className="flex mobile:gap-2 gap-1">
             <div className="md:hidden lg:hidden flex gap-1 mobile:gap-2 m-nav">
               <Notification />
-              <button className="relative inline-flex items-center gap-1 px-3 mobile:px-2 mobile:font-normal py-2.5 text-sm mobile:h-10	 font-medium text-center text-white bg-[#0e0a38] rounded-lg">
+              {/* <button className="relative inline-flex items-center gap-1 px-3 mobile:px-2 mobile:font-normal py-2.5 text-sm mobile:h-10	 font-medium text-center text-white bg-[#0e0a38] rounded-lg">
                 <FaGift />
                 <strong>120</strong>
-              </button>
+              </button> */}
               <ManagerProfileDropdown />
             </div>
 

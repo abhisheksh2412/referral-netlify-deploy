@@ -76,7 +76,7 @@ function CouponsCard({ data, handleView, isdelete = true }) {
 
         <div className="flex items-center justify-between gap-1 mt-12 mb-2 mobile:inline-block">
           <CouponStatus status={data?.status} />
-          <h6 class="flex items-center text-ellipsis justify-center gap-1 bg-white text-black-800 text-xs font-medium me-2 px-2.5 py-1 rounded-full mobile:mt-3">
+          <h6 className="flex items-center text-ellipsis justify-center gap-1 bg-white text-black-800 text-xs font-medium me-2 px-2.5 py-1 rounded-full mobile:mt-3">
             <IoIosCheckmarkCircle className="text-blush-red text-base" />{" "}
             {data?.coupon_value}
           </h6>

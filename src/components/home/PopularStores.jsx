@@ -3,7 +3,7 @@ import { useCallback, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Container from "../globals/container";
 import { Swiper, SwiperSlide } from "swiper/react";
-import Image from 'next/image'
+import Image from "next/image";
 
 export default function PopularStore() {
   const dispatch = useDispatch();
@@ -50,23 +50,19 @@ export default function PopularStore() {
               slidesPerView: 5,
               spaceBetween: 50,
             },
-
           }}
-
         >
           {popularStores?.map((item, index) => (
             <SwiperSlide key={index}>
               <div className=" bg-white rounded-lg  relative p-0 rounded-b-lg mb-4 cursor-pointer hover:shadow-md transition-shadow">
                 <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                
                   <Image
                     src={item?.logo}
                     width={250}
                     height={250}
                     alt="Picture of the author"
-                    class="!w-32 !h-32 mx-auto object-cover"
+                    className="!w-32 !h-32 mx-auto object-cover"
                   />
-
                 </div>
                 <h3 className="text-center p-4 font-medium">{item?.name}</h3>
               </div>

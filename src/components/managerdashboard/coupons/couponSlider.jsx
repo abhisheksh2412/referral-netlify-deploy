@@ -104,6 +104,7 @@ export default function CouponSlider() {
               <CouponDetails
                 data={viewCoupon}
                 isdelete={true}
+                handleClose={handleViewcoupon}
                 refreshFunc={fetchManagerCoupon}
               />
             </div>

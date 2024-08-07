@@ -90,7 +90,7 @@ function VoucherTable() {
                     {item?.coupon_code}
                   </th>
                   <td className="px-6 py-4 text-right">
-                    <span class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                    <span className="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                       {item?.status}
                     </span>
                   </td>
@@ -105,7 +105,7 @@ function VoucherTable() {
                 VUCHR024
               </th>
               <td className="px-6 py-4 text-right">
-                <span class="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                <span className="inline-flex items-center rounded-md bg-red-50 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
                   Deactive
                 </span>
               </td>

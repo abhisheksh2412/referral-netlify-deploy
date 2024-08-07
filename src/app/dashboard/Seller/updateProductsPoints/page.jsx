@@ -23,24 +23,28 @@ function UpdateProductsPoints() {
       <div className="bg-gray-100 px-4  py-8 md:py-16 lg:py-16">
         <Container>
           <div className="lg:w-2/4 mobile:w-full md:w-5/6 md-landscape::w-5/6 mx-auto lg:mt-12 mobile:mt-3 ">
-            <div class="bg-white  shadow-md rounded-lg mt-5">
-              <div className="flex items-center justify-between !inline-block w-full mobile:w-full p-5  bg-white border-b border-gray-200 rounded-t-lg
+            <div className="bg-white  shadow-md rounded-lg mt-5">
+              <div
+                className="flex items-center justify-between !inline-block w-full mobile:w-full p-5  bg-white border-b border-gray-200 rounded-t-lg
 
-">
+"
+              >
                 <h4 className="font-semibold text-base">Update</h4>
               </div>
 
-              <div className="p-8 rounded-b-lg
+              <div
+                className="p-8 rounded-b-lg
 
-">
-                <div class="  sm:rounded-lg ">
-                  <div class="md:px-2 lg:px-2 py-1 mb-3">
+"
+              >
+                <div className="  sm:rounded-lg ">
+                  <div className="md:px-2 lg:px-2 py-1 mb-3">
                     <div className="mobile:py-1">
                       <label className="text-base font-medium text-black mb-2 inline-block">
                         Product Image
                       </label>
 
-                      <div class="flex items-center justify-center w-full">
+                      <div className="flex items-center justify-center w-full">
                         <label
                           for="dropzone-file"
                           className="flex flex-col items-center justify-center w-full h-42 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-700 hover:bg-gray-100 dark:border-gray-600 dark:hover:border-gray-500 dark:hover:bg-gray-600"
@@ -62,7 +66,9 @@ function UpdateProductsPoints() {
                               />
                             </svg>
                             <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                              <span className="font-semibold">Click to upload</span>{" "}
+                              <span className="font-semibold">
+                                Click to upload
+                              </span>{" "}
                               or drag and drop
                             </p>
                             <p className="text-xs text-gray-500 dark:text-gray-400">
@@ -79,7 +85,7 @@ function UpdateProductsPoints() {
                     </div>
                   </div>
 
-                  <div class="md:px-2 lg:px-2 py-1 mb-3">
+                  <div className="md:px-2 lg:px-2 py-1 mb-3">
                     <div className="mobile:py-1">
                       <label className="text-base font-medium text-black mb-2 inline-block">
                         Product Name
@@ -94,7 +100,7 @@ function UpdateProductsPoints() {
                     </div>
                   </div>
 
-                  <div class="md:px-2 lg:px-2 py-1 mb-3">
+                  <div className="md:px-2 lg:px-2 py-1 mb-3">
                     <div className="mobile:py-1">
                       <label className="text-base font-medium text-black mb-2 inline-block">
                         Product Quantity
@@ -109,7 +115,7 @@ function UpdateProductsPoints() {
                     </div>
                   </div>
 
-                  <div class="md:px-2 lg:px-2 py-1 mb-3">
+                  <div className="md:px-2 lg:px-2 py-1 mb-3">
                     <div className="mobile:py-1">
                       <label className="text-base font-medium text-black mb-2 inline-block">
                         Product Points
@@ -124,7 +130,7 @@ function UpdateProductsPoints() {
                     </div>
                   </div>
 
-                  <div class="md:px-2 lg:px-2 py-1 mb-3">
+                  <div className="md:px-2 lg:px-2 py-1 mb-3">
                     <div className="mobile:py-1">
                       <label className="text-base font-medium text-black mb-2 inline-block">
                         Barcode Number

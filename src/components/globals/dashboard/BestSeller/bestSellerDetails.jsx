@@ -46,7 +46,7 @@ export default function BestSellerDetails({ data }) {
             {data?.product?.points}
           </h5>
           <h5 className="text-md text-gray-700 font-medium">
-            <span class="bg-green-100 text-green-800 text-md font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">
+            <span className="bg-green-100 text-green-800 text-md font-medium me-2 px-4 py-1.5 rounded-full dark:bg-green-900 dark:text-green-300">
               {data?.product?.store_name
                 ? data?.product?.store_name
                 : "No Store"}

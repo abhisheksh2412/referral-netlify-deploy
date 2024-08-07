@@ -3,7 +3,7 @@ import { config } from "@/config/config";
 import { MdDelete } from "react-icons/md";
 import moment from "moment";
 import Image from "next/image";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "next/navigation";
 import { useCallback } from "react";
 import {
@@ -12,6 +12,7 @@ import {
 } from "@/store/slices/customer";
 import { DeleteCouponById } from "@/store/slices/coupon";
 import Swal from "sweetalert2";
+import toast from "react-hot-toast";
 
 export default function CouponDetails({
   data,
@@ -22,6 +23,7 @@ export default function CouponDetails({
   const dispatch = useDispatch();
   const params = useSearchParams();
   const storeId = useSearchParams().get("store_id");
+  const coupon = useSelector((state) => state.coupon);
   const CustomersAllData = useCallback(() => {
     const id = params.get("store_id");
     dispatch(GetCustomerDashData(id));
@@ -37,11 +39,14 @@ export default function CouponDetails({
         confirmButtonColor: "#3085d6",
         cancelButtonColor: "#d33",
         confirmButtonText: "Yes, delete it!",
-      }).then((result) => {
+      }).then(async (result) => {
         if (result.isConfirmed) {
-          dispatch(DeleteCouponById(id));
+          await dispatch(DeleteCouponById(id));
           refreshFunc();
-          handleClose(null);
+          if (coupon?.isSuccess) {
+            handleClose(null);
+            toast.success("Deleted Success");
+          }
         }
       });
     },
@@ -83,7 +88,6 @@ export default function CouponDetails({
               width={150}
               height={150}
               className="rounded-md mx-auto"
-              
             />
             <h4 className="text-sm font-medium text-gray-700 text-center">
               COUPON CODE : <strong>{data?.coupon_code}</strong>

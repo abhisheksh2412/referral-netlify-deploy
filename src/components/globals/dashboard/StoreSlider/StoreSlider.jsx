@@ -80,7 +80,7 @@ export default function StoresSlider({ details = true }) {
                           width={300}
                           height={300}
                           alt="Picture of the author"
-                          class="w-32 h-32 mx-auto object-cover"
+                          className="w-32 h-32 mx-auto object-cover"
                         />
                       </div>
                       <h3 className="text-center p-4 font-medium">
@@ -103,8 +103,6 @@ export default function StoresSlider({ details = true }) {
               </div>
               <div className="max-h-[80vh] overflow-auto">
                 <div className="relative m-2 rounded-lg flex items-center	 w-40 h-40 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                 
-
                   <Image
                     src={config.IMAGE_URL_PATH + selectedData?.logo}
                     width={500}
@@ -163,7 +161,8 @@ export default function StoresSlider({ details = true }) {
                         <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                           <th
                             scope="row"
-                            className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                            className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                          >
                             <h5>Town</h5>
                           </th>
                           <td className="px-6 py-2">

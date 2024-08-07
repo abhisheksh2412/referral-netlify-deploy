@@ -1,10 +1,9 @@
 "use client";
 import { MdEdit } from "react-icons/md";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useFormik } from "formik";
 import { SellerEditProfileValidationSchema } from "@/validators/authValidations";
-import { UpdateProfileBySellerId } from "@/store/slices/seller";
 import Loader from "../../Loader";
 import { FindSelfUser } from "@/store/slices/authSlice";
 import Swal from "sweetalert2";
@@ -16,7 +15,6 @@ export default function CustomerEditProfile({ handleOpen }) {
   const user = useSelector((state) => state.auth.data);
   const [selectedImage, setSelectedImage] = useState(null);
   const [ImageBinary, setImageBinary] = useState(null);
-
 
   // Initialize Formik
   const formik = useFormik({
@@ -71,13 +69,12 @@ export default function CustomerEditProfile({ handleOpen }) {
       <div>
         <form onSubmit={formik.handleSubmit}>
           <span className="relative table mx-auto">
-          
             <Image
-               src={selectedImage || user.profile_photo_url}
+              src={selectedImage || user.profile_photo_url}
               width={500}
               height={500}
-             alt="seller avatar"
-               className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
+              alt="seller avatar"
+              className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
             />
 
             <div

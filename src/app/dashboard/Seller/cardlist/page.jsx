@@ -120,10 +120,10 @@ function CardList() {
                   No Cards Found
                 </h5>
               ) : (
-                <div class="grid lg:grid-cols-3 mobile:grid-cols-1 md:grid-cols-2 sm:grid-cols-6 gap-4">
+                <div className="grid lg:grid-cols-3 mobile:grid-cols-1 md:grid-cols-2 sm:grid-cols-6 gap-4">
                   {handleSearch(cards?.cards, search)?.map((item, index) => (
                     <div key={index} className="w-full mb-4">
-                      <div class=" py-2 px-2 bg-white border border-gray-200 rounded-[1.5rem] shadow dark:bg-gray-800 dark:border-gray-700 relative">
+                      <div className=" py-2 px-2 bg-white border border-gray-200 rounded-[1.5rem] shadow dark:bg-gray-800 dark:border-gray-700 relative">
                         <button
                           onClick={() => handleDeleteCard(item?.card_id)}
                           className="absolute w-12 h-12 rounded-full right-6 -top-5 bg-white text-red-500 text-xl flex justify-center items-center"

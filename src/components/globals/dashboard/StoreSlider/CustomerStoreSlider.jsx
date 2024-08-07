@@ -126,15 +126,13 @@ export default function CustomerStoresSlider({ details = true }) {
                       )}
                     >
                       <div className="p-2 rounded-t-lg bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-                      
                         <Image
                           src={config.IMAGE_URL_PATH + item?.logo}
                           width={500}
                           height={500}
                           alt="StoreImage"
-                          class="w-32 h-32 mx-auto object-cover"
+                          className="w-32 h-32 mx-auto object-cover"
                         />
-
                       </div>
                       <h3 className="text-center p-4 font-medium">
                         {item?.name}

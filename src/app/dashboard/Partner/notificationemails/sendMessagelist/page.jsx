@@ -93,7 +93,7 @@ function SendMessageList() {
                   <div className="flex justify-end mobile:justify-center mobile:mt-3">
                     <Link
                       href="/dashboard/Partner/addBirthday/sendMessage"
-                      class=" bg-blush-red flex items-center justify-center gap-2 py-3 rounded-md text-white px-4"
+                      className=" bg-blush-red flex items-center justify-center gap-2 py-3 rounded-md text-white px-4"
                     >
                       <IoIosSend className="w-6 h-6" />
                       Add Send Message

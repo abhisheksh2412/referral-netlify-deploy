@@ -113,7 +113,7 @@ function ProfileDropdown() {
                 </Link>
               </li>
               <li>
-                <hr class="my-0 border-blue-gray-50" role="menuitem" />
+                <hr className="my-0 border-blue-gray-50" role="menuitem" />
               </li>
               <li>
                 <button
@@ -194,7 +194,7 @@ function ProfileDropdown() {
               </Link>
             </li>
             <li>
-              <hr class="my-0 border-blue-gray-50" role="menuitem" />
+              <hr className="my-0 border-blue-gray-50" role="menuitem" />
             </li>
             <li>
               <button

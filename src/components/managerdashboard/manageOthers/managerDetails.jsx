@@ -6,7 +6,12 @@ import { Clock10Icon } from "lucide-react";
 import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { GetPartner, VerifyManager } from "@/store/slices/partner";
-import { GetSellerStorebyId, GetStores, PartnerGetManager, PartnerGetSeller } from "@/store/slices/seller";
+import {
+  GetSellerStorebyId,
+  GetStores,
+  PartnerGetManager,
+  PartnerGetSeller,
+} from "@/store/slices/seller";
 import EasySelect from "@/components/globals/EasySelect";
 import { Button } from "@material-tailwind/react";
 import { popup } from "@/_utils/alerts";
@@ -108,51 +113,53 @@ function ManagerDetails({ data, handleClose }) {
             Personal Info
           </h3>
 
-          <div class="relative overflow-x-auto shadow-md sm:rounded-lg mb-3">
-            <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+          <div className="relative overflow-x-auto shadow-md sm:rounded-lg mb-3">
+            <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
               <tbody>
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Name
                   </th>
-                  <td class="px-6 py-2 font-medium text-black">{data?.name}</td>
+                  <td className="px-6 py-2 font-medium text-black">
+                    {data?.name}
+                  </td>
                 </tr>
 
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Email
                   </th>
-                  <td class="px-6 py-2 font-medium text-black">
+                  <td className="px-6 py-2 font-medium text-black">
                     {data?.email}
                   </td>
                 </tr>
 
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Contact
                   </th>
-                  <td class="px-6 py-2 font-medium text-black">
+                  <td className="px-6 py-2 font-medium text-black">
                     {data?.mobile_number}
                   </td>
                 </tr>
 
-                <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                   <th
                     scope="row"
-                    class="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                    className="px-6 py-2 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                   >
                     Date
                   </th>
-                  <td class="px-6 py-2 font-medium text-black">
+                  <td className="px-6 py-2 font-medium text-black">
                     {moment(data?.created_at).format("DD-MM-YYYY hh:mm A")}
                   </td>
                 </tr>

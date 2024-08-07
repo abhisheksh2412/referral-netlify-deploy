@@ -169,7 +169,7 @@ export default function CreateComboForm() {
           <p className="text-base font-semibold mb-2">Upload Combo Image</p>
           <UseSampleImage
             popper={false}
-            buttonClass="!w-fit"
+            buttonclassName="!w-fit"
             imageUrl="/assets/combodemo.png"
           />
           <label

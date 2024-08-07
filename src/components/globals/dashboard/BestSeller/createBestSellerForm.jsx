@@ -98,7 +98,7 @@ export default function CreateBestSellerForm() {
             </p>
             <UseSampleImage
               popper={false}
-              buttonClass="!w-fit"
+              buttonclassName="!w-fit"
               imageUrl="/assets/bestsellerdemo.png"
             />
             <label
@@ -119,7 +119,7 @@ export default function CreateBestSellerForm() {
                   <>
                     <CloudUpload className="text-gray-500" />
                     <p className="mb-2 text-sm text-gray-500 dark:text-gray-400">
-                      <span class="font-semibold">Click to upload</span>
+                      <span className="font-semibold">Click to upload</span>
                     </p>
                     <p className="text-xs text-gray-500 dark:text-gray-400">
                       JPG, JPEG, or PNG (MIN 200x200px ,Max. 500x500px , 2MB)

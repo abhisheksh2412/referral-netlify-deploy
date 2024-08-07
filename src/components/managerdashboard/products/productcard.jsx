@@ -70,7 +70,7 @@ function ProductCard({ data, handleModal = null, isActionAllow = true }) {
         </div>
         <h3
           onClick={() => handleModal("view", data)}
-          class="text-center mobile:text-sm font-semibold pt-3"
+          className="text-center mobile:text-sm font-semibold pt-3"
         >
           {data?.name}
         </h3>

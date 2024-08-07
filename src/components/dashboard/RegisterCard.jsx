@@ -114,7 +114,7 @@ export default function RegisterCard({ handleClose }) {
               ) : null}
             </div>
           </div>
-          <div class="mb-6">
+          <div className="mb-6">
             <label
               for="email"
               className="block mb-2 text-sm font-medium text-gray-900 dark:text-white"
@@ -135,7 +135,7 @@ export default function RegisterCard({ handleClose }) {
             ) : null}
           </div>
 
-          <div class="mb-6">
+          <div className="mb-6">
             <EasySelect
               options={cardsList}
               handleChange={(value) =>

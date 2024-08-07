@@ -121,7 +121,7 @@ export default function UpdateProduct({ data, handleModal }) {
             />
           </button>
         </div>
-        <UseSampleImage popper={false} buttonClass="!max-w-fit" />
+        <UseSampleImage popper={false} buttonclassName="!max-w-fit" />
         {/*  Product image Upload */}
         <form onSubmit={formik.handleSubmit}>
           <input

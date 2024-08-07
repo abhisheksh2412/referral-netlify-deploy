@@ -45,7 +45,7 @@ function CustomerStoreCard({ stores, details = false }) {
                         width={500}
                         height={500}
                         alt="StoreImage"
-                        class="w-32 h-32 mx-auto object-cover"
+                        className="w-32 h-32 mx-auto object-cover"
                       />
                     </div>
                     <h3 className="text-center p-4 font-medium">Store Name</h3>
@@ -60,7 +60,6 @@ function CustomerStoreCard({ stores, details = false }) {
           </div>
           <div className="max-h-[80vh] overflow-auto">
             <div className="relative m-2 rounded-md flex items-center	 w-48 h-48 shadow-lg mx-auto p-2  bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50">
-            
               <Image
                 src="/assets/store.png"
                 width={500}

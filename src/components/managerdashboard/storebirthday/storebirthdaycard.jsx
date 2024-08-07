@@ -58,13 +58,12 @@ function StoreBirthdayCard({ data, handleEdit = null }) {
           </button>
         </div>
         <div className="flex items-center gap-2">
-         
           <Image
             src={config.IMAGE_URL_PATH + data?.birthday_image}
             width={500}
             height={500}
             alt="Picture of the author"
-            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
+            className="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
           />
 
           <div>
@@ -90,7 +89,7 @@ function StoreBirthdayCard({ data, handleEdit = null }) {
           </div>
         </div>
 
-        <button class=" bg-blush-red inline-block flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6">
+        <button className=" bg-blush-red inline-block flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6">
           Send <IoIosSend />
         </button>
       </div>

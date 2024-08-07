@@ -113,7 +113,7 @@ export default function CreateMenuCafeForm({
         <div className="mt-6 w-full">
           <p className="text-base font-semibold mb-2">Upload Menu Cafe Image</p>
           <UseSampleImage
-            buttonClass="!w-fit"
+            buttonclassName="!w-fit"
             popper={false}
             imageUrl="/assets/menucafedemo.png"
           />
@@ -191,60 +191,58 @@ export default function CreateMenuCafeForm({
           )}
         </div>
 
+        <div className="md:grid md:grid-flow-col md:gap-4 lg:grid lg:grid-flow-col lg:gap-4">
+          <div className="mt-6 w-full">
+            <p className="text-base font-semibold mb-2">Point</p>
+            <input
+              type="text"
+              id="points"
+              name="points"
+              className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
+              placeholder="Enter Point"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.points}
+            />
+            {formik.errors.points && formik.touched.points && (
+              <p className="text-red-500 text-xs">{formik.errors.points}</p>
+            )}
+          </div>
 
-       <div className="md:grid md:grid-flow-col md:gap-4 lg:grid lg:grid-flow-col lg:gap-4">
-        <div className="mt-6 w-full">
-          <p className="text-base font-semibold mb-2">Point</p>
-          <input
-            type="text"
-            id="points"
-            name="points"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
-            placeholder="Enter Point"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.points}
-          />
-          {formik.errors.points && formik.touched.points && (
-            <p className="text-red-500 text-xs">{formik.errors.points}</p>
-          )}
-        </div>
+          <div className="mt-6 w-full">
+            <p className="text-base font-semibold mb-2">Price</p>
+            <input
+              type="number"
+              id="price"
+              name="price"
+              className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
+              placeholder="Enter Point"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.price}
+            />
+            {formik.errors.price && formik.touched.price && (
+              <p className="text-red-500 text-xs">{formik.errors.price}</p>
+            )}
+          </div>
 
-        <div className="mt-6 w-full">
-          <p className="text-base font-semibold mb-2">Price</p>
-          <input
-            type="number"
-            id="price"
-            name="price"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
-            placeholder="Enter Point"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.price}
-          />
-          {formik.errors.price && formik.touched.price && (
-            <p className="text-red-500 text-xs">{formik.errors.price}</p>
-          )}
+          <div className="mt-6 w-full">
+            <p className="text-base font-semibold mb-2">Weight</p>
+            <input
+              type="text"
+              id="weight"
+              name="weight"
+              className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
+              placeholder="Enter Weight"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.weight}
+            />
+            {formik.errors.weight && formik.touched.weight && (
+              <p className="text-red-500 text-xs">{formik.errors.weight}</p>
+            )}
+          </div>
         </div>
-
-        <div className="mt-6 w-full">
-          <p className="text-base font-semibold mb-2">Weight</p>
-          <input
-            type="text"
-            id="weight"
-            name="weight"
-            className="bg-gray-50 border text-gray-900 text-sm rounded block w-full p-3"
-            placeholder="Enter Weight"
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            value={formik.values.weight}
-          />
-          {formik.errors.weight && formik.touched.weight && (
-            <p className="text-red-500 text-xs">{formik.errors.weight}</p>
-          )}
-        </div>
-        </div>
-
 
         <div className="mt-5 w-full">
           <p className="text-base font-semibold mb-2">Description</p>

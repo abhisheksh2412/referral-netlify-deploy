@@ -23,7 +23,7 @@ function ExtraPoints({ data }) {
               <h3 className="text-center font-semibold text-sm mb-2 line-clamp-1">
                 {data?.product_name}
               </h3>
-              <h5 class="bg-blush-red text-white text-xs font-medium me-2 px-3 py-1.5 rounded-full dark:bg-pink-900 dark:text-pink-300 inline-flex items-center gap-1">
+              <h5 className="bg-blush-red text-white text-xs font-medium me-2 px-3 py-1.5 rounded-full dark:bg-pink-900 dark:text-pink-300 inline-flex items-center gap-1">
                 <AiFillCheckCircle />
                 {data?.earn_point}
               </h5>

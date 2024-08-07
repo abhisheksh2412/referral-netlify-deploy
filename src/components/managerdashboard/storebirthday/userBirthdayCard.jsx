@@ -92,7 +92,7 @@ function UserBirthdayCard({ data, handleEdit = null }) {
             width={500}
             height={500}
             alt="Picture of the author"
-            class="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
+            className="w-20 h-20 ml-0 rounded-full p-1 bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50"
           />
 
           <div>
@@ -123,7 +123,7 @@ function UserBirthdayCard({ data, handleEdit = null }) {
 
         <button
           onClick={() => handlesend(data?.id)}
-          class=" bg-blush-red  flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6"
+          className=" bg-blush-red  flex items-center justify-center gap-2 py-2 rounded-md text-white px-4 w-full mt-6"
         >
           Send <IoIosSend />
         </button>

@@ -41,16 +41,13 @@ function SellerProfile() {
                 <div className="flex justify-center items-center text-center ">
                   <div className="">
                     <div className="text-center relative -top-[30px] w-36 h-36 mx-auto bg-gray-100 rounded-full py-5">
-                     
-
                       <Image
                         src={user?.profile_photo_url}
                         width={500}
                         height={500}
                         alt="sellar avatar"
-                        class="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
+                        className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
                       />
-
                     </div>
                     <div>
                       <h3 className="text-base font-semibold mb-1 text-center ">
@@ -61,7 +58,7 @@ function SellerProfile() {
                         <strong>Email:</strong>
                         <span>{user?.email}</span>
                       </p>
-                      <span class="inline-flex items-center rounded-md bg-pink-100 px-4 py-2 text-sm font-medium text-pink-700 ring-1 ring-inset ring-pink-600/20">
+                      <span className="inline-flex items-center rounded-md bg-pink-100 px-4 py-2 text-sm font-medium text-pink-700 ring-1 ring-inset ring-pink-600/20">
                         {user?.role}
                       </span>
                     </div>
@@ -70,7 +67,7 @@ function SellerProfile() {
               </div>
 
               <div className="absolute right-0 top-0 p-7">
-                <span class="inline-flex items-center rounded-md bg-green-50 px-3 py-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+                <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                   <RiVerifiedBadgeFill />
                   Verified
                 </span>
@@ -80,7 +77,7 @@ function SellerProfile() {
                 <button
                   onClick={handleSetEditModal}
                   type="button"
-                  class="inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20"
+                  className="inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20"
                 >
                   <MdOutlineEdit />
                   Edit Profile
@@ -91,7 +88,7 @@ function SellerProfile() {
                 <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                   <tbody>
                     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700   ">
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="text-base font-semibold flex items-center gap-2">
                           <BsFillHousesFill className="text-pink-400" />
                           House No :
@@ -101,7 +98,7 @@ function SellerProfile() {
                     </tr>
 
                     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="text-base font-semibold flex items-center gap-2">
                           <FaStreetView className="text-pink-400" />
                           Street :
@@ -111,7 +108,7 @@ function SellerProfile() {
                     </tr>
 
                     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="text-base font-semibold flex items-center gap-2">
                           {" "}
                           <BiSolidCity className="text-pink-400" /> City :
@@ -121,7 +118,7 @@ function SellerProfile() {
                     </tr>
 
                     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="text-base font-semibold flex items-center gap-2">
                           <GiPostOffice className="text-pink-400" />
                           Postal Code :
@@ -131,7 +128,7 @@ function SellerProfile() {
                     </tr>
 
                     <tr>
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                         <div className="text-base font-semibold flex items-center gap-2">
                           <FaMobileAlt className="text-pink-400" />
                           Mobile No :
@@ -141,7 +138,7 @@ function SellerProfile() {
                     </tr>
 
                     <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
-                      <th class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></th>
+                      <th className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"></th>
                       <td></td>
                     </tr>
                   </tbody>

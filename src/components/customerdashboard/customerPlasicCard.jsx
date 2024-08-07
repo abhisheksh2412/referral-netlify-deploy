@@ -47,8 +47,8 @@ function CustomerPlasticCard({ data }) {
         <div className="absolute w-[217px] h-[277px] bg-[#ffd8e545] right-[-130px] bottom-0 top-[-8px] rounded-full border-[27px] border-[#ffffff85] rotate-[-164deg]"></div>
       </div>
       <div className="flex justify-between items-center px-2 pt-2 mt-2">
-        <h3 class="font-semibold">Rewards Points</h3>
-        <h5 class="bg-green-100 text-green-800 text-xs font-medium px-6 py-2 rounded-full dark:bg-green-900 dark:text-green-300 inline-block">
+        <h3 className="font-semibold">Rewards Points</h3>
+        <h5 className="bg-green-100 text-green-800 text-xs font-medium px-6 py-2 rounded-full dark:bg-green-900 dark:text-green-300 inline-block">
           {data?.loyalty_card_details?.customerPoints}
         </h5>
       </div>

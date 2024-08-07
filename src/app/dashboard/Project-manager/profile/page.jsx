@@ -37,15 +37,13 @@ function Profile() {
               <div className="flex justify-center items-center text-center ">
                 <div className="">
                   <div className="text-center relative -top-[30px] w-36 h-36 mx-auto bg-gray-100 rounded-full py-5">
-                    
                     <Image
-                     src={user?.profile_photo_url}
+                      src={user?.profile_photo_url}
                       width={500}
                       height={500}
                       alt="sellar avatar"
-                      class="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
+                      className="w-28 h-28 p-1 rounded-full ring-2 ring-gray-300 dark:ring-gray-500 mx-auto table"
                     />
-
                   </div>
                   <div>
                     <h3 className="text-base font-semibold mb-1 text-center ">
@@ -56,7 +54,7 @@ function Profile() {
                       <strong>Email:</strong>
                       <span>{user?.email}</span>
                     </p>
-                    <span class="inline-flex items-center rounded-md bg-pink-100 px-4 py-2 text-sm font-medium text-pink-700 ring-1 ring-inset ring-pink-600/20">
+                    <span className="inline-flex items-center rounded-md bg-pink-100 px-4 py-2 text-sm font-medium text-pink-700 ring-1 ring-inset ring-pink-600/20">
                       {user?.role}
                     </span>
                   </div>
@@ -65,7 +63,7 @@ function Profile() {
             </div>
 
             <div className="absolute left-0 top-0 p-7 mobile:p-0 mobile:pt-2">
-              <span class="inline-flex items-center rounded-md bg-green-50 px-3 py-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
+              <span className="inline-flex items-center rounded-md bg-green-50 px-3 py-2 text-xs font-medium text-green-700 ring-1 ring-inset ring-green-600/20">
                 <RiVerifiedBadgeFill />
                 Verified
               </span>
@@ -75,79 +73,79 @@ function Profile() {
               <button
                 onClick={handleSetEditModal}
                 type="button"
-                class="inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20"
+                className="inline-flex items-center gap-2 rounded-md bg-blue-50 px-3 py-2 text-xs font-medium text-blue-700 ring-1 ring-inset ring-blue-600/20"
               >
                 <MdOutlineEdit />
                 Edit Profile
               </button>
             </div>
 
-            <div class="relative overflow-x-auto shadow-md sm:rounded-lg mt-12">
-              <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+            <div className="relative overflow-x-auto shadow-md sm:rounded-lg mt-12">
+              <table className="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
                 <tbody>
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <div className="text-base font-semibold flex items-center gap-2">
                         <BsFillHousesFill className="text-pink-400" />
                         House No :
                       </div>
                     </th>
-                    <td class="px-6 py-4">{user?.address?.house_no}</td>
+                    <td className="px-6 py-4">{user?.address?.house_no}</td>
                   </tr>
 
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <div className="text-base font-semibold flex items-center gap-2">
                         <FaStreetView className="text-pink-400" />
                         Street :
                       </div>
                     </th>
-                    <td class="px-6 py-4">{user?.address?.street}</td>
+                    <td className="px-6 py-4">{user?.address?.street}</td>
                   </tr>
 
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <div className="text-base font-semibold flex items-center gap-2">
                         {" "}
                         <BiSolidCity className="text-pink-400" /> City :
                       </div>
                     </th>
-                    <td class="px-6 py-4">{user?.address?.city}</td>
+                    <td className="px-6 py-4">{user?.address?.city}</td>
                   </tr>
 
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <div className="text-base font-semibold flex items-center gap-2">
                         <GiPostOffice className="text-pink-400" />
                         Postal Code :
                       </div>
                     </th>
-                    <td class="px-6 py-4">{user?.address?.postal_code}</td>
+                    <td className="px-6 py-4">{user?.address?.postal_code}</td>
                   </tr>
 
-                  <tr class="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
+                  <tr className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700">
                     <th
                       scope="row"
-                      class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
+                      className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
                     >
                       <div className="text-base font-semibold flex flex-nowrap text-nowrap items-center gap-2">
                         <FaMobileAlt className="text-pink-400" />
                         Mobile No :
                       </div>
                     </th>
-                    <td class="px-6 py-4">{user?.mobile_number}</td>
+                    <td className="px-6 py-4">{user?.mobile_number}</td>
                   </tr>
                 </tbody>
               </table>

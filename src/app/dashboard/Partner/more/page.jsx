@@ -45,7 +45,7 @@ function More() {
                     href={`/dashboard/Partner/more/${item?.title}`}
                     className="group"
                   >
-                    <div class="bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-t-lg">
+                    <div className="bg-gradient-to-r from-pink-100 via-pink-50 to-pink-50 p-2 rounded-t-lg">
                       <Image
                         src={
                           config?.IMAGE_URL_PATH.replace(
@@ -59,8 +59,8 @@ function More() {
                         className="mx-auto"
                       />
                     </div>
-                    <div class="bg-white rounded-b-lg p-3 group-hover:bg-blush-red">
-                      <h3 class="line-clamp-1 text-black font-normal text-base text-center group-hover:text-white">
+                    <div className="bg-white rounded-b-lg p-3 group-hover:bg-blush-red">
+                      <h3 className="line-clamp-1 text-black font-normal text-base text-center group-hover:text-white">
                         {item?.title} ({item?.count})
                       </h3>
                     </div>

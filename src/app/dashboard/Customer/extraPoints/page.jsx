@@ -128,7 +128,7 @@ function ExtraPage() {
                     Dummy Product
                   </h3>
                   <div className="flex justify-center">
-                    <h5 class="absolute top-0 right-0 m-5 bg-blush-red text-white text-sm font-medium me-2 px-3 py-1.5 rounded-full dark:bg-pink-900 dark:text-pink-300 inline-flex items-center gap-1">
+                    <h5 className="absolute top-0 right-0 m-5 bg-blush-red text-white text-sm font-medium me-2 px-3 py-1.5 rounded-full dark:bg-pink-900 dark:text-pink-300 inline-flex items-center gap-1">
                       <AiFillCheckCircle className="w-6 h-6" />
                       250 Points
                     </h5>

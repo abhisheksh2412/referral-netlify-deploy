@@ -10,13 +10,11 @@ import TopHeader from "@/components/home/homeHeader/topheader";
 import InnerBanner from "@/components/innerpagebanner/page";
 import withAuth from "@/hoc/withAuth";
 import { GetAllCustomerStores } from "@/store/slices/seller";
-import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 function ViewCustomerStore() {
   const dispatch = useDispatch();
-  const navigate = useRouter();
   const user = useSelector((state) => state.auth.data);
   const [search, setSearch] = useState("");
   const [selectedData, setSelectedData] = useState(null);

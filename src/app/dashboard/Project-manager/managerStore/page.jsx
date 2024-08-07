@@ -58,7 +58,7 @@ function ManagerStore() {
                           width={500}
                           height={500}
                           alt="Picture of the author"
-                          class="w-32 h-32 mx-auto object-cover"
+                          className="w-32 h-32 mx-auto object-cover"
                         />
                       </div>
                       <h3 className="text-center p-4 font-medium">
