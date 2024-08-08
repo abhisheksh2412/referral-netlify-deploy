@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { IoMdHome } from "react-icons/io";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
-import { Radio } from "@material-tailwind/react";
+import { Button, Radio } from "@material-tailwind/react";
 import { useStateManager } from "@/providers/useStateManager";
 import { useFormik } from "formik";
 import { GetCardOrderTotal, GetStores } from "@/store/slices/seller";
@@ -16,7 +16,6 @@ import {
   resetRedirectUrl,
 } from "@/store/slices/common";
 import usePaymentCheckout from "@/hooks/usePaymentCheckout";
-import { StorePlasticCardOrder } from "@/store/slices/partner";
 import { RemoveSpaces } from "@/_utils/manageRoute";
 import { popup } from "@/_utils/alerts";
 import { cardNumberList } from "@/_utils/_utils";
@@ -28,6 +27,7 @@ function BuyPlasticCardForm() {
   const [cardFormData, setCardFormData] = useState(null);
   const checkOut = useSelector((state) => state.common);
   const partner = useSelector((state) => state.partner);
+  const [isLoadingOrder, setIsLoadingOrder] = useState(false);
   const { orderTotal, isLoading } = useSelector((state) => state.seller);
   const { plasticCardData } = useStateManager();
   const { status, sessionId } = usePaymentCheckout(
@@ -48,6 +48,7 @@ function BuyPlasticCardForm() {
       store_id: plasticCardData?.store_id ?? "",
     },
     onSubmit: async (values) => {
+      setIsLoadingOrder(true);
       const formdata = new FormData();
       for (const key of Object.keys(values)) {
         formdata.append(key, values[key]);
@@ -76,16 +77,12 @@ function BuyPlasticCardForm() {
           router.push(`/dashboard/${RemoveSpaces(user?.role)}/order`)
         )
       );
+      setIsLoadingOrder(false);
       if (typeof window !== "undefined") {
         localStorage.removeItem("store_payment");
       }
-      // if (await checkOut.isSuccess) {
-      //   await dispatch(StorePlasticCardOrder(cardFormData));
-      //   router.push(`/dashboard/${RemoveSpaces(user?.role)}/order`);
-      // } else {
-      //   popup({ status: "error", message: "failed to success order" });
-      // }
     } else if (status === "cancel" || status === "failed") {
+      setIsLoadingOrder(false);
       if (typeof window !== "undefined") {
         localStorage.removeItem("store_payment");
       }
@@ -247,13 +244,24 @@ function BuyPlasticCardForm() {
               Total Price :{" "}
               <strong>zł {orderTotal?.data?.grand_total || 0}</strong>
             </h3>
-            <button
-              disabled={isLoading || partner.isLoading || checkOut.isLoading}
+            <Button
+              disabled={
+                isLoading ||
+                partner.isLoading ||
+                checkOut.isLoading ||
+                isLoadingOrder
+              }
+              loading={
+                isLoading ||
+                partner.isLoading ||
+                checkOut.isLoading ||
+                isLoadingOrder
+              }
               type="submit"
               className="text-white  bg-blush-red font-medium rounded-lg text-md px-5 py-3"
             >
               Buy
-            </button>
+            </Button>
           </div>
         </form>
       </div>
