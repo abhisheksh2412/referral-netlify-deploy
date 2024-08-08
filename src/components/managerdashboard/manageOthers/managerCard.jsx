@@ -41,7 +41,7 @@ function ManagerCard({ data, showDetails }) {
         <div className="flex items-center gap-4 ">
           <div className="w-1/3">
             <Image
-              src={data?.profile_photo_url}
+              src={data?.profile_photo_url || "/assets/defaultmanager.gif"}
               width={100}
               height={100}
               alt="user_img"

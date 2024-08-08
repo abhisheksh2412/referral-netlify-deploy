@@ -5,7 +5,8 @@ import Loader from "@/components/globals/Loader";
 import { useStateManager } from "@/providers/useStateManager";
 import { GetStores } from "@/store/slices/seller";
 import { PlasticCardValidationSchema } from "@/validators/orderValidations";
-import { Formik, useFormik } from "formik";
+import { Button } from "@material-tailwind/react";
+import { useFormik } from "formik";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useCallback, useEffect, useMemo, useState } from "react";
@@ -18,6 +19,7 @@ function AddPlasticCardForm() {
   const { plasticCardData, setPlasticCardData } = useStateManager();
   const { stores, isLoading } = useSelector((state) => state.seller);
   const [cardFrontImage, setCardFrontImage] = useState(null);
+  const [isSaveAndNext, setIsSaveAndNext] = useState(false);
   const [selectedStore, setSelectedStore] = useState(null);
 
   const formik = useFormik({
@@ -27,6 +29,7 @@ function AddPlasticCardForm() {
     },
     validationSchema: PlasticCardValidationSchema,
     onSubmit: (values) => {
+      setIsSaveAndNext(true);
       const data = {
         ...values,
         store: selectedStore,
@@ -70,6 +73,10 @@ function AddPlasticCardForm() {
       value: item?.id,
     }));
   }, [stores]);
+
+  useEffect(() => {
+    setIsSaveAndNext(false);
+  }, []);
 
   return (
     <Loader isLoading={isLoading}>
@@ -187,12 +194,13 @@ function AddPlasticCardForm() {
           <div className="mt-8 w-full">
             {/* Same Button For Paper and Plastic Card */}
 
-            <button
+            <Button
+              loading={isSaveAndNext}
               type="submit"
               className="text-white w-full bg-blush-red font-medium rounded-lg text-md px-5 py-4 mb-2"
             >
               Save & Next
-            </button>
+            </Button>
           </div>
         </form>
       </div>

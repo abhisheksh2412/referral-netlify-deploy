@@ -94,7 +94,7 @@ function CustomerBestSeller() {
                 No Data Found
               </h6>
             ) : (
-              <div className="lg:col-span-3 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-4">
+              <div className="grid grid-cols-12 gap-16 mobile:grid-cols-1  mobile:gap-4 sm:gap-4 lg:col-span-3 mobile:col-span-1 sm:col-span-6 md-landscape:col-span-4">
                 {filteredData(search, bestSellersList)?.map((item, index) => (
                   <div key={index} className="col-span-4">
                     <BestSellerCard
